@@ -33,15 +33,24 @@ public class Multiplicacion {
 	      bloque.append(")\n");
 	      //////////////
 	      
-		  if(A.length()==1 && B.length()==1){
-			  int a=Integer.parseInt(A);
-			  int b=Integer.parseInt(B);
-			  String respuesta= (a*b)+"";
-			  bloque.append("respuesta: ");
-			  bloque.append(respuesta);
-			  bloque.append("\n");
-			  procedimiento.add(bloque.toString());
-			  return respuesta;
+		  if(A.length()==1 || B.length()==1){
+			  if(A.length()==1 && A.charAt(0)=='0' ||
+					  B.length()==1 && B.charAt(0)=='0'){
+				  bloque.append("respuesta: 0");
+				  bloque.append("\n");
+				  procedimiento.add(bloque.toString());
+				  return "0";
+			  }
+			  if(A.length()==1 && B.length()==1){
+				  int a=Integer.parseInt(A);
+				  int b=Integer.parseInt(B);
+				  String respuesta= (a*b)+"";
+				  bloque.append("respuesta: ");
+				  bloque.append(respuesta);
+				  bloque.append("\n");
+				  procedimiento.add(bloque.toString());
+				  return respuesta;
+			  }
 		  }
 		  
 		  //////////////
