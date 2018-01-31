@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -25,7 +26,7 @@ public class InterfazMultiplicacion extends JFrame{
 		setLayout(new BorderLayout());
 		
 		mundo=new Multiplicacion();
-		po=new PanelOpcion();
+		po=new PanelOpcion(this);
 		pv=new PanelVisualizacion();
 		
 		
@@ -41,6 +42,14 @@ public class InterfazMultiplicacion extends JFrame{
 		InterfazMultiplicacion mg=new InterfazMultiplicacion();
 		mg.setVisible(true);
 		mg.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+
+	public void multiplicarConKaratsuba(String num1, String num2) {
+		mundo.karatsuba(num1, num2);
+		ArrayList<String>pro=mundo.getProcedimiento();
+		pv.setTexty(pro);
+		pv.repaint();
+		mundo.setProcedimiento(new ArrayList<String>());;
 	}
 
 }

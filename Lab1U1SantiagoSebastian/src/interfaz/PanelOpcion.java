@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class PanelOpcion extends JPanel implements ActionListener{
 	
@@ -13,23 +14,38 @@ public class PanelOpcion extends JPanel implements ActionListener{
 	private JButton option2;
 	private JButton option3;
 	
-	public PanelOpcion(){
-		setLayout(new GridLayout(1,3));
+	private JTextField num1;
+	private JTextField num2;
+	
+	private InterfazMultiplicacion im;
+	
+	public PanelOpcion(InterfazMultiplicacion im){
+		
+		this.im=im;
+		
+		setLayout(new GridLayout(2,3));
 		
 		option1=new JButton("Karatsuba");
 		option1.addActionListener(this);
+		option1.setActionCommand("KARA");
 		option2=new JButton("Toom Cook");
 		option2.addActionListener(this);
 		option3=new JButton("Algorithm 3");
 		option3.addActionListener(this);
-
+		
+		num1=new JTextField();
+		num2=new JTextField();
+		
 		add(option1);
 		add(option2);
 		add(option3);
+		add(num1);
+		add(num2);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getActionCommand().equals("KARA")){
+			im.multiplicarConKaratsuba(num1.getText(),num2.getText());
+		}
 	}
 }
