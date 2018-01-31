@@ -51,7 +51,7 @@ public class Multiplicacion {
 			return sb.toString();			
 		}
 	}
-	//It has a bug jajja
+	
 	public String substract(String A, String B){
 		int o1=0;
 		int o2=0;
@@ -128,7 +128,12 @@ public class Multiplicacion {
 			int j=Integer.parseInt(matrix[1][k]+"");
 			int dif=j-i;
 			if(dif>0){
-				matrix[0][k-1]=((Integer.parseInt(matrix[0][k-1]+"")-1)+"").charAt(0);
+				int indice=k-1;
+				while(matrix[0][indice]=='0'){
+					matrix[0][indice]='9';
+					indice--;
+				}
+				matrix[0][indice]=((Integer.parseInt(matrix[0][indice]+"")-1)+"").charAt(0);
 			}else if(dif<0){
 				dif+=10;
 			}
@@ -151,7 +156,7 @@ public class Multiplicacion {
 	}
 	
 	public String karatsuba(String A,String B){
-		  if(A.length()==1 || B.length()==1){
+		  if(A.length()==1 && B.length()==1){
 			  int a=Integer.parseInt(A);
 			  int b=Integer.parseInt(B);
 			  return a*b+"";
@@ -159,11 +164,23 @@ public class Multiplicacion {
 		  int m =(A.length()>B.length())?A.length():B.length();
 		  int m2 = m/2;
 		  //S.length-(S.length/2) 0 high, 1 low
-		  String[] ex1= splitAt(A, m2);
-		  String[] ex2= splitAt(B, m2);
+		  String[] ex1=new String[2];
+		  String[] ex2=new String[2];
+		  if(A.length()!=1){
+			  ex1= splitAt(A, m2);			  
+		  }else{
+			  ex1[0]="0";
+			  ex1[1]=A;
+		  }
+		  if(B.length()!=1){
+			  ex2= splitAt(B, m2);			  
+		  }else{
+			  ex2[0]="0";
+			  ex2[1]=B;
+		  }
 		  /* 3 calls made to numbers approximately half the size */
 		  String z0 = karatsuba(ex1[1],ex2[1]);
-		  String z1 = karatsuba(sum(ex1[0],ex1[1]),sum(ex2[0],ex2[1]));
+		  String z1 = karatsuba(sum(ex1[0],ex1[1]),sum(ex2[0],ex2[1]));//100
 		  String z2 = karatsuba(ex1[0],ex2[0]);
 		  
 		  StringBuilder sb=new StringBuilder();
@@ -196,6 +213,3 @@ public class Multiplicacion {
 		
 	}
 }
-//No borrar
-//tabla de sustracion, j-i mod 10 es el indice donde se encuentra el resultado de
-// una sustracion elemental en el arreglo {0 9 8 7 6 5 4 3 2 1}, i es el numero al que se le resta j.
