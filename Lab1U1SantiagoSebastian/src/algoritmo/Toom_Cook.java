@@ -45,9 +45,6 @@ public class Toom_Cook {
 			a1=partitionsA.get(1);
 			a0=partitionsA.get(0);
 			
-			System.out.println(a2);
-			System.out.println(a1);
-			System.out.println(a0);
 			
 			b2=partitionsB.get(2);
 			b1=partitionsB.get(1);
@@ -94,7 +91,7 @@ public class Toom_Cook {
 			dos=OperacionBasica.substract(save, cuatro);
 			uno=OperacionBasica.substract(uno, tres);
 			
-			//por ultimo s computa el polinomio con las respuestas del bordato trick
+			//por ultimo se computa el polinomio con las respuestas del bordato trick
 			
 		}
 			return "termina tu work basurita";
