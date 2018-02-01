@@ -5,6 +5,12 @@ import java.util.ArrayList;
 
 public class Toom_Cook {
 	public static String Toom(String a,String b){
+		int negative=0;
+	if(a.length()<5 ||b.length()<5){
+		int f=Integer.parseInt(a);
+		int s=Integer.parseInt(b);
+		return f*s+"";
+	}else{
 		if(a.equals("0")||b.equals(0)){
 			return "0";
 		}else if(a.equals("1")) {
@@ -12,6 +18,17 @@ public class Toom_Cook {
 		}else if(a.equals("1")){
 			return a;
 		}else {
+			if(a.charAt(0)=='-'&&b.charAt(0)!='-'){
+				negative=1;
+				a=a.replace("-", "");
+				
+			}else if(b.charAt(0)=='-'&&a.charAt(0)!='-') {
+				negative=1;
+				b=b.replace("-", "");
+			}else if(b.charAt(0)=='-'&&a.charAt(0)=='-'){
+				b=b.replace("-","");
+				a=a.replace("-","");
+			}
 			//here we goooooo
 			long asize=a.length();
 			long bsize=b.length();
@@ -66,6 +83,7 @@ public class Toom_Cook {
 			String cuatro=rInfinito;
 			//TODO
 			//la linea de abajo se tiene que dividir entre tres
+			
 			String tres=OperacionBasica.substract(rMenosDos, rUno);
 			String uno=OperacionBasica.substract(rUno, rMenosUno);
 			String dos=OperacionBasica.substract(rMenosUno, rCero);
@@ -78,7 +96,7 @@ public class Toom_Cook {
 			
 			//por ultimo s computa el polinomio con las respuestas del bordato trick
 			
-			
+		}
 			return "termina tu work basurita";
 			
 			
@@ -98,7 +116,7 @@ public class Toom_Cook {
 	// solopara pruebas despues toca borrarlooooooooo
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Toom("1234567890123456789012","987654321987654321098");
+		System.out.println(Toom("1234567890123456789012","987654321987654321098"));
 	}
 	
 
