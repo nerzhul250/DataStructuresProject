@@ -3,7 +3,7 @@ package algoritmo;
 import java.awt.List;
 import java.util.ArrayList;
 
-public class Toom_Kook {
+public class Toom_Cook {
 	public static String Toom(String a,String b){
 		if(a.equals("0")||b.equals(0)){
 			return "0";
@@ -24,9 +24,9 @@ public class Toom_Kook {
 			
 			ArrayList<String> partitionsA=cutter(a,low);
 			ArrayList<String> partitionsB=cutter(b,low);
-			a2=partitionsA.get(2).replaceAll("\\s+","");
-			a1=partitionsA.get(1).replaceAll("\\s+","");
-			a0=partitionsA.get(0).replaceAll("\\s+","");
+			a2=partitionsA.get(2);
+			a1=partitionsA.get(1);
+			a0=partitionsA.get(0);
 			
 			System.out.println(a2);
 			System.out.println(a1);
@@ -95,9 +95,10 @@ public class Toom_Kook {
         }
         return parts;
     }
+	// solopara pruebas despues toca borrarlooooooooo
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Toom("12	3456	7890	1234	5678	9012","987654321987654321098");
+		Toom("1234567890123456789012","987654321987654321098");
 	}
 	
 
