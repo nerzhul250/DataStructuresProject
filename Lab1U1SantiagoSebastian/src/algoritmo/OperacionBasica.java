@@ -52,7 +52,12 @@ public class OperacionBasica {
 			return sb.toString();			
 		}
 	}
-	//Resta
+	/**
+	 * Descripcion:Efectua la resta de dos numeros enteros grandes.
+	 * @param A sumando
+	 * @param B sumando
+	 * @return suma de los dos parametros 
+	 */
 	public static String substract(String A, String B){
 		int o1=0;
 		int o2=0;
