@@ -10,7 +10,7 @@ public class Toom_Cook {
 		int f=Integer.parseInt(a);
 		int s=Integer.parseInt(b);
 		return f*s+"";
-	}else{
+	}else{	
 		if(a.equals("0")||b.equals(0)){
 			return "0";
 		}else if(a.equals("1")) {
