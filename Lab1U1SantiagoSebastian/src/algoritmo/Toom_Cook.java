@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Toom_Cook {
 	public static String Toom(String a,String b){
 		int negative=0;
-	if(a.length()<5 ||b.length()<5){
+	if(a.length()<3&&b.length()<3){
 		int f=Integer.parseInt(a);
 		int s=Integer.parseInt(b);
 		return f*s+"";
@@ -46,11 +46,13 @@ public class Toom_Cook {
 			a0=partitionsA.get(0);
 			
 			
+			
+			
 			b2=partitionsB.get(2);
 			b1=partitionsB.get(1);
 			b0=partitionsB.get(0);
 			
-			String control= a0+a2;
+			String control=OperacionBasica.sum(a0,a2) ;
 			String AdeCero=a0;
 			String AdeUno=OperacionBasica.sum(control,a1);
 			String AdeMenosUno=OperacionBasica.substract(control, a1);
@@ -59,7 +61,7 @@ public class Toom_Cook {
 			String AdeMenosDos=OperacionBasica.substract(second, a0);
 			String AdeInfinito=a2;
 			
-			String Bcontrol= b0+b2;
+			String Bcontrol= OperacionBasica.sum(b0,b2);
 			String BdeCero=b0;
 			String BdeUno=OperacionBasica.sum(Bcontrol,b1);
 			String BdeMenosUno=OperacionBasica.substract(Bcontrol, b1);
@@ -78,14 +80,20 @@ public class Toom_Cook {
 			//bodrato trick
 			String cero=rCero;
 			String cuatro=rInfinito;
-			//TODO
-			//la linea de abajo se tiene que dividir entre tres
+		
 			
-			String tres=OperacionBasica.substract(rMenosDos, rUno);
-			String uno=OperacionBasica.substract(rUno, rMenosUno);
+			String tres=	OperacionBasica.divisionByN(OperacionBasica.substract(rMenosDos, rUno), 3);
+
+			String uno=OperacionBasica.divisionByN(OperacionBasica.substract(rUno, rMenosUno), 2);;
+			
+			
+			
+
 			String dos=OperacionBasica.substract(rMenosUno, rCero);
-			//el de abajo es igual a (dos − tres)/2 + 2rInfinito
-			//tres=;
+			
+			String dobleInfinito=OperacionBasica.sum(rInfinito, rInfinito);
+			tres=OperacionBasica.sum(OperacionBasica.divisionByN(OperacionBasica.substract(dos, tres), 2), dobleInfinito);
+			
 			
 			String save=OperacionBasica.sum(dos, uno);
 			dos=OperacionBasica.substract(save, cuatro);
@@ -93,8 +101,22 @@ public class Toom_Cook {
 			
 			//por ultimo se computa el polinomio con las respuestas del bordato trick
 			
+		
+			
+	String aAlaCuatro=concaternarCeros(cuatro, (int)low*4);
+	String aAlaTres=concaternarCeros(cuatro, (int)low*3);
+	String aAlaDos=concaternarCeros(cuatro, (int)low*2);
+	String aAlaUno=concaternarCeros(cuatro, (int)low);
+	String aAlaCero=cero;
+	
+	String sumaUno=OperacionBasica.sum(aAlaCuatro, aAlaTres);
+	String sumaDos=OperacionBasica.sum(aAlaDos, aAlaUno);
+	String sumaTres=OperacionBasica.sum(sumaUno, sumaDos);
+	String sumaFinla=OperacionBasica.sum(sumaTres, aAlaCero);
+	
+	return sumaFinla;
+			
 		}
-			return "termina tu work basurita";
 			
 			
 		}
@@ -102,18 +124,47 @@ public class Toom_Cook {
 	}
 	
 	private static ArrayList<String> cutter(String string, long low) {
-        ArrayList<String> parts = new ArrayList<String>();
-        int len = string.length();
-        for (int i=0; i<len; i+=low)
-        {
-            parts.add(string.substring(i, (int) Math.min(len, i + low)));
+		
+       char[] arreglo=string.toCharArray();
+       
+       ArrayList<String> retorno=new ArrayList<String>();
+       int control=0;
+       String anadir="";
+        for(int i=string.length()-1;i>=0;i--) {
+        	anadir=arreglo[i]+anadir;
+        	control++;
+        	if(control==low) {
+        		retorno.add(anadir);
+        		control=0;
+        		anadir="";
+        	}
         }
-        return parts;
+     	if(!anadir.isEmpty()){
+    		retorno.add(anadir);
+    	}
+        return retorno;
+		
+		
     }
+	/**
+	 * Descripcion
+	 * @param a
+	 * @param expo
+	 * @return
+	 */
+	public static String concaternarCeros(String a, int expo) {
+		String retorno=a;
+		for(int i=0;i<expo;i++) {
+			retorno=retorno+"0";
+			
+		}
+		
+		return retorno;
+	}
 	// solopara pruebas despues toca borrarlooooooooo
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(Toom("1234567890123456789012","987654321987654321098"));
+		System.out.println(Toom("174","156"));
 	}
 	
 
