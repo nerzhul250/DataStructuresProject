@@ -69,8 +69,8 @@ public class OperacionBasica {
 	}
 	/**
 	 * Descripcion:Efectua la resta de dos numeros enteros grandes.
-	 * @param A sumando
-	 * @param B sumando
+	 * @param A 
+	 * @param B 
 	 * @return suma de los dos parametros 
 	 */
 	public static String substract(String A, String B){
@@ -153,6 +153,8 @@ public class OperacionBasica {
 					matrix[0][indice]='9';
 					indice--;
 				}
+			
+			
 				matrix[0][indice]=((Integer.parseInt(matrix[0][indice]+"")-1)+"").charAt(0);
 			}else if(dif<0){
 				dif+=10;
