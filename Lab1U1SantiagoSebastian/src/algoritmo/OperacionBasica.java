@@ -3,6 +3,21 @@ package algoritmo;
 import java.util.Arrays;
 
 public class OperacionBasica {
+	public static String divisionByN(String A,int n){
+		String nam="";
+		String result="";
+		int indice=0;
+		while(indice<A.length()){
+			nam+=A.charAt(indice);
+			int num=Integer.parseInt(nam);
+			if(num>=n){
+				nam=(num%n)+"";
+				result=result+(num/n);
+			}
+			indice++;
+		}
+		return result;
+	}
 	//Suma
 	public static String sum(String A, String B){
 		int ke=(A.length()>B.length())?A.length():B.length();
