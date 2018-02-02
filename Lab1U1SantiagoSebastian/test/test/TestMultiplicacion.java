@@ -9,6 +9,7 @@ import algoritmo.OperacionBasica;
 import junit.framework.TestCase;
 
 public class TestMultiplicacion extends TestCase {
+	
 	private Multiplicacion multiplicacion;
 	
 	private void setUpEscenario1(){

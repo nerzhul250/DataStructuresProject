@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Multiplicacion {
+	
 	private ArrayList<String> procedimiento;
+	
 	public String[] splitAt(String A,int k){
 		String[] ke=new String[2];
 		if(A.length()==1){
@@ -22,6 +24,7 @@ public class Multiplicacion {
 		}
 		return ke;
 	}
+	
 	public String karatsuba(String A,String B){
 		
 		  //////////////

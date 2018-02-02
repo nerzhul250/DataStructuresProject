@@ -3,6 +3,44 @@ package algoritmo;
 import java.util.Arrays;
 
 public class OperacionBasica {
+	public static String sumaGeneral(String A,String B){
+		if((A.charAt(0)=='-'&&B.charAt(0)!='-')||
+				(B.charAt(0)=='-'&&A.charAt(0)!='-')){
+			int neg=0;
+			if((A.charAt(0)=='-'&&B.charAt(0)!='-')){
+				A=A.substring(1);
+				neg=1;
+			}else{
+				B=B.substring(1);
+				neg=2;
+			}
+			Object[] info=theBigger(A, B);
+			String val=substract(A,B);
+			if(((String)info[2]).equals(A)){
+				if(neg==1){
+					return "-"+val;					
+				}else{
+					return val;
+				}
+			}else{
+				if(neg==2){
+					return "-"+val;					
+				}else{
+					return val;
+				}
+			}
+		}else{
+			if(A.charAt(0)=='-'){
+				A=A.substring(1);
+				B=B.substring(1);
+				String val=sum(A, B);
+				return "-"+val;
+			}else{
+				String val=sum(A, B);
+				return val;
+			}
+		}
+	}
 	public static String divisionByN(String A,int n){
 		String nam="";
 		String result="";
@@ -74,58 +112,15 @@ public class OperacionBasica {
 	 * @return suma de los dos parametros 
 	 */
 	public static String substract(String A, String B){
-		int o1=0;
-		int o2=0;
-		while(o1<A.length()&&A.charAt(o1)=='0'){
-			o1++;
-		}
-		while(o2<B.length()&&B.charAt(o2)=='0'){
-			o2++;
-		}
 		
-		if(o1==A.length()){
-			o1=A.length()-1;
-		}
-		if(o2==B.length()){
-			o2=B.length()-1;
-		}
+		Object[] info=theBigger(A, B);
+		int ke=(Integer)info[4];
+		String big=(String)info[2];
+		String small=(String)info[3];
+		int o1=(Integer)info[0];
+		int o2=(Integer)info[1];
 		
-		int dif1=A.length()-o1;
-		int dif2=B.length()-o2;
-		int ke=(dif1>dif2)?dif1:dif2;
 		char[][] matrix=new char[3][ke];
-		
-		String big=A;
-		String small=B;
-		if(ke!=dif1 || dif2!=ke){
-			big=(dif1==ke)?A:B;
-			small=(dif1==ke)?B:A;
-			if(dif1!=ke){
-				int temp=o1;
-				o1=o2;
-				o2=temp;
-			}
-		}else{
-			int indice1=o1;
-			int indice2=o2;
-			while(indice1<A.length()){
-				if(A.charAt(indice1)>B.charAt(indice2)){
-					big=A;
-					small=B;
-					break;
-				}else if(A.charAt(indice1)<B.charAt(indice2)){
-					big=B;
-					small=A;
-					int temp=o1;
-					o1=o2;
-					o2=temp;
-					break;
-				}
-				indice1++;
-				indice2++;
-			}
-		}
-		
 		int pa=big.length()-1;
 		int pb=small.length()-1;
 		for (int i = matrix[0].length-1; i >= 0; i--) {
@@ -175,5 +170,63 @@ public class OperacionBasica {
 		}
 	}
 	
-
+	public static Object[] theBigger(String A,String B){
+		int o1=0;
+		int o2=0;
+		while(o1<A.length()&&A.charAt(o1)=='0'){
+			o1++;
+		}
+		while(o2<B.length()&&B.charAt(o2)=='0'){
+			o2++;
+		}
+		
+		if(o1==A.length()){
+			o1=A.length()-1;
+		}
+		if(o2==B.length()){
+			o2=B.length()-1;
+		}
+		
+		int dif1=A.length()-o1;
+		int dif2=B.length()-o2;
+		int ke=(dif1>dif2)?dif1:dif2;
+		
+		String big=A;
+		String small=B;
+		if(ke!=dif1 || dif2!=ke){
+			big=(dif1==ke)?A:B;
+			small=(dif1==ke)?B:A;
+			if(dif1!=ke){
+				int temp=o1;
+				o1=o2;
+				o2=temp;
+			}
+		}else{
+			int indice1=o1;
+			int indice2=o2;
+			while(indice1<A.length()){
+				if(A.charAt(indice1)>B.charAt(indice2)){
+					big=A;
+					small=B;
+					break;
+				}else if(A.charAt(indice1)<B.charAt(indice2)){
+					big=B;
+					small=A;
+					int temp=o1;
+					o1=o2;
+					o2=temp;
+					break;
+				}
+				indice1++;
+				indice2++;
+			}
+		}
+		Object[] obs=new Object[5];
+		obs[0]=(Integer)o1;
+		obs[1]=(Integer)o2;
+		obs[2]=big;
+		obs[3]=small;
+		obs[4]=(Integer)ke;
+		return obs;
+	}
 }

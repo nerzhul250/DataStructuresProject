@@ -76,7 +76,26 @@ public class TestOperacionBasica {
 		String respuesta=OperacionBasica.divisionByN(A,2);
 		assertEquals("78",respuesta);
 		A="12";
-		respuesta=OperacionBasica.divisionByN(A,3);
+		respuesta=OperacionBasica.divisionByN(A,3);	
 		assertEquals("4",respuesta);
+	}
+	@Test
+	public void testSumaGeneral(){
+		String A="-156";
+		String B="56";
+		String respuesta=OperacionBasica.sumaGeneral(A, B);
+		assertEquals("-100",respuesta);
+		A="-156";
+		B="-56";
+		respuesta=OperacionBasica.sumaGeneral(A, B);
+		assertEquals("-212",respuesta);
+		A="1645";
+		B="56";
+		respuesta=OperacionBasica.sumaGeneral(A, B);
+		assertEquals("1701",respuesta);
+		A="4656";
+		B="-56";
+		respuesta=OperacionBasica.sumaGeneral(A, B);
+		assertEquals("4600",respuesta);
 	}
 }
