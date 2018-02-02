@@ -1,8 +1,10 @@
 package algoritmo;
 
+import java.math.BigInteger;
+
 public class Fibonacci {
 
-	public byte[] multiplicacion (String x, String d) {
+	public String multiplicacion (String x, String d) {
 		byte matriz [][] = new byte [x.length()][d.length()];
 		byte [] numerosResultado = new byte [x.length() + d.length()];
 		for (int i = 0; i < x.length(); i++) {
@@ -10,28 +12,39 @@ public class Fibonacci {
 			matriz[i][j] = (byte) (Character.getNumericValue(x.charAt(i)) * Character.getNumericValue(d.charAt(j)));
 				numerosResultado[i + j] += (byte) (matriz[i][j]/10);
 				numerosResultado[i + j + 1] += (byte) (matriz[i][j]%10);
-				int anterior = i+j;
-//				if(numerosResultado[i + j + 1] >= 10) {
-					while(numerosResultado[anterior + 1]>=10) {
-						numerosResultado[anterior] += 1;
-						numerosResultado[anterior + 1] -=10;
-						anterior --;
-//					}
-				}
+				sumarDecenas(numerosResultado, i + j);
 			}
 		}
-		
-		return numerosResultado;
+		if(numerosResultado[numerosResultado.length-1]>=10)
+			sumarDecenas(numerosResultado, numerosResultado.length-1);
+		return concatenarValores(numerosResultado);
 	}
 	
+	public String concatenarValores (byte[] arreglo) {
+		String valor = "";
+		int i = 0;
+		while(arreglo[i] == 0 && i<arreglo.length-1)
+			i ++;
+		while (i < arreglo.length) {
+			valor += arreglo[i];
+			i++;
+		}
+		return valor;
+	}
+	public void sumarDecenas(byte[] numerosResultado, int anterior) {
+		while(numerosResultado[anterior]>=10) {
+			numerosResultado[anterior - 1] += 1;
+			numerosResultado[anterior] -=10;
+			anterior --;
+	}
+	}
 	public static void main(String[] args) {
 		Fibonacci f = new Fibonacci();
-		byte [] resultado = f.multiplicacion("7634189325", "3561053102738");
-		String impresion = "";
-		for (int i = 0; i < resultado.length; i++) {
-			impresion += resultado[i];
-		}
-		System.out.println(impresion);
+		String resultado = f.multiplicacion("111111111111111111111111111111111111111111111111111111111111111111", "0");
+		System.out.println(resultado);
+		BigInteger a = new BigInteger("763418769325");
+		BigInteger b = new BigInteger("356108653102738");
+		
+		System.out.println(a.multiply(b));
 	}
-	//Números de la muerte "763418769325", "356108653102738"
 }
