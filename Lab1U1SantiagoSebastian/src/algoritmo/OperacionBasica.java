@@ -246,8 +246,12 @@ public class OperacionBasica {
 		obs[2]=big;
 		obs[3]=small;
 		obs[4]=(Integer)ke;
-		
+	
 		return obs;
+	}
+	public static int log10(String a){
+		return a.length()-1;
+		
 	}
 	
 }

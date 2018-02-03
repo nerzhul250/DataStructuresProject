@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Toom_Cook {
 	public static String Toom(String a,String b){
 		int negative=0;
-	if(a.length()<6&&b.length()<6){
+	if(a.length()<3&&b.length()<3){
 		long f=Long.parseLong(a);
 		long s=Long.parseLong(b);
 		return f*s+"";
@@ -29,29 +29,19 @@ public class Toom_Cook {
 				a=a.replace("-","");
 			}
 			//here we goooooo
-			long asize=a.length();
-			long bsize=b.length();
 			
-			long longest= Math.max(asize, bsize);
 			
-			long low=(longest+2)/3;
-			System.out.println(low);
+			int TheA=(OperacionBasica.log10(a)/3)+1 ;
+			int TheB=(OperacionBasica.log10(b)/3)+1;
+			int TheMain=TheA;
+			
+			if(TheB>TheMain);
+			TheMain=TheB;
+			
 			String a0,a1,a2,b0,b1,b2;
 			
-			ArrayList<String> partitionsA=cutter(a,low);
-			ArrayList<String> partitionsB=cutter(b,low);
-			
-			int min=Integer.MAX_VALUE;
-			for (int i = 0; i < partitionsA.size(); i++) {
-				if(min>partitionsA.get(i).length()){
-					min=partitionsA.get(i).length();
-				}
-			}
-			for (int i = 0; i < partitionsB.size(); i++) {
-				if(min>partitionsB.get(i).length()){
-					min=partitionsB.get(i).length();
-				}
-			}
+			ArrayList<String> partitionsA=cutter(a,TheMain);
+			ArrayList<String> partitionsB=cutter(b,TheMain);
 			
 			a2=partitionsA.get(2);
 			a1=partitionsA.get(1);
@@ -70,6 +60,8 @@ public class Toom_Cook {
 			String AdeMenosDos=OperacionBasica.sumaGeneral(second, "-"+a0);
 			String AdeInfinito=a2;
 			
+			
+			
 			String Bcontrol= OperacionBasica.sumaGeneral(b0,b2);
 			String BdeCero=b0;
 			String BdeUno=OperacionBasica.sumaGeneral(Bcontrol,b1);
@@ -78,13 +70,17 @@ public class Toom_Cook {
 			String Bsecond=OperacionBasica.sumaGeneral(Bfirst,Bfirst);
 			String BdeMenosDos=OperacionBasica.sumaGeneral(Bsecond, "-"+b0);
 			String BdeInfinito=b2;
-			//llamados recursivos cichis
+			
+			
+			//llamados recursivos.
 			
 			String rCero=Toom(AdeCero,BdeCero);
 			String rUno =Toom(AdeUno,BdeUno );
 			String rMenosUno =Toom(AdeMenosUno,BdeMenosUno );
 			String rMenosDos =Toom(AdeMenosDos, BdeMenosDos);
 			String rInfinito =Toom(AdeInfinito,BdeInfinito );
+			
+			
 			
 			//bodrato trick
 			String cero=rCero;
@@ -106,19 +102,19 @@ public class Toom_Cook {
 			uno=OperacionBasica.sumaGeneral(uno, "-"+tres);
 			
 			//por ultimo se computa el polinomio con las respuestas del bordato trick
-			
-//			System.out.println(cero);
-//			System.out.println(uno);
-//			System.out.println(dos);
-//			System.out.println(tres);
-//			System.out.println(cuatro);
+
 			
 			
-			String aAlaCuatro=concaternarCeros(cuatro, (int)min*4);
-			String aAlaTres=concaternarCeros(tres, (int)min*3);
-			String aAlaDos=concaternarCeros(dos, (int)min*2);
-			String aAlaUno=concaternarCeros(uno, (int)min);
+			String aAlaCuatro=concaternarCeros(cuatro, (int)TheMain*4);
+			String aAlaTres=concaternarCeros(tres, (int)TheMain*3);
+			String aAlaDos=concaternarCeros(dos, (int)TheMain*2);
+			String aAlaUno=concaternarCeros(uno, (int)TheMain);
 			String aAlaCero=cero;
+			
+			
+
+			
+			
 			
 			String suma=OperacionBasica.sumaGeneral(aAlaCuatro, aAlaTres);
 			suma=OperacionBasica.sumaGeneral(suma,aAlaDos);
@@ -171,6 +167,7 @@ public class Toom_Cook {
 	// solopara pruebas despues toca borrarlooooooooo
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
 		System.out.println(Toom("1234567890123456789012","987654321987654321098"));
 	}
 }
