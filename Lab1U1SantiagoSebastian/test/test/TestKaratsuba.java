@@ -9,7 +9,7 @@ import algoritmo.Karatsuba;
 import algoritmo.OperacionBasica;
 import junit.framework.TestCase;
 
-public class TestMultiplicacion extends TestCase {
+public class TestKaratsuba extends TestCase {
 	
 	private Karatsuba multiplicacion;
 	private Fibonacci fibo;
