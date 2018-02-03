@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Toom_Cook {
 	public static String Toom(String a,String b){
 		int negative=0;
-	if(a.length()<3&&b.length()<3){
+	if(a.length()<5&&b.length()<5){
 		int f=Integer.parseInt(a);
 		int s=Integer.parseInt(b);
 		return f*s+"";
@@ -41,10 +41,11 @@ public class Toom_Cook {
 			
 			ArrayList<String> partitionsA=cutter(a,low);
 			ArrayList<String> partitionsB=cutter(b,low);
+			
 			a2=partitionsA.get(2);
 			a1=partitionsA.get(1);
 			a0=partitionsA.get(0);
-			
+	
 			
 			
 			
@@ -52,21 +53,25 @@ public class Toom_Cook {
 			b1=partitionsB.get(1);
 			b0=partitionsB.get(0);
 			
-			String control=OperacionBasica.sum(a0,a2) ;
+			String control=OperacionBasica.sumaGeneral(a0,a2) ;
 			String AdeCero=a0;
-			String AdeUno=OperacionBasica.sum(control,a1);
+			String AdeUno=OperacionBasica.sumaGeneral(control,a1);
 			String AdeMenosUno=OperacionBasica.substract(control, a1);
-			String first=OperacionBasica.sum(AdeMenosUno, a2);
-			String second=OperacionBasica.sum(first, first);
+			String first=OperacionBasica.sumaGeneral(AdeMenosUno, a2);
+			String second=OperacionBasica.sumaGeneral(first, first);
 			String AdeMenosDos=OperacionBasica.substract(second, a0);
 			String AdeInfinito=a2;
 			
-			String Bcontrol= OperacionBasica.sum(b0,b2);
+		
+			
+			
+			
+			String Bcontrol= OperacionBasica.sumaGeneral(b0,b2);
 			String BdeCero=b0;
-			String BdeUno=OperacionBasica.sum(Bcontrol,b1);
+			String BdeUno=OperacionBasica.sumaGeneral(Bcontrol,b1);
 			String BdeMenosUno=OperacionBasica.substract(Bcontrol, b1);
-			String Bfirst=OperacionBasica.sum(BdeMenosUno, b2);
-			String Bsecond=OperacionBasica.sum(first, first);
+			String Bfirst=OperacionBasica.sumaGeneral(BdeMenosUno, b2);
+			String Bsecond=OperacionBasica.sumaGeneral(first, first);
 			String BdeMenosDos=OperacionBasica.substract(second, b0);
 			String BdeInfinito=b2;
 			//llamados recursivos cichis
@@ -91,11 +96,11 @@ public class Toom_Cook {
 
 			String dos=OperacionBasica.substract(rMenosUno, rCero);
 			
-			String dobleInfinito=OperacionBasica.sum(rInfinito, rInfinito);
-			tres=OperacionBasica.sum(OperacionBasica.divisionByN(OperacionBasica.substract(dos, tres), 2), dobleInfinito);
+			String dobleInfinito=OperacionBasica.sumaGeneral(rInfinito, rInfinito);
+			tres=OperacionBasica.sumaGeneral(OperacionBasica.divisionByN(OperacionBasica.substract(dos, tres), 2), dobleInfinito);
 			
 			
-			String save=OperacionBasica.sum(dos, uno);
+			String save=OperacionBasica.sumaGeneral(dos, uno);
 			dos=OperacionBasica.substract(save, cuatro);
 			uno=OperacionBasica.substract(uno, tres);
 			
@@ -109,10 +114,10 @@ public class Toom_Cook {
 	String aAlaUno=concaternarCeros(cuatro, (int)low);
 	String aAlaCero=cero;
 	
-	String sumaUno=OperacionBasica.sum(aAlaCuatro, aAlaTres);
-	String sumaDos=OperacionBasica.sum(aAlaDos, aAlaUno);
-	String sumaTres=OperacionBasica.sum(sumaUno, sumaDos);
-	String sumaFinla=OperacionBasica.sum(sumaTres, aAlaCero);
+	String sumaUno=OperacionBasica.sumaGeneral(aAlaCuatro, aAlaTres);
+	String sumaDos=OperacionBasica.sumaGeneral(aAlaDos, aAlaUno);
+	String sumaTres=OperacionBasica.sumaGeneral(sumaUno, sumaDos);
+	String sumaFinla=OperacionBasica.sumaGeneral(sumaTres, aAlaCero);
 	
 	return sumaFinla;
 			
@@ -146,12 +151,7 @@ public class Toom_Cook {
 		
 		
     }
-	/**
-	 * Descripcion
-	 * @param a
-	 * @param expo
-	 * @return
-	 */
+	
 	public static String concaternarCeros(String a, int expo) {
 		String retorno=a;
 		for(int i=0;i<expo;i++) {
@@ -164,7 +164,7 @@ public class Toom_Cook {
 	// solopara pruebas despues toca borrarlooooooooo
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(Toom("174","156"));
+		System.out.println(Toom("1234567890123456789012","987654321987654321098"));
 	}
 	
 

@@ -105,12 +105,8 @@ public class OperacionBasica {
 			return sb.toString();			
 		}
 	}
-	/**
-	 * Descripcion:Efectua la resta de dos numeros enteros grandes.
-	 * @param A 
-	 * @param B 
-	 * @return suma de los dos parametros 
-	 */
+
+	
 	public static String substract(String A, String B){
 		
 		Object[] info=theBigger(A, B);
@@ -119,6 +115,8 @@ public class OperacionBasica {
 		String small=(String)info[3];
 		int o1=(Integer)info[0];
 		int o2=(Integer)info[1];
+		
+	
 		
 		char[][] matrix=new char[3][ke];
 		int pa=big.length()-1;
@@ -229,6 +227,8 @@ public class OperacionBasica {
 		obs[2]=big;
 		obs[3]=small;
 		obs[4]=(Integer)ke;
+		
 		return obs;
 	}
+	
 }
