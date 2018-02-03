@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Toom_Cook {
 	public static String Toom(String a,String b){
 		int negative=0;
-	if(a.length()<5&&b.length()<5){
+	if(a.length()<3&&b.length()<3){
 		int f=Integer.parseInt(a);
 		int s=Integer.parseInt(b);
 		return f*s+"";
@@ -56,10 +56,10 @@ public class Toom_Cook {
 			String control=OperacionBasica.sumaGeneral(a0,a2) ;
 			String AdeCero=a0;
 			String AdeUno=OperacionBasica.sumaGeneral(control,a1);
-			String AdeMenosUno=OperacionBasica.substract(control, a1);
+			String AdeMenosUno=OperacionBasica.sumaGeneral(control, "-"+a1);
 			String first=OperacionBasica.sumaGeneral(AdeMenosUno, a2);
 			String second=OperacionBasica.sumaGeneral(first, first);
-			String AdeMenosDos=OperacionBasica.substract(second, a0);
+			String AdeMenosDos=OperacionBasica.sumaGeneral(second, "-"+a0);
 			String AdeInfinito=a2;
 			
 		
@@ -69,10 +69,10 @@ public class Toom_Cook {
 			String Bcontrol= OperacionBasica.sumaGeneral(b0,b2);
 			String BdeCero=b0;
 			String BdeUno=OperacionBasica.sumaGeneral(Bcontrol,b1);
-			String BdeMenosUno=OperacionBasica.substract(Bcontrol, b1);
+			String BdeMenosUno=OperacionBasica.sumaGeneral(Bcontrol, "-"+b1);
 			String Bfirst=OperacionBasica.sumaGeneral(BdeMenosUno, b2);
 			String Bsecond=OperacionBasica.sumaGeneral(first, first);
-			String BdeMenosDos=OperacionBasica.substract(second, b0);
+			String BdeMenosDos=OperacionBasica.sumaGeneral(second, "-"+b0);
 			String BdeInfinito=b2;
 			//llamados recursivos cichis
 			
@@ -87,22 +87,22 @@ public class Toom_Cook {
 			String cuatro=rInfinito;
 		
 			
-			String tres=	OperacionBasica.divisionByN(OperacionBasica.substract(rMenosDos, rUno), 3);
-
-			String uno=OperacionBasica.divisionByN(OperacionBasica.substract(rUno, rMenosUno), 2);;
+			String tres=	OperacionBasica.divisionByN(OperacionBasica.sumaGeneral(rMenosDos, "-"+rUno), 3);
+			
+			String uno=OperacionBasica.divisionByN(OperacionBasica.sumaGeneral(rUno, "-"+rMenosUno), 2);;
 			
 			
 			
 
-			String dos=OperacionBasica.substract(rMenosUno, rCero);
+			String dos=OperacionBasica.sumaGeneral(rMenosUno, "-"+rCero);
 			
 			String dobleInfinito=OperacionBasica.sumaGeneral(rInfinito, rInfinito);
-			tres=OperacionBasica.sumaGeneral(OperacionBasica.divisionByN(OperacionBasica.substract(dos, tres), 2), dobleInfinito);
+			tres=OperacionBasica.sumaGeneral(OperacionBasica.divisionByN(OperacionBasica.sumaGeneral(dos, "-"+tres), 2), dobleInfinito);
 			
 			
 			String save=OperacionBasica.sumaGeneral(dos, uno);
-			dos=OperacionBasica.substract(save, cuatro);
-			uno=OperacionBasica.substract(uno, tres);
+			dos=OperacionBasica.sumaGeneral(save, "-"+cuatro);
+			uno=OperacionBasica.sumaGeneral(uno, "-"+tres);
 			
 			//por ultimo se computa el polinomio con las respuestas del bordato trick
 			
@@ -118,6 +118,8 @@ public class Toom_Cook {
 	String sumaDos=OperacionBasica.sumaGeneral(aAlaDos, aAlaUno);
 	String sumaTres=OperacionBasica.sumaGeneral(sumaUno, sumaDos);
 	String sumaFinla=OperacionBasica.sumaGeneral(sumaTres, aAlaCero);
+	if(negative==1)
+	return "-"+sumaFinla;
 	
 	return sumaFinla;
 			

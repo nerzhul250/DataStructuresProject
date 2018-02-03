@@ -42,6 +42,12 @@ public class OperacionBasica {
 		}
 	}
 	public static String divisionByN(String A,int n){
+		int negativo =0;
+		if(A.charAt(0)=='-'){
+			negativo=1;
+			A=A.replace("-", "");
+		}	
+		
 		String nam="";
 		String result="";
 		int indice=0;
@@ -53,7 +59,9 @@ public class OperacionBasica {
 				result=result+(num/n);
 			}
 			indice++;
-		}
+		}if(negativo==1)
+		return "-"+result;
+		
 		return result;
 	}
 	//Suma
