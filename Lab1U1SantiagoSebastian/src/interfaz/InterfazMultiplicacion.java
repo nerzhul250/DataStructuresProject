@@ -12,11 +12,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
-import algoritmo.Multiplicacion;
+import algoritmo.Karatsuba;
 
 public class InterfazMultiplicacion extends JFrame{
 	
-	private Multiplicacion mundo;
+	private Karatsuba mundo;
 	
 	private PanelVisualizacion pv;
 	private PanelOpcion po;
@@ -25,7 +25,7 @@ public class InterfazMultiplicacion extends JFrame{
 		setTitle("MultiPliDynamic");
 		setLayout(new BorderLayout());
 		
-		mundo=new Multiplicacion();
+		mundo=new Karatsuba();
 		po=new PanelOpcion(this);
 		pv=new PanelVisualizacion();
 		

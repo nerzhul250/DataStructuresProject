@@ -3,7 +3,7 @@ package algoritmo;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Multiplicacion {
+public class Karatsuba {
 	
 	private ArrayList<String> procedimiento;
 	
@@ -128,7 +128,7 @@ public class Multiplicacion {
 	public void setProcedimiento(ArrayList<String> procedimiento) {
 		this.procedimiento = procedimiento;
 	}
-	public Multiplicacion(){
+	public Karatsuba(){
 		procedimiento=new ArrayList<String>();
 	}
 }

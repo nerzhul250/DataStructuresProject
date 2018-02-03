@@ -5,16 +5,16 @@ import java.math.BigInteger;
 import org.junit.Test;
 
 import algoritmo.Fibonacci;
-import algoritmo.Multiplicacion;
+import algoritmo.Karatsuba;
 import algoritmo.OperacionBasica;
 import junit.framework.TestCase;
 
 public class TestMultiplicacion extends TestCase {
 	
-	private Multiplicacion multiplicacion;
+	private Karatsuba multiplicacion;
 	private Fibonacci fibo;
 	private void setUpEscenario1(){
-		multiplicacion=new Multiplicacion();
+		multiplicacion=new Karatsuba();
 	}
 	private void setupEscenario2 () {
 		fibo = new Fibonacci();
