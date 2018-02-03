@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Toom_Cook {
 	public static String Toom(String a,String b){
 		int negative=0;
-	if(a.length()<3&&b.length()<3){
+	if(Math.max(a.length(), b.length())<5){
 		long f=Long.parseLong(a);
 		long s=Long.parseLong(b);
 		return f*s+"";
@@ -29,7 +29,15 @@ public class Toom_Cook {
 				a=a.replace("-","");
 			}
 			//here we goooooo
-			
+			if(a.charAt(0)=='0'){
+				a="-"+a;
+				a=a.replace("-0", "");
+				
+			}if(b.charAt(0)=='0') {
+				b="-"+b;
+				b=b.replace("-0", "");
+				
+			}
 			
 			int TheA=(OperacionBasica.log10(a)/3)+1 ;
 			int TheB=(OperacionBasica.log10(b)/3)+1;
@@ -39,10 +47,10 @@ public class Toom_Cook {
 			TheMain=TheB;
 			
 			String a0,a1,a2,b0,b1,b2;
-			
+
 			ArrayList<String> partitionsA=cutter(a,TheMain);
 			ArrayList<String> partitionsB=cutter(b,TheMain);
-			
+			System.out.println(partitionsA.size());
 			a2=partitionsA.get(2);
 			a1=partitionsA.get(1);
 			a0=partitionsA.get(0);
