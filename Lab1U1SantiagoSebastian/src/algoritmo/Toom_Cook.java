@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Toom_Cook {
 	public static String Toom(String a,String b){
 		int negative=0;
-	if(Math.max(a.length(), b.length())<5){
+	if(Math.max(a.length(), b.length())<6){
 		long f=Long.parseLong(a);
 		long s=Long.parseLong(b);
 		return f*s+"";
@@ -48,16 +48,16 @@ public class Toom_Cook {
 			
 			String a0,a1,a2,b0,b1,b2;
 
-			ArrayList<String> partitionsA=cutter(a,TheMain);
-			ArrayList<String> partitionsB=cutter(b,TheMain);
-			System.out.println(partitionsA.size());
-			a2=partitionsA.get(2);
-			a1=partitionsA.get(1);
-			a0=partitionsA.get(0);
+			String[] partitionsA=cutter(a,TheMain);
+			String[] partitionsB=cutter(b,TheMain);
 			
-			b2=partitionsB.get(2);
-			b1=partitionsB.get(1);
-			b0=partitionsB.get(0);
+			a2=cleanValue(partitionsA[2]);
+			a1=cleanValue(partitionsA[1]);
+			a0=cleanValue(partitionsA[0]);
+			
+			b2=cleanValue(partitionsB[2]);
+			b1=cleanValue(partitionsB[1]);
+			b0=cleanValue(partitionsB[0]);
 			
 			String control=OperacionBasica.sumaGeneral(a0,a2) ;
 			String AdeCero=a0;
@@ -141,29 +141,50 @@ public class Toom_Cook {
 		
 	}
 	
-	private static ArrayList<String> cutter(String string, long low) {
+	private static String[] cutter(String string, long low) {
 		
        char[] arreglo=string.toCharArray();
        
-       ArrayList<String> retorno=new ArrayList<String>();
+      String[] retorno=new String[3];
+      int cuenta=0;
        int control=0;
        String anadir="";
         for(int i=string.length()-1;i>=0;i--) {
         	anadir=arreglo[i]+anadir;
         	control++;
         	if(control==low) {
-        		retorno.add(anadir);
+        		retorno[cuenta]=anadir;
         		control=0;
         		anadir="";
+        		cuenta++;
         	}
         }
      	if(!anadir.isEmpty()){
-    		retorno.add(anadir);
+     		if(retorno[2]==null)
+     			retorno[2]=anadir;
+
+     		retorno[2]=anadir+retorno[2];
     	}
+     	for (int i = 0; i < retorno.length; i++) {
+			System.out.println(retorno[i]);
+		}
+		System.out.println("size: "+retorno.length);
+
+		System.out.println("stop here");
+
         return retorno;
 		
 		
     }
+	
+	public static String cleanValue(String a) {
+		if(a.charAt(0)=='0'){
+			a="-"+a;
+			a=a.replace("-0", "");
+			
+		}
+		return a;
+	}
 	
 	public static String concaternarCeros(String a, int expo) {
 		String retorno=a;
