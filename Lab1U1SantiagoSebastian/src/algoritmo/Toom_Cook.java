@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Toom_Cook {
 	public static String Toom(String a,String b){
 		int negative=0;
-	if(Math.max(a.length(), b.length())<6){
+	if(Math.max(a.length(), b.length())<5 ){
 		long f=Long.parseLong(a);
 		long s=Long.parseLong(b);
 		return f*s+"";
@@ -38,27 +38,39 @@ public class Toom_Cook {
 				b=b.replace("-0", "");
 				
 			}
+			int TheMain=0;
 			
-			int TheA=(OperacionBasica.log10(a)/3)+1 ;
-			int TheB=(OperacionBasica.log10(b)/3)+1;
-			int TheMain=TheA;
+			int TheA=(OperacionBasica.log10(a)/3);
 			
-			if(TheB>TheMain);
+			int TheB=(OperacionBasica.log10(b)/3);
+			
+			if(TheB<TheA){
+			TheMain=TheA;}
+			else if(TheB>TheA) {
 			TheMain=TheB;
+			}else {
+				TheMain=TheA;
+			}
+			
+			
+			TheMain=TheMain+1;
+			
 			
 			String a0,a1,a2,b0,b1,b2;
 
 			String[] partitionsA=cutter(a,TheMain);
 			String[] partitionsB=cutter(b,TheMain);
 			
+			
 			a2=cleanValue(partitionsA[2]);
 			a1=cleanValue(partitionsA[1]);
 			a0=cleanValue(partitionsA[0]);
+		
 			
 			b2=cleanValue(partitionsB[2]);
 			b1=cleanValue(partitionsB[1]);
 			b0=cleanValue(partitionsB[0]);
-			
+		
 			String control=OperacionBasica.sumaGeneral(a0,a2) ;
 			String AdeCero=a0;
 			String AdeUno=OperacionBasica.sumaGeneral(control,a1);
@@ -68,10 +80,13 @@ public class Toom_Cook {
 			String AdeMenosDos=OperacionBasica.sumaGeneral(second, "-"+a0);
 			String AdeInfinito=a2;
 			
+
+			
 			
 			
 			String Bcontrol= OperacionBasica.sumaGeneral(b0,b2);
 			String BdeCero=b0;
+			
 			String BdeUno=OperacionBasica.sumaGeneral(Bcontrol,b1);
 			String BdeMenosUno=OperacionBasica.sumaGeneral(Bcontrol, "-"+b1);
 			String Bfirst=OperacionBasica.sumaGeneral(BdeMenosUno, b2);
@@ -93,7 +108,8 @@ public class Toom_Cook {
 			//bodrato trick
 			String cero=rCero;
 			String cuatro=rInfinito;
-		
+			
+			
 			
 			String tres=OperacionBasica.divisionByN(OperacionBasica.sumaGeneral(rMenosDos, "-"+rUno), 3);
 			
@@ -119,20 +135,16 @@ public class Toom_Cook {
 			String aAlaUno=concaternarCeros(uno, (int)TheMain);
 			String aAlaCero=cero;
 			
-			
-
-			
-			
-			
 			String suma=OperacionBasica.sumaGeneral(aAlaCuatro, aAlaTres);
 			suma=OperacionBasica.sumaGeneral(suma,aAlaDos);
 			suma=OperacionBasica.sumaGeneral(suma,aAlaUno);
 			suma=OperacionBasica.sumaGeneral(suma,aAlaCero);
 			
-			if(negative==1)
-				return "-"+suma;
-			
+			if(negative==1){
+				return "-"+suma;}
+			else{
 			return suma;
+			}
 			
 		}
 			
@@ -150,9 +162,10 @@ public class Toom_Cook {
        int control=0;
        String anadir="";
         for(int i=string.length()-1;i>=0;i--) {
+        	
         	anadir=arreglo[i]+anadir;
         	control++;
-        	if(control==low) {
+        	if(control==low&&cuenta<3){
         		retorno[cuenta]=anadir;
         		control=0;
         		anadir="";
@@ -160,17 +173,12 @@ public class Toom_Cook {
         	}
         }
      	if(!anadir.isEmpty()){
-     		if(retorno[2]==null)
-     			retorno[2]=anadir;
+     		if(retorno[2]==null) {
+     			retorno[2]=anadir;}else {
 
-     		retorno[2]=anadir+retorno[2];
+     		retorno[2]=anadir+retorno[2];}
     	}
-     	for (int i = 0; i < retorno.length; i++) {
-			System.out.println(retorno[i]);
-		}
-		System.out.println("size: "+retorno.length);
-
-		System.out.println("stop here");
+     	
 
         return retorno;
 		
@@ -178,12 +186,16 @@ public class Toom_Cook {
     }
 	
 	public static String cleanValue(String a) {
+		String retorno="0";
+		if(a!=null){
 		if(a.charAt(0)=='0'){
 			a="-"+a;
 			a=a.replace("-0", "");
 			
 		}
-		return a;
+		retorno=a;
+		}
+		return retorno;
 	}
 	
 	public static String concaternarCeros(String a, int expo) {
