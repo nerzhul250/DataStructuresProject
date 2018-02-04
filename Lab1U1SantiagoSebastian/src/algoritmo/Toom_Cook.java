@@ -65,11 +65,17 @@ public class Toom_Cook {
 			a2=cleanValue(partitionsA[2]);
 			a1=cleanValue(partitionsA[1]);
 			a0=cleanValue(partitionsA[0]);
+			System.out.println("Valores a multiplicar; "+a+"*"+b);
+			System.out.println("Separar cada "+TheMain+" digitos");
+			System.out.println("Primer polinomio:");
+			System.out.println("A(x)="+a2+"x^2+"+a1+"x+"+a0);
 		
 			
 			b2=cleanValue(partitionsB[2]);
 			b1=cleanValue(partitionsB[1]);
 			b0=cleanValue(partitionsB[0]);
+			System.out.println("Segundo polinomio:");
+			System.out.println("B(x)="+b2+"x^2+"+b1+"x+"+b0+"\n");
 		
 			String control=OperacionBasica.sumaGeneral(a0,a2) ;
 			String AdeCero=a0;
