@@ -40,10 +40,10 @@ public class Fibonacci {
 	}
 	public static void main(String[] args) {
 		Fibonacci f = new Fibonacci();
-		String resultado = f.multiplicacion("111111111111111111111111111111111111111111111111111111111111111111", "0");
+		String resultado = f.multiplicacion("98", "88");
 		System.out.println(resultado);
-		BigInteger a = new BigInteger("763418769325");
-		BigInteger b = new BigInteger("356108653102738");
+		BigInteger a = new BigInteger("98");
+		BigInteger b = new BigInteger("88");
 		
 		System.out.println(a.multiply(b));
 	}
