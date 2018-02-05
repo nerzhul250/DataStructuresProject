@@ -160,11 +160,11 @@ public class Toom_Cook {
 		// TODO Auto-generated method stub
 		
 		
-		BigInteger a = new BigInteger("1234567891234566");
-		BigInteger b = new BigInteger("8800000000000000000000");
+		BigInteger a = new BigInteger("8");
+		BigInteger b = new BigInteger("54334545442323");
 		System.out.println("Resultado BigInetegger: "+a.multiply(b)+"\n");
 		
-		System.out.println("Resultado artesanal: "+Toom("1234567891234566","8800000000000000000000"));
+		System.out.println("Resultado artesanal: "+Toom("8","54334545442323"));
 	
 	}
 	
