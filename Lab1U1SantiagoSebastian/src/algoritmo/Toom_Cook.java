@@ -2,12 +2,18 @@ package algoritmo;
 
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Toom_Cook {
+	
+	public final static String GOOGLEPLEX="10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
 	public static String Toom(String a,String b){
 		int negative=0;
+		a=cleanValue(a);
+		b=cleanValue(b);
+
 		
-	if(Math.max(a.length(), b.length())<=5){
+	if(Math.max(a.length(), b.length())<=3){
 		long f=Long.parseLong(a);
 		long s=Long.parseLong(b);
 		return (f*s)+"";
@@ -31,13 +37,9 @@ public class Toom_Cook {
 			}
 			//here we goooooo
 			if(a.charAt(0)=='0'){
-				a="-"+a;
-				a=a.replace("-0", "");
-				
+				a=a.substring(1);
 			}if(b.charAt(0)=='0') {
-				b="-"+b;
-				b=b.replace("-0", "");
-				
+				b=b.substring(1);
 			}
 			int TheMain=0;
 			
@@ -58,25 +60,71 @@ public class Toom_Cook {
 			
 			
 			String a0,a1,a2,b0,b1,b2;
+			
+			a2="0";
+			a1="0";
+			a0="0";
+			
+			b2="0";
+			b1="0";
+			b0="0";
+			
+			
+			if(a.length()>3) {
 
 			String[] partitionsA=cutter(a,TheMain);
-			String[] partitionsB=cutter(b,TheMain);
+			
 			
 			
 			a2=cleanValue(partitionsA[2]);
 			a1=cleanValue(partitionsA[1]);
 			a0=cleanValue(partitionsA[0]);
-			//System.out.println("Valores a multiplicar; "+a+"*"+b);
-			//System.out.println("Separar cada "+TheMain+" digitos");
-			//System.out.println("Primer polinomio:");
-			//System.out.println("A(x)="+a2+"x^2+"+a1+"x+"+a0);
-		
+			System.out.println("Valores a multiplicar; "+a+"*"+b);
+			System.out.println("Separar cada "+TheMain+" digitos");
+			System.out.println("Primer polinomio:");
+			System.out.println("A(x)="+a2+"x^2+"+a1+"x+"+a0);
+			}else if(a.length()==1) {
+				
+				a2=0+"";
+				a1=0+"";
+				a0=a.charAt(0)+"";
+				
+			}else if(a.length()==2) {
+				a2=0+"";
+				a1=a.charAt(1)+"";
+				a0=a.charAt(0)+"";
+				
+			}else if(a.length()==3) {
+				a2=a.charAt(2)+"";
+				a1=a.charAt(1)+"";
+				a0=a.charAt(0)+"";
+				}
 			
+			
+			if(b.length()>3) {
+			String[] partitionsB=cutter(b,TheMain);
 			b2=cleanValue(partitionsB[2]);
 			b1=cleanValue(partitionsB[1]);
 			b0=cleanValue(partitionsB[0]);
-			//System.out.println("Segundo polinomio:");
-			//System.out.println("B(x)="+b2+"x^2+"+b1+"x+"+b0+"\n");
+			System.out.println("Segundo polinomio:");
+			System.out.println("B(x)="+b2+"x^2+"+b1+"x+"+b0+"\n");
+			
+			}else if(b.length()==1) {
+				
+				b2=0+"";
+				b1=0+"";
+				b0=b.charAt(0)+"";
+				
+			}else if(b.length()==2) {
+				b2=0+"";
+				b1=b.charAt(1)+"";
+				b0=b.charAt(0)+"";
+				
+			}else if(b.length()==3) {
+				a2=b.charAt(2)+"";
+				a1=b.charAt(1)+"";
+				a0=b.charAt(0)+"";
+				}
 		
 			String control=OperacionBasica.sumaGeneral(a0,a2) ;
 			String AdeCero=a0;
@@ -193,16 +241,22 @@ public class Toom_Cook {
     }
 	
 	public static String cleanValue(String a) {
+		
 		String retorno="0";
 		if(a!=null){
-		if(a.charAt(0)=='0'){
-			a="-"+a;
-			a=a.replace("-0", "");
+			if(a.length()!=1){	
+				if(a.charAt(0)=='0'){
+					a="-"+a;
+					a=a.replace("-0", "");
 			
 		}
 		retorno=a;
+		
 		}
+			retorno=a;
+	}
 		return retorno;
+		
 	}
 	
 	public static String concaternarCeros(String a, int expo) {
@@ -215,7 +269,13 @@ public class Toom_Cook {
 	// solopara pruebas despues toca borrarlooooooooo
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		long a=System.nanoTime();
 		System.out.println(Toom("1234567890123456789012","987654321987654321098"));
+		long b=System.nanoTime();
+		//double seconds = (double)b-a / 1000000000.0;
+		
+
+		System.out.println(b-a);
+		
 	}
 }
