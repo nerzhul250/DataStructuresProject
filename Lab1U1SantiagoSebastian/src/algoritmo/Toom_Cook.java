@@ -2,6 +2,7 @@ package algoritmo;
 
 import java.awt.List;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.concurrent.TimeUnit;
 
 public class Toom_Cook {
@@ -17,6 +18,16 @@ public class Toom_Cook {
 		long f=Long.parseLong(a);
 		long s=Long.parseLong(b);
 		return (f*s)+"";
+=======
+
+public class Toom_Cook {
+	public static String Toom(String a,String b){
+		int negative=0;
+	if(Math.max(a.length(), b.length())<5 ){
+		long f=Long.parseLong(a);
+		long s=Long.parseLong(b);
+		return f*s+"";
+>>>>>>> parent of 820a1e5... ToomNice
 	}else{	
 		if(a.equals("0")||b.equals("0")){
 			return "0";
@@ -34,6 +45,7 @@ public class Toom_Cook {
 			}else if(b.charAt(0)=='-'&&a.charAt(0)=='-'){
 				b=b.replace("-","");
 				a=a.replace("-","");
+<<<<<<< HEAD
 			}
 			//here we goooooo
 			if(a.charAt(0)=='0'){
@@ -210,6 +222,142 @@ public class Toom_Cook {
 	
 	private static String[] cutter(String string, long low) {
 		
+=======
+			}
+			//here we goooooo
+			if(a.charAt(0)=='0'){
+				a="-"+a;
+				a=a.replace("-0", "");
+				
+			}if(b.charAt(0)=='0') {
+				b="-"+b;
+				b=b.replace("-0", "");
+				
+			}
+			int TheMain=0;
+			
+			int TheA=(OperacionBasica.log10(a)/3);
+			
+			int TheB=(OperacionBasica.log10(b)/3);
+			
+			if(TheB<TheA){
+			TheMain=TheA;}
+			else if(TheB>TheA) {
+			TheMain=TheB;
+			}else {
+				TheMain=TheA;
+			}
+			
+			
+			TheMain=TheMain+1;
+			
+			
+			String a0,a1,a2,b0,b1,b2;
+
+			String[] partitionsA=cutter(a,TheMain);
+			String[] partitionsB=cutter(b,TheMain);
+			
+			
+			a2=cleanValue(partitionsA[2]);
+			a1=cleanValue(partitionsA[1]);
+			a0=cleanValue(partitionsA[0]);
+			System.out.println("Valores a multiplicar; "+a+"*"+b);
+			System.out.println("Separar cada "+TheMain+" digitos");
+			System.out.println("Primer polinomio:");
+			System.out.println("A(x)="+a2+"x^2+"+a1+"x+"+a0);
+		
+			
+			b2=cleanValue(partitionsB[2]);
+			b1=cleanValue(partitionsB[1]);
+			b0=cleanValue(partitionsB[0]);
+			System.out.println("Segundo polinomio:");
+			System.out.println("B(x)="+b2+"x^2+"+b1+"x+"+b0+"\n");
+		
+			String control=OperacionBasica.sumaGeneral(a0,a2) ;
+			String AdeCero=a0;
+			String AdeUno=OperacionBasica.sumaGeneral(control,a1);
+			String AdeMenosUno=OperacionBasica.sumaGeneral(control, "-"+a1);
+			String first=OperacionBasica.sumaGeneral(AdeMenosUno, a2);
+			String second=OperacionBasica.sumaGeneral(first, first);
+			String AdeMenosDos=OperacionBasica.sumaGeneral(second, "-"+a0);
+			String AdeInfinito=a2;
+			
+
+			
+			
+			
+			String Bcontrol= OperacionBasica.sumaGeneral(b0,b2);
+			String BdeCero=b0;
+			
+			String BdeUno=OperacionBasica.sumaGeneral(Bcontrol,b1);
+			String BdeMenosUno=OperacionBasica.sumaGeneral(Bcontrol, "-"+b1);
+			String Bfirst=OperacionBasica.sumaGeneral(BdeMenosUno, b2);
+			String Bsecond=OperacionBasica.sumaGeneral(Bfirst,Bfirst);
+			String BdeMenosDos=OperacionBasica.sumaGeneral(Bsecond, "-"+b0);
+			String BdeInfinito=b2;
+			
+			
+			//llamados recursivos.
+			
+			String rCero=Toom(AdeCero,BdeCero);
+			String rUno =Toom(AdeUno,BdeUno );
+			String rMenosUno =Toom(AdeMenosUno,BdeMenosUno );
+			String rMenosDos =Toom(AdeMenosDos, BdeMenosDos);
+			String rInfinito =Toom(AdeInfinito,BdeInfinito );
+			
+			
+			
+			//bodrato trick
+			String cero=rCero;
+			String cuatro=rInfinito;
+			
+			
+			
+			String tres=OperacionBasica.divisionByN(OperacionBasica.sumaGeneral(rMenosDos, "-"+rUno), 3);
+			
+			String uno=OperacionBasica.divisionByN(OperacionBasica.sumaGeneral(rUno, "-"+rMenosUno), 2);			
+
+			String dos=OperacionBasica.sumaGeneral(rMenosUno, "-"+rCero);
+			
+			String dobleInfinito=OperacionBasica.sumaGeneral(rInfinito, rInfinito);
+			String res=OperacionBasica.sumaGeneral(dos,"-"+tres);
+			tres=OperacionBasica.sumaGeneral(OperacionBasica.divisionByN(res, 2), dobleInfinito);
+			
+			String save=OperacionBasica.sumaGeneral(dos, uno);
+			dos=OperacionBasica.sumaGeneral(save, "-"+cuatro);
+			uno=OperacionBasica.sumaGeneral(uno, "-"+tres);
+			
+			//por ultimo se computa el polinomio con las respuestas del bordato trick
+
+			
+			
+			String aAlaCuatro=concaternarCeros(cuatro, (int)TheMain*4);
+			String aAlaTres=concaternarCeros(tres, (int)TheMain*3);
+			String aAlaDos=concaternarCeros(dos, (int)TheMain*2);
+			String aAlaUno=concaternarCeros(uno, (int)TheMain);
+			String aAlaCero=cero;
+			
+			String suma=OperacionBasica.sumaGeneral(aAlaCuatro, aAlaTres);
+			suma=OperacionBasica.sumaGeneral(suma,aAlaDos);
+			suma=OperacionBasica.sumaGeneral(suma,aAlaUno);
+			suma=OperacionBasica.sumaGeneral(suma,aAlaCero);
+			
+			if(negative==1){
+				return "-"+suma;}
+			else{
+			return suma;
+			}
+			
+		}
+			
+			
+		}
+		
+	}
+	
+	private static String[] cutter(String string, long low) {
+		
+>>>>>>> parent of 820a1e5... ToomNice
        char[] arreglo=string.toCharArray();
        
       String[] retorno=new String[3];
@@ -241,6 +389,7 @@ public class Toom_Cook {
     }
 	
 	public static String cleanValue(String a) {
+<<<<<<< HEAD
 		
 		String retorno="0";
 		if(a!=null){
@@ -258,6 +407,19 @@ public class Toom_Cook {
 		return retorno;
 		
 	}
+=======
+		String retorno="0";
+		if(a!=null){
+		if(a.charAt(0)=='0'){
+			a="-"+a;
+			a=a.replace("-0", "");
+			
+		}
+		retorno=a;
+		}
+		return retorno;
+	}
+>>>>>>> parent of 820a1e5... ToomNice
 	
 	public static String concaternarCeros(String a, int expo) {
 		String retorno=a;
@@ -269,6 +431,7 @@ public class Toom_Cook {
 	// solopara pruebas despues toca borrarlooooooooo
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		long a=System.nanoTime();
 		System.out.println(Toom("1234567890123456789012","987654321987654321098"));
 		long b=System.nanoTime();
@@ -277,5 +440,9 @@ public class Toom_Cook {
 
 		System.out.println(b-a);
 		
+=======
+		
+		System.out.println(Toom("1234567890123456789012","987654321987654321098"));
+>>>>>>> parent of 820a1e5... ToomNice
 	}
 }
