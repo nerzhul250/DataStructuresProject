@@ -1,68 +1,108 @@
- package algoritmo;
- 
+package algoritmo;
+
 import java.awt.List;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class Toom_Cook {
 	
-		public static String Toom(String A,String B){
-			int neg=0;
-			if(A.charAt(0)=='-' || B.charAt(0)=='-'){
-				if(A.charAt(0)=='-' && B.charAt(0)=='-'){
-					A=A.substring(1);
-					B=B.substring(1);
-				}else{
-					if(A.charAt(0)=='-'){
-						A=A.substring(1);
-					}else{
-						B=B.substring(1);
-					}
-					neg=1;				
-				}
+	public final static String GOOGLEPLEX="10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+	public static String Toom(String a,String b){
+		int negative=0;
+		a=cleanValue(a);
+		b=cleanValue(b);
+
+		
+	if(Math.max(a.length(), b.length())<=5){
+		long f=Long.parseLong(a);
+		long s=Long.parseLong(b);
+		return (f*s)+"";
+	}else{	
+		if(a.equals("0")||b.equals("0")){
+			return "0";
+		}else if(a.equals("1")) {
+			return b;
+		}else if(b.equals("1")){
+			return a;
+		}else {
+			if(a.charAt(0)=='-'&&b.charAt(0)!='-'){
+				negative=1;
+				a=a.replace("-", "");
+			}else if(b.charAt(0)=='-'&&a.charAt(0)!='-') {
+				negative=1;
+				b=b.replace("-", "");
+			}else if(b.charAt(0)=='-'&&a.charAt(0)=='-'){
+				b=b.replace("-","");
+				a=a.replace("-","");
 			}
-			if(A.length()<7 && B.length()<7){
-				if(neg==1){
-					return (-1*Long.parseLong(A)*Long.parseLong(B))+"";
-				}else{
-					return (Long.parseLong(A)*Long.parseLong(B))+"";				
-				}
+			//here we goooooo
+			if(a.charAt(0)=='0'){
+				a="-"+a;
+				a=a.replace("-0", "");
+				
+			}if(b.charAt(0)=='0') {
+				b="-"+b;
+				b=b.replace("-0", "");
+				
 			}
 			int TheMain=0;
 			
-			int TheA=(OperacionBasica.log10(A)/3);
+			int TheA=(OperacionBasica.log10(a)/3);
 			
-			int TheB=(OperacionBasica.log10(B)/3);
+			int TheB=(OperacionBasica.log10(b)/3);
 			
 			if(TheB<TheA){
 			TheMain=TheA;}
-			else{
+			else if(TheB>TheA) {
 			TheMain=TheB;
+			}else {
+				TheMain=TheA;
 			}
-			TheMain++;
+			
+			
+			TheMain=TheMain+1;
+			
 			
 			String a0,a1,a2,b0,b1,b2;
 			
-			String[] partitionsA=split(A,TheMain);
-			String[] partitionsB=split(B,TheMain);
+			
+
+			String[] partitionsA=cutter(a,TheMain);
 			
 			
-			a2=partitionsA[2];
-			a1=partitionsA[1];
-			a0=partitionsA[0];
 			
-			b2=partitionsB[2];
-			b1=partitionsB[1];
-			b0=partitionsB[0];
+			a2=cleanValue(partitionsA[2]);
+			a1=cleanValue(partitionsA[1]);
+			a0=cleanValue(partitionsA[0]);
+			System.out.println("Valores a multiplicar; "+a+"*"+b);
+			System.out.println("Separar cada "+TheMain+" digitos");
+			System.out.println("Primer polinomio:");
+			System.out.println("A(x)="+a2+"x^2+"+a1+"x+"+a0);
 			
+			
+			
+		
+			String[] partitionsB=cutter(b,TheMain);
+			b2=cleanValue(partitionsB[2]);
+			b1=cleanValue(partitionsB[1]);
+			b0=cleanValue(partitionsB[0]);
+			System.out.println("Segundo polinomio:");
+			System.out.println("B(x)="+b2+"x^2+"+b1+"x+"+b0+"\n");
+			
+			
+		
 			String control=OperacionBasica.sumaGeneral(a0,a2) ;
 			String AdeCero=a0;
 			String AdeUno=OperacionBasica.sumaGeneral(control,a1);
-			String AdeMenosUno=OperacionBasica.sumaGeneral(control, "-"+a1);
+			String AdeMenosUno=OperacionBasica.sumaGeneral(control,"-"+a1);
 			String first=OperacionBasica.sumaGeneral(AdeMenosUno, a2);
 			String second=OperacionBasica.sumaGeneral(first, first);
-			String AdeMenosDos=OperacionBasica.sumaGeneral(second, "-"+a0);
+			String AdeMenosDos=OperacionBasica.sumaGeneral(second,"-"+a0);
 			String AdeInfinito=a2;
+			
+
+			
+			
 			
 			String Bcontrol= OperacionBasica.sumaGeneral(b0,b2);
 			String BdeCero=b0;
@@ -83,14 +123,18 @@ public class Toom_Cook {
 			String rMenosDos =Toom(AdeMenosDos, BdeMenosDos);
 			String rInfinito =Toom(AdeInfinito,BdeInfinito );
 			
+			
+			
 			//bodrato trick
 			String cero=rCero;
 			String cuatro=rInfinito;
 			
+			
+			
 			String tres=OperacionBasica.divisionByN(OperacionBasica.sumaGeneral(rMenosDos, "-"+rUno), 3);
 			
 			String uno=OperacionBasica.divisionByN(OperacionBasica.sumaGeneral(rUno, "-"+rMenosUno), 2);			
-			
+
 			String dos=OperacionBasica.sumaGeneral(rMenosUno, "-"+rCero);
 			
 			String dobleInfinito=OperacionBasica.sumaGeneral(rInfinito, rInfinito);
@@ -102,11 +146,13 @@ public class Toom_Cook {
 			uno=OperacionBasica.sumaGeneral(uno, "-"+tres);
 			
 			//por ultimo se computa el polinomio con las respuestas del bordato trick
+
 			
-			String aAlaCuatro=addZeroes(cuatro, (int)TheMain*4);
-			String aAlaTres=addZeroes(tres, (int)TheMain*3);
-			String aAlaDos=addZeroes(dos, (int)TheMain*2);
-			String aAlaUno=addZeroes(uno, (int)TheMain);
+			
+			String aAlaCuatro=concaternarCeros(cuatro, (int)TheMain*4);
+			String aAlaTres=concaternarCeros(tres, (int)TheMain*3);
+			String aAlaDos=concaternarCeros(dos, (int)TheMain*2);
+			String aAlaUno=concaternarCeros(uno, (int)TheMain);
 			String aAlaCero=cero;
 			
 			String suma=OperacionBasica.sumaGeneral(aAlaCuatro, aAlaTres);
@@ -114,37 +160,87 @@ public class Toom_Cook {
 			suma=OperacionBasica.sumaGeneral(suma,aAlaUno);
 			suma=OperacionBasica.sumaGeneral(suma,aAlaCero);
 			
-			if(neg==1){
-				return "-"+suma;			
-			}else{
-				return suma;
+			if(negative==1){
+				return "-"+suma;}
+			else{
+			return suma;
 			}
-		}
-		private static String[] split(String a, int k) {
-			int counter=0;
-			String[] arr=new String[3];
-			Arrays.fill(arr,"");
-			int indice=0;
-			for (int i = a.length()-1; i >=0; i--) {
-				counter++;
-				arr[indice]=a.charAt(i)+arr[indice];
-				if(counter%k==0){
-					indice++;
-				}
-			}	
-			return arr;
-		}
-		private static String addZeroes(String a, int i) {
-			for (int j = 0; j < i; j++) {
-				a=a+"0";
-			}
-			return a;
-		}
-		
-		public static void main(String[] args) {
-			// TODO Auto-generated method stub
-			System.out.println(Toom("1234567890123456789012","987654321987654321098"));
-		}
-	}
-		
 			
+		}
+			
+			
+		}
+		
+	}
+	
+	private static String[] cutter(String string, long low) {
+		
+       char[] arreglo=string.toCharArray();
+       
+      String[] retorno=new String[3];
+      int cuenta=0;
+       int control=0;
+       String anadir="";
+        for(int i=string.length()-1;i>=0;i--) {
+        	
+        	anadir=arreglo[i]+anadir;
+        	control++;
+        	if(control==low&&cuenta<3){
+        		retorno[cuenta]=anadir;
+        		control=0;
+        		anadir="";
+        		cuenta++;
+        	}
+        }
+     	if(!anadir.isEmpty()){
+     		if(retorno[2]==null) {
+     			retorno[2]=anadir;}else {
+
+     		retorno[2]=anadir+retorno[2];}
+    	}
+     	
+
+        return retorno;
+		
+		
+    }
+	
+	public static String cleanValue(String a) {
+		
+		String retorno="0";
+		if(a!=null){
+			if(a.length()!=1){	
+				if(a.charAt(0)=='0'){
+					a="-"+a;
+					a=a.replace("-0", "");
+			
+		}
+		retorno=a;
+		
+		}
+			retorno=a;
+	}
+		return retorno;
+		
+	}
+	
+	public static String concaternarCeros(String a, int expo) {
+		String retorno=a;
+		for(int i=0;i<expo;i++) {
+			retorno=retorno+"0";
+		}
+		return retorno;
+	}
+	// solopara pruebas despues toca borrarlooooooooo
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		long a=System.nanoTime();
+		System.out.println(Toom("1234567890123456789012","987654321987654321098"));
+		long b=System.nanoTime();
+		//double seconds = (double)b-a / 1000000000.0;
+		
+
+		System.out.println(b-a);
+		
+	}
+}
