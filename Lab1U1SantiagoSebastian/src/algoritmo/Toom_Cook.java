@@ -149,7 +149,7 @@ public class Toom_Cook {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		System.out.println(Toom("100000000000000000000000000","1000000000000000000000000000"));
+		System.out.println(Toom("7","7898989898989"));
 	
 	}
 	
