@@ -1,6 +1,7 @@
 package algoritmo;
 
 import java.awt.List;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -136,7 +137,16 @@ public class Toom_Cook {
 			if(counter%k==0){
 				indice++;
 			}
-		}	
+		}
+		if(arr[0].equals("")) {
+			arr[0]="0";
+		}
+        if(arr[1].equals("")) {
+        	   arr[1]="0";
+		}
+        if(arr[2].equals("")) {
+        	    arr[2]="0";
+		}
 		return arr;
 	}
 	
@@ -149,7 +159,12 @@ public class Toom_Cook {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		System.out.println(Toom("7","7898989898989"));
+		
+		BigInteger a = new BigInteger("1234567891234566");
+		BigInteger b = new BigInteger("8800000000000000000000");
+		System.out.println("Resultado BigInetegger: "+a.multiply(b)+"\n");
+		
+		System.out.println("Resultado artesanal: "+Toom("1234567891234566","8800000000000000000000"));
 	
 	}
 	
