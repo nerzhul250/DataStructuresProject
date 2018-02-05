@@ -74,10 +74,10 @@ public class TestOperacionBasica {
 	public void testDivisionByN(){
 		String A="156";
 		String respuesta=OperacionBasica.divisionByN(A,2);
-		assertEquals("78",respuesta);
+		assertEquals("078",respuesta);
 		A="12";
 		respuesta=OperacionBasica.divisionByN(A,3);	
-		assertEquals("4",respuesta);
+		assertEquals("04",respuesta);
 	}
 	@Test
 	public void testSumaGeneral(){
@@ -97,5 +97,7 @@ public class TestOperacionBasica {
 		B="-56";
 		respuesta=OperacionBasica.sumaGeneral(A, B);
 		assertEquals("4600",respuesta);
+		A="1600";
+		B="100";
 	}
 }
