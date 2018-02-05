@@ -6,10 +6,11 @@ import java.util.ArrayList;
 public class Toom_Cook {
 	public static String Toom(String a,String b){
 		int negative=0;
-	if(Math.max(a.length(), b.length())<5 ){
+		
+	if(Math.max(a.length(), b.length())<=5){
 		long f=Long.parseLong(a);
 		long s=Long.parseLong(b);
-		return f*s+"";
+		return (f*s)+"";
 	}else{	
 		if(a.equals("0")||b.equals("0")){
 			return "0";
@@ -65,25 +66,25 @@ public class Toom_Cook {
 			a2=cleanValue(partitionsA[2]);
 			a1=cleanValue(partitionsA[1]);
 			a0=cleanValue(partitionsA[0]);
-			System.out.println("Valores a multiplicar; "+a+"*"+b);
-			System.out.println("Separar cada "+TheMain+" digitos");
-			System.out.println("Primer polinomio:");
-			System.out.println("A(x)="+a2+"x^2+"+a1+"x+"+a0);
+			//System.out.println("Valores a multiplicar; "+a+"*"+b);
+			//System.out.println("Separar cada "+TheMain+" digitos");
+			//System.out.println("Primer polinomio:");
+			//System.out.println("A(x)="+a2+"x^2+"+a1+"x+"+a0);
 		
 			
 			b2=cleanValue(partitionsB[2]);
 			b1=cleanValue(partitionsB[1]);
 			b0=cleanValue(partitionsB[0]);
-			System.out.println("Segundo polinomio:");
-			System.out.println("B(x)="+b2+"x^2+"+b1+"x+"+b0+"\n");
+			//System.out.println("Segundo polinomio:");
+			//System.out.println("B(x)="+b2+"x^2+"+b1+"x+"+b0+"\n");
 		
 			String control=OperacionBasica.sumaGeneral(a0,a2) ;
 			String AdeCero=a0;
 			String AdeUno=OperacionBasica.sumaGeneral(control,a1);
-			String AdeMenosUno=OperacionBasica.sumaGeneral(control, "-"+a1);
+			String AdeMenosUno=OperacionBasica.sumaGeneral(control,"-"+a1);
 			String first=OperacionBasica.sumaGeneral(AdeMenosUno, a2);
 			String second=OperacionBasica.sumaGeneral(first, first);
-			String AdeMenosDos=OperacionBasica.sumaGeneral(second, "-"+a0);
+			String AdeMenosDos=OperacionBasica.sumaGeneral(second,"-"+a0);
 			String AdeInfinito=a2;
 			
 
