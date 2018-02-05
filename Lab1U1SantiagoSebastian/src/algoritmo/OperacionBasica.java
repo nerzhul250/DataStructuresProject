@@ -62,9 +62,14 @@ public class OperacionBasica {
 		while(indice<A.length()){
 			nam+=A.charAt(indice);
 			int num=Integer.parseInt(nam);
-			if(num>=n){
+			boolean entered=false;
+			if(num>=n || num==0){
+				entered=true;
 				nam=(num%n)+"";
 				result=result+(num/n);
+			}
+			if(!entered){
+				result=result+"0";
 			}
 			indice++;
 		}
@@ -134,9 +139,7 @@ public class OperacionBasica {
 		String small=(String)info[3];
 		int o1=(Integer)info[0];
 		int o2=(Integer)info[1];
-		
-	
-		
+				
 		char[][] matrix=new char[3][ke];
 		int pa=big.length()-1;
 		int pb=small.length()-1;
@@ -251,7 +254,6 @@ public class OperacionBasica {
 	}
 	public static int log10(String a){
 		return a.length()-1;
-		
 	}
 	
 }
