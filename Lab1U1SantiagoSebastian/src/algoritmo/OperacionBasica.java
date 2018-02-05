@@ -62,9 +62,13 @@ public class OperacionBasica {
 		while(indice<A.length()){
 			nam+=A.charAt(indice);
 			int num=Integer.parseInt(nam);
-			if(num>=n){
+			boolean entered=false;
+			if(num>=n || num==0){
+				entered=true;
 				nam=(num%n)+"";
 				result=result+(num/n);
+			}if(!entered){
+				result=result+"0";
 			}
 			indice++;
 		}
