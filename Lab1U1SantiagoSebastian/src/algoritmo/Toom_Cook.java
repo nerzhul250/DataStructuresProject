@@ -160,18 +160,21 @@ public class Toom_Cook {
 		}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		String A="";
+		String B="";
 		
 		
-		BigInteger a = new BigInteger(GOOGLEPLEX);
-		BigInteger b = new BigInteger(GOOGLEPLEX);
+		BigInteger a = new BigInteger(A);
+		BigInteger b = new BigInteger(B);
 		long i=System.nanoTime();
-		System.out.println("Resultado artesanal: "+Toom(GOOGLEPLEX,GOOGLEPLEX));
+		System.out.println("el primer numero tien un largo de "+A.length()+" Y el segundo de "+B.length());
+		System.out.println("Resultado artesanal: "+Toom(A,B));
 		long f=System.nanoTime();
 		System.out.println("It took: "+(f-i));
-		i=System.nanoTime();
-		System.out.println("Resultado BigInetegger: "+a.multiply(b)+"\n");
-		f=System.nanoTime();
-		System.out.println("It took: "+(f-i));
+		//i=System.nanoTime();
+		//System.out.println("Resultado BigInetegger: "+a.multiply(b)+"\n");
+		//f=System.nanoTime();
+		//System.out.println("It took: "+(f-i));
 		
 	}
 	
