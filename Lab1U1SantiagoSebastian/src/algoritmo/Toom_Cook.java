@@ -8,6 +8,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Toom_Cook {
 	
+	public Toom_Cook() {
+		
+	}
+	
 	public final static String GOOGLEPLEX="10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
 	public static String Toom(String A,String B){
 		int neg=0;
@@ -24,8 +28,6 @@ public class Toom_Cook {
 				neg=1;				
 			}
 			}
-		
-	
 	if(A.length()<7 && B.length()<7){
 		if(neg==1){
 			return (-1*Long.parseLong(A)*Long.parseLong(B))+"";
@@ -160,12 +162,17 @@ public class Toom_Cook {
 		// TODO Auto-generated method stub
 		
 		
-		BigInteger a = new BigInteger("8");
-		BigInteger b = new BigInteger("54334545442323");
+		BigInteger a = new BigInteger(GOOGLEPLEX);
+		BigInteger b = new BigInteger(GOOGLEPLEX);
+		long i=System.nanoTime();
+		System.out.println("Resultado artesanal: "+Toom(GOOGLEPLEX,GOOGLEPLEX));
+		long f=System.nanoTime();
+		System.out.println("It took: "+(f-i));
+		i=System.nanoTime();
 		System.out.println("Resultado BigInetegger: "+a.multiply(b)+"\n");
+		f=System.nanoTime();
+		System.out.println("It took: "+(f-i));
 		
-		System.out.println("Resultado artesanal: "+Toom("8","54334545442323"));
-	
 	}
 	
 }
