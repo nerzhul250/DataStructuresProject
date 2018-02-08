@@ -13,10 +13,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 import algoritmo.Karatsuba;
+import algoritmo.Toom_Cook;
 
 public class InterfazMultiplicacion extends JFrame{
 	
 	private Karatsuba mundo;
+	private Toom_Cook toom;
 	
 	private PanelVisualizacion pv;
 	private PanelOpcion po;
@@ -26,6 +28,7 @@ public class InterfazMultiplicacion extends JFrame{
 		setLayout(new BorderLayout());
 		
 		mundo=new Karatsuba();
+		toom=new Toom_Cook();
 		po=new PanelOpcion(this);
 		pv=new PanelVisualizacion();
 		
@@ -44,6 +47,14 @@ public class InterfazMultiplicacion extends JFrame{
 		mg.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
+	public void multiplicarToom(String num1,String num2) {
+		Toom_Cook.Toom(num1, num2);
+		ArrayList<String>pro=toom.getProcedimiento();
+		pv.setTexty(pro);
+		pv.repaint();
+		toom.setProcedimiento(new ArrayList<String>());;
+
+	}
 	public void multiplicarConKaratsuba(String num1, String num2) {
 		mundo.karatsuba(num1, num2);
 		ArrayList<String>pro=mundo.getProcedimiento();

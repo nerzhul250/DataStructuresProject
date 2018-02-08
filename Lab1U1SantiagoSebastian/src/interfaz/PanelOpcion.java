@@ -30,6 +30,7 @@ public class PanelOpcion extends JPanel implements ActionListener{
 		option1.setActionCommand("KARA");
 		option2=new JButton("Toom Cook");
 		option2.addActionListener(this);
+		option2.setActionCommand("Toom3");
 		option3=new JButton("Algorithm 3");
 		option3.addActionListener(this);
 		
@@ -46,6 +47,9 @@ public class PanelOpcion extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("KARA")){
 			im.multiplicarConKaratsuba(num1.getText(),num2.getText());
+		}
+		if(e.getActionCommand().equals("Toom3")) {
+			im.multiplicarToom(num1.getText(),num2.getText());
 		}
 	}
 }
