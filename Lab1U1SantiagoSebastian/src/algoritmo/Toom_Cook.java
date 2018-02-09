@@ -103,7 +103,7 @@ public class Toom_Cook {
 			
 			  //////////////
 			  bloque.append("Generamos el polinomio A(x)...\n");
-			  bloque.append("A(x)="+a2+"x^2"+a1+"x"+a0+"\n");
+			  bloque.append("A(x)="+a2+"x^2+"+a1+"x+"+a0+"\n");
 			  //////////////
 			
 			b2=partitionsB[2];
@@ -112,7 +112,7 @@ public class Toom_Cook {
 			
 			 //////////////
 			  bloque.append("Generamos el polinomio B(x)...\n");
-			  bloque.append("A(x)="+b2+"x^2"+b1+"x"+b0+"\n");
+			  bloque.append("A(x)="+b2+"x^2+"+b1+"x+"+b0+"\n");
 			  //////////////
 			  
 			  
@@ -167,7 +167,7 @@ public class Toom_Cook {
 			
 			 //////////////
 			  bloque.append("El polinomio R(x) es encontrado tras una serie de sumas y 5 llamados recursivos \n");
-			  bloque.append("R(x)="+cuatro+"x^4"+tres+"x^3"+dos+"x^2"+uno+"x"+cero+"\n");
+			  bloque.append("R(x)="+cuatro+"x^4+"+tres+"x^3+"+dos+"x^2+"+uno+"x+"+cero+"\n");
 			  //////////////
 			
 			  //////////////
