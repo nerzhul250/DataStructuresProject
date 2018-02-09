@@ -12,6 +12,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
+import algoritmo.Fibonacci;
 import algoritmo.Karatsuba;
 import algoritmo.Toom_Cook;
 
@@ -19,7 +20,7 @@ public class InterfazMultiplicacion extends JFrame{
 	
 	private Karatsuba mundo;
 	private Toom_Cook toom;
-	
+	private Fibonacci fibo;
 	private PanelVisualizacion pv;
 	private PanelOpcion po;
 	
@@ -29,6 +30,7 @@ public class InterfazMultiplicacion extends JFrame{
 		
 		mundo=new Karatsuba();
 		toom=new Toom_Cook();
+		fibo = new Fibonacci();
 		po=new PanelOpcion(this);
 		pv=new PanelVisualizacion();
 		
@@ -61,6 +63,14 @@ public class InterfazMultiplicacion extends JFrame{
 		pv.setTexty(pro);
 		pv.repaint();
 		mundo.setProcedimiento(new ArrayList<String>());;
+	}
+
+	public void multiplicarFibo(String text, String text2) {
+		fibo.multiplicacion(text, text2);
+		ArrayList<String>pro=fibo.getProcedimiento();
+		pv.setTexty(pro);
+		pv.repaint();
+		fibo.setProcedimiento(new ArrayList<String>());
 	}
 
 }
