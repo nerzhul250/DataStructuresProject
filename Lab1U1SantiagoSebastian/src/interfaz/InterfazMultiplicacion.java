@@ -82,7 +82,8 @@ public class InterfazMultiplicacion extends JFrame{
 			pv.repaint();
 			fibo.setProcedimiento(new ArrayList<String>());
 		}catch(Exception e){
-			JOptionPane.showMessageDialog(this,"Parece ser, que eres, un usuario mañoso");
+			JOptionPane.showMessageDialog(this,"Parece ser, que eres un usuario mañoso\n"
+					+ "Ya verás por qué soy tan ineficiente, pero sencillo");
 		}
 	}
 
