@@ -94,6 +94,7 @@ public class Karatsuba {
 		  bloque.append("Los partimos a la mitad...\n");
 		  bloque.append("X_h="+ex1[0]+", X_l="+ex1[1]+"\n");
 		  bloque.append("Y_h="+ex2[0]+", Y_l="+ex2[1]+"\n");
+		  bloque.append("Sea m2= "+m2+" la maxima longitud de las cadenas entre dos\n");
 		  //////////////
 		  
 		  /* 3 calls made to numbers approximately half the size */
