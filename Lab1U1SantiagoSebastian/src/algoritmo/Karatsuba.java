@@ -35,6 +35,21 @@ public class Karatsuba {
 	      bloque.append(B);
 	      bloque.append(")\n");
 	      //////////////
+		
+		int neg=0;
+		if(A.charAt(0)=='-' || B.charAt(0)=='-'){
+			if(A.charAt(0)=='-' && B.charAt(0)=='-'){
+				A=A.substring(1);
+				B=B.substring(1);
+			}else{
+				if(A.charAt(0)=='-'){
+					A=A.substring(1);
+				}else{
+					B=B.substring(1);
+				}
+				neg=1;				
+			}
+		}  
 	      
 		  if(A.length()==1 || B.length()==1){
 			  if(A.length()==1 && A.charAt(0)=='0' ||
@@ -79,6 +94,7 @@ public class Karatsuba {
 		  bloque.append("Los partimos a la mitad...\n");
 		  bloque.append("X_h="+ex1[0]+", X_l="+ex1[1]+"\n");
 		  bloque.append("Y_h="+ex2[0]+", Y_l="+ex2[1]+"\n");
+		  bloque.append("Sea m2= "+m2+" la maxima longitud de las cadenas entre dos\n");
 		  //////////////
 		  
 		  /* 3 calls made to numbers approximately half the size */
@@ -111,6 +127,12 @@ public class Karatsuba {
 		  
 		  String respuesta=OperacionBasica.sum(OperacionBasica.sum(z2,za),z0);
 		 
+		  if(neg==1){
+			  respuesta="-"+respuesta;
+		  }else{
+			  respuesta=respuesta;
+		  }		 
+		  
           //////////////
 		  bloque.append("Finalmente...\n");
 		  bloque.append("X*Y=A*10^(2*M2)+(C-A-B)*10^M2+B\n");
@@ -119,6 +141,7 @@ public class Karatsuba {
 		  
 		  procedimiento.add(bloque.toString());
 		  
+		 
 		  return respuesta;
 	}
 	

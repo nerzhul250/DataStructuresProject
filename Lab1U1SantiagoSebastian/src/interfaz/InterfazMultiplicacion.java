@@ -12,6 +12,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
+import algoritmo.Fibonacci;
 import algoritmo.Karatsuba;
 import algoritmo.Toom_Cook;
 
@@ -19,7 +20,7 @@ public class InterfazMultiplicacion extends JFrame{
 	
 	private Karatsuba mundo;
 	private Toom_Cook toom;
-	
+	private Fibonacci fibo;
 	private PanelVisualizacion pv;
 	private PanelOpcion po;
 	
@@ -29,6 +30,7 @@ public class InterfazMultiplicacion extends JFrame{
 		
 		mundo=new Karatsuba();
 		toom=new Toom_Cook();
+		fibo = new Fibonacci();
 		po=new PanelOpcion(this);
 		pv=new PanelVisualizacion();
 		
@@ -48,19 +50,41 @@ public class InterfazMultiplicacion extends JFrame{
 	}
 
 	public void multiplicarToom(String num1,String num2) {
-		Toom_Cook.Toom(num1, num2);
-		ArrayList<String>pro=toom.getProcedimiento();
-		pv.setTexty(pro);
-		pv.repaint();
-		toom.setProcedimiento(new ArrayList<String>());;
-
+		try{
+			Toom_Cook.Toom(num1, num2);
+			ArrayList<String>pro=toom.getProcedimiento();
+			pv.setTexty(pro);
+			pv.repaint();
+			toom.setProcedimiento(new ArrayList<String>());;
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(this,"Toom: Parece ser, que eres, un usuario mañoso\n"
+					+ "espero que no pruebes este algoritmo con numeritos");
+		}
 	}
 	public void multiplicarConKaratsuba(String num1, String num2) {
-		mundo.karatsuba(num1, num2);
-		ArrayList<String>pro=mundo.getProcedimiento();
-		pv.setTexty(pro);
-		pv.repaint();
-		mundo.setProcedimiento(new ArrayList<String>());;
+		try{
+			mundo.karatsuba(num1, num2);
+			ArrayList<String>pro=mundo.getProcedimiento();
+			pv.setTexty(pro);
+			pv.repaint();
+			mundo.setProcedimiento(new ArrayList<String>());
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(this,"Karatsuba: Parece ser, que eres, un usuario mañoso\n"
+					+ "¿No quieres ver como parto en dos mis numeros?");
+		}
+	}
+
+	public void multiplicarFibo(String text, String text2) {
+		try{
+			fibo.multiplicacion(text, text2);
+			ArrayList<String>pro=fibo.getProcedimiento();
+			pv.setTexty(pro);
+			pv.repaint();
+			fibo.setProcedimiento(new ArrayList<String>());
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(this,"Parece ser, que eres un usuario mañoso\n"
+					+ "Ya verás por qué soy tan ineficiente, pero sencillo");
+		}
 	}
 
 }

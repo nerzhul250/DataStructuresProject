@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 
 public class PanelOpcion extends JPanel implements ActionListener{
 	
+	private static final String FIBO = "Fibo";
+	
 	private JButton option1;
 	private JButton option2;
 	private JButton option3;
@@ -31,8 +33,9 @@ public class PanelOpcion extends JPanel implements ActionListener{
 		option2=new JButton("Toom Cook");
 		option2.addActionListener(this);
 		option2.setActionCommand("Toom3");
-		option3=new JButton("Algorithm 3");
+		option3=new JButton("Fibonacci");
 		option3.addActionListener(this);
+		option3.setActionCommand(FIBO);
 		
 		num1=new JTextField();
 		num2=new JTextField();
@@ -50,6 +53,9 @@ public class PanelOpcion extends JPanel implements ActionListener{
 		}
 		if(e.getActionCommand().equals("Toom3")) {
 			im.multiplicarToom(num1.getText(),num2.getText());
+		}
+		if(e.getActionCommand().equals(FIBO)) {
+			im.multiplicarFibo(num1.getText(),num2.getText());
 		}
 	}
 }

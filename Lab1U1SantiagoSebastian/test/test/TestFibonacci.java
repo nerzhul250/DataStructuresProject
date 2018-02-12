@@ -55,5 +55,23 @@ public class TestFibonacci extends TestCase{
 		d=new BigInteger(B);
 		result=fibo.multiplicacion(A, B);
 		assertEquals(x.multiply(d).toString(),result);
+		A="-123443746681111154855234424211148467111";
+		B="19";
+		x=new BigInteger(A);
+		d=new BigInteger(B);
+		result=fibo.multiplicacion(A, B);
+		assertEquals(x.multiply(d).toString(),result);
+		A="-123443746643298769015675645433424211148467111";
+		B="-121345678766776435325623646369";
+		x=new BigInteger(A);
+		d=new BigInteger(B);
+		result=fibo.multiplicacion(A, B);
+		assertEquals(x.multiply(d).toString(),result);
+		A="123443746643298769015675645433424211148467111";
+		B="-1213456787667764353256264763313646369";
+		x=new BigInteger(A);
+		d=new BigInteger(B);
+		result=fibo.multiplicacion(A, B);
+		assertEquals(x.multiply(d).toString(),result);
 	}
 }
