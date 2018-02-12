@@ -22,14 +22,14 @@ public class Fibonacci {
 		parla.append(")\n");
 
 		parla.append(
-				"Generamos una matriz del tamaño en filas y columnas equivalente a la cantidad de cifras de las dos entradas\n");
+				"Generamos una matriz del tamaï¿½o en filas y columnas equivalente a la cantidad de cifras de las dos entradas\n");
 		byte matriz[][] = new byte[x.length()][d.length()];
-		parla.append("tamaño de la nueva matriz: " + x.length() + " filas * " + d.length() + " columnas\n");
+		parla.append("tamaï¿½o de la nueva matriz: " + x.length() + " filas * " + d.length() + " columnas\n");
 		parla.append(
-				"Luego determinamos el tamaño máximo de cifras que puede tener la respuesta dada por la suma de las cifras de la entrada\n");
+				"Luego determinamos el tamaï¿½o mï¿½ximo de cifras que puede tener la respuesta dada por la suma de las cifras de la entrada\n");
 		int tamanio = x.length() + d.length();
 		byte[] numerosResultado = new byte[tamanio];
-		parla.append("cantidad de cifras máxima de la salida: " + tamanio + "\n");
+		parla.append("cantidad de cifras mï¿½xima de la salida: " + tamanio + "\n");
 		boolean negativo = false;
 		int i = 0;
 		int j = 0;
@@ -44,12 +44,12 @@ public class Fibonacci {
 			else if (d.startsWith("-"))
 				j = 1;
 		}
-		parla.append("Se aplica la regla de signos básica y almacenamos su carga, la cual es ");
+		parla.append("Se aplica la regla de signos bï¿½sica y almacenamos su carga, la cual es ");
 		if (negativo)
 			parla.append("negativa para este caso\n");
 		else
 			parla.append("positiva para este caso\n");
-		parla.append("Se llena la matriz con las multiplicaciones de cada dígito de los números, así:\n   ");
+		parla.append("Se llena la matriz con las multiplicaciones de cada dï¿½gito de los nï¿½meros, asï¿½:\n   ");
 		for (; i < d.length(); i++) {
 			parla.append(d.charAt(i) + "    ");
 		}
@@ -84,8 +84,8 @@ public class Fibonacci {
 			sigDigito = i + x.length();
 			parla.append("( " + sigDigito + " ) ");
 		}
-		parla.append("\nDonde (#) es el dígito proporcionado por la suma de su diagonal respectiva\n");
-		parla.append("pasadas sus decenas a la suma del dígito anterior tenemos\n");
+		parla.append("\nDonde (#) es el dï¿½gito proporcionado por la suma de su diagonal respectiva\n");
+		parla.append("pasadas sus decenas a la suma del dï¿½gito anterior tenemos\n");
 		String resultado = concatenarValores(numerosResultado);
 		if (negativo)
 			resultado = "-" + resultado;
@@ -114,15 +114,15 @@ public class Fibonacci {
 		}
 	}
 
-	public static void main(String[] args) {
-		Fibonacci f = new Fibonacci();
-		String resultado = f.multiplicacion("73", "-73");
-		System.out.println(resultado);
-		BigInteger a = new BigInteger("73");
-		BigInteger b = new BigInteger("-73");
-
-		System.out.println(a.multiply(b));
-	}
+//	public static void main(String[] args) {
+//		Fibonacci f = new Fibonacci();
+//		String resultado = f.multiplicacion("73", "-73");
+//		System.out.println(resultado);
+//		BigInteger a = new BigInteger("73");
+//		BigInteger b = new BigInteger("-73");
+//
+//		System.out.println(a.multiply(b));
+//	}
 
 	public ArrayList<String> getProcedimiento() {
 		return procedimiento;
