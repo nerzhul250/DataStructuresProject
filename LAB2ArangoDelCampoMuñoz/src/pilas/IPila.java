@@ -1,8 +1,8 @@
 package pilas;
 
-public interface IPila {
-	public Object pop();
-	
-	public void push(String x);
-
+public interface IPila<T> {
+	public T pop() throws PilaVaciaException;
+	public boolean push(T t);
+	public boolean isEmpty();
+	public T top();
 }

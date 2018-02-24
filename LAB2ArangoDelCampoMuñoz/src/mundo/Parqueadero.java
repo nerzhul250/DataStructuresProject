@@ -2,7 +2,7 @@ package mundo;
 
 import colas.ICola;
 
-public class Parqueadero implements ICola{
+public class Parqueadero{
 	Bahia[] bahias;
 	
 	String[] colaLlegadaParqueadero;

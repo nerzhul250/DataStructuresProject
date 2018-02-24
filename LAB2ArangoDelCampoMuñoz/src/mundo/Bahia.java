@@ -3,7 +3,7 @@ package mundo;
 import colas.ICola;
 import pilas.IPila;
 
-public class Bahia implements ICola,IPila{
+public class Bahia {
 	public int capacidadBahia;
 	public String[] pila;
 	public String[] cola;
@@ -12,11 +12,6 @@ public class Bahia implements ICola,IPila{
 		capacidadBahia=capacidad;
 		String[] pila=new String[capacidadBahia];
 		String[] cola=new String [capacidadBahia];
-	}
-
-	public Object pop() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public void push(String x) {
@@ -33,9 +28,5 @@ public class Bahia implements ICola,IPila{
 		// TODO Auto-generated method stub
 		
 	}
-
-
-	
-
 
 }
