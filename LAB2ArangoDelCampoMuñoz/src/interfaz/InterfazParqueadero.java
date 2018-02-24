@@ -1,10 +1,23 @@
 package interfaz;
 
-public class InterfazParqueadero {
+import javax.swing.JFrame;
 
+import mundo.Parqueadero;
+
+public class InterfazParqueadero extends JFrame {
+
+	private PanelBahia bahia;
+	private Parqueadero parking;
+	public InterfazParqueadero ()  {
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		bahia = new PanelBahia(this);
+		add(bahia);
+		pack();
+//		setSize(500, 500);
+	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		InterfazParqueadero i = new InterfazParqueadero();
+		i.setVisible(true);
 	}
 
 }
