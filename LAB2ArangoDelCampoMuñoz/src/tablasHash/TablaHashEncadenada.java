@@ -28,11 +28,11 @@ public class TablaHashEncadenada<K,V> implements ITablaHash<K,V> {
 		this.numeroDeColisiones = numeroDeColisiones;
 	}
 
-	public boolean estaVacio() {
+	public boolean isEmpty() {
 		return numeroElementosEnTabla==0;
 	}
 	//whaHappens when llave already exists?
-	public boolean insertar(K llave, V valor) {
+	public boolean insert(K llave, V valor) {
 		int pos=hash(llave);
 		if(tabla[pos]!=null){
 			numeroDeColisiones++;
@@ -48,7 +48,7 @@ public class TablaHashEncadenada<K,V> implements ITablaHash<K,V> {
 		return true;
 	}
 
-	public V buscar(K llave) {
+	public V find(K llave) {
 		int pos=hash(llave);
 		NodoHash<K,V> current=(NodoHash<K, V>) tabla[pos];
 		while(current!=null&&!current.getLlave().equals(llave)){
@@ -61,7 +61,7 @@ public class TablaHashEncadenada<K,V> implements ITablaHash<K,V> {
 		}
 	}
 
-	public V eliminar(K llave){
+	public V delete(K llave){
 		int pos=hash(llave);
 		NodoHash<K,V>ant=null;
 		NodoHash<K,V>current=(NodoHash<K, V>) tabla[pos];
@@ -84,7 +84,7 @@ public class TablaHashEncadenada<K,V> implements ITablaHash<K,V> {
 	
 	//Why strings have NegativeHashCodes
 	public int hash(K llave) {
-		return Math.abs(llave.hashCode())%tabla.length;
+		return (llave.hashCode()&0x7fffffff)%tabla.length;
 	}
 	
 }

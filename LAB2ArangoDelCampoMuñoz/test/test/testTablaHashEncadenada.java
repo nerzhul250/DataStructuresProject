@@ -19,50 +19,50 @@ public class testTablaHashEncadenada {
 	@Test
 	public void testInsertar() {
 		setUpEscenario1();
-		the.insertar("sdklfsd",2);
-		the.insertar("sdlfsd",3);
-		the.insertar("sdfsd",10);
-		the.insertar("sdsd",41);
-		the.insertar("fsd",46);
-		the.insertar("sklfsd",8);
-		the.insertar("sfsd",9);
-		the.insertar("sfsd",14);
-		the.insertar("slfd",15);
-		the.insertar("slf",10654);
+		the.insert("sdklfsd",2);
+		the.insert("sdlfsd",3);
+		the.insert("sdfsd",10);
+		the.insert("sdsd",41);
+		the.insert("fsd",46);
+		the.insert("sklfsd",8);
+		the.insert("sfsd",9);
+		the.insert("sfsd",14);
+		the.insert("slfd",15);
+		the.insert("slf",10654);
 		assertTrue(the.getNumeroElementosEnTabla()==10);
 		System.out.println(the.getNumeroDeColisiones());
 		setUpEscenario2();
-		the.insertar("sdklfsd",2);
-		the.insertar("sdlfsd",3);
-		the.insertar("sdfsd",10);
-		the.insertar("sdsd",41);
-		the.insertar("fsd",46);
-		the.insertar("sklfsd",8);
-		the.insertar("sfsd",9);
-		the.insertar("sfsd",14);
-		the.insertar("slfd",15);
-		the.insertar("slf",10654);
+		the.insert("sdklfsd",2);
+		the.insert("sdlfsd",3);
+		the.insert("sdfsd",10);
+		the.insert("sdsd",41);
+		the.insert("fsd",46);
+		the.insert("sklfsd",8);
+		the.insert("sfsd",9);
+		the.insert("sfsd",14);
+		the.insert("slfd",15);
+		the.insert("slf",10654);
 		assertTrue(the.getNumeroElementosEnTabla()==10);
 		System.out.println(the.getNumeroDeColisiones());
 	}
 	@Test
 	public void testBuscar() {
 		setUpEscenario1();
-		the.insertar("Automovil",2);
-		the.insertar("utomovil",3);
-		the.insertar("tomovil",10);
-		the.insertar("omovil",41);
-		the.insertar("movil",46);
-		the.insertar("ovil",8);
-		the.insertar("vil",9);
-		the.insertar("il",14);
-		the.insertar("l",15);
-		the.insertar("li",10654);
-		assertTrue(the.buscar("Automovil")==2);
-		assertTrue(the.buscar("l")==15);
-		assertTrue(the.buscar("li")==10654);
-		assertTrue(the.buscar("movil")==46);
-		assertTrue(the.buscar("vil")==9);
+		the.insert("Automovil",2);
+		the.insert("utomovil",3);
+		the.insert("tomovil",10);
+		the.insert("omovil",41);
+		the.insert("movil",46);
+		the.insert("ovil",8);
+		the.insert("vil",9);
+		the.insert("il",14);
+		the.insert("l",15);
+		the.insert("li",10654);
+		assertTrue(the.find("Automovil")==2);
+		assertTrue(the.find("l")==15);
+		assertTrue(the.find("li")==10654);
+		assertTrue(the.find("movil")==46);
+		assertTrue(the.find("vil")==9);
 		assertTrue(the.getNumeroElementosEnTabla()==10);
 	}
 }

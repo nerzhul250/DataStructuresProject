@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import colas.ColaEnlazada;
 import colas.ICola;
 import pilas.IPila;
+import tablasHash.ITablaHash;
+import tablasHash.TablaHashEncadenada;
 
 public class Parqueadero  { 
 	
 	Bahia[] bahias;
 	
 	ICola<Automovil>filaEntrada;
+	ITablaHash<Automovil,Bahia> tabla;
 	
 	int limiteVehiculos;
 	
@@ -22,6 +25,7 @@ public class Parqueadero  {
 		limiteVehiculos=totalCarrosIngresan;
 		limiteVehiculosPorBahia=capacidadBahia;
 		Bahia[] bahias=crearBahias(capacidadBahia, numBahias);
+		tabla=new TablaHashEncadenada<Automovil,Bahia>(numBahias);
 		filaEntrada=new ColaEnlazada<Automovil>();
 		llenarBahias(filaEntrada);
 		
@@ -42,11 +46,11 @@ public class Parqueadero  {
 	
 	public void llenarBahias(ICola<Automovil> filaEntrada) {
 		
-		for(int i=0;i<getBahias().length-1;i++){
+		for(int i=0;i<getBahias().length;i++){
 			
 			for(int j=0;j<this.limiteVehiculosPorBahia;j++){
-				
-			getBahias()[i].getPila().push(filaEntrada.unQueue());
+			getBahias()[i].getPila().push(filaEntrada.front());
+			tabla.insert(filaEntrada.unQueue(),getBahias()[i]);
 			}	
 		
 		}

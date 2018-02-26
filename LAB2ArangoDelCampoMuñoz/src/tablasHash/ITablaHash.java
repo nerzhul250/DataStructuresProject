@@ -2,9 +2,9 @@ package tablasHash;
 
 public interface ITablaHash<K,V> {
 	
-	public boolean estaVacio();
-	public boolean insertar(K llave, V valor);
-	public V buscar(K llave);
-	public V eliminar(K llave);
+	public boolean isEmpty();
+	public boolean insert(K llave, V valor);
+	public V find(K llave);
+	public V delete(K llave);
 	public int hash(K llave);
 }	
