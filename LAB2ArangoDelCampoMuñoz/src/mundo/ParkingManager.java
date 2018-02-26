@@ -20,7 +20,7 @@ public class ParkingManager {
 				Parqueadero nuevo=new Parqueadero(cantBahias,numVehiculosIngresan,capacidadBahia);
 				for(int x=j+1;x<numVehiculosIngresan;x++) {
 					Automovil pepeElCarroNuevo=new Automovil(entrada[x]);
-					nuevo.getFilaEntrada().add(pepeElCarroNuevo);
+					nuevo.getFilaEntrada().queue(pepeElCarroNuevo);
 				}
 				casos[i]=nuevo;
 				i++;
