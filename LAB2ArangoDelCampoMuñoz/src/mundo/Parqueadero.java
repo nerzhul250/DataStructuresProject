@@ -14,6 +14,7 @@ public class Parqueadero  {
 	
 	ICola<Automovil>filaEntrada;
 	ITablaHash<Automovil,Bahia> tabla;
+	ICola<Automovil>filaSalida;
 	
 	int limiteVehiculos;
 	
@@ -27,6 +28,7 @@ public class Parqueadero  {
 		Bahia[] bahias=crearBahias(capacidadBahia, numBahias);
 		tabla=new TablaHashEncadenada<Automovil,Bahia>(numBahias);
 		filaEntrada=new ColaEnlazada<Automovil>();
+		filaSalida=new ColaEnlazada<Automovil>();
 		llenarBahias(filaEntrada);
 		
 	}
@@ -47,12 +49,11 @@ public class Parqueadero  {
 	public void llenarBahias(ICola<Automovil> filaEntrada) {
 		
 		for(int i=0;i<getBahias().length;i++){
-			
+		
 			for(int j=0;j<this.limiteVehiculosPorBahia;j++){
 			getBahias()[i].getPila().push(filaEntrada.front());
 			tabla.insert(filaEntrada.unQueue(),getBahias()[i]);
 			}	
-		
 		}
 		
 	}
@@ -97,7 +98,14 @@ public class Parqueadero  {
 		this.limiteVehiculosPorBahia = limiteVehiculosPorBahia;
 	}
 	
+	public ICola<Automovil> getFilaSalida() {
+		return filaSalida;
+	}
 
+
+	public void setFilaSalida(ICola<Automovil> filaSalida) {
+		this.filaSalida = filaSalida;
+	}
 
 
 

@@ -16,4 +16,11 @@ public class Automovil {
 		}
 		return (int)hash;
 	}
+	public String getPlaca() {
+		return placa;
+	}
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+	
 }
