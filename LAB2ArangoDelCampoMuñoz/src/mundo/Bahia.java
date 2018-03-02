@@ -1,32 +1,46 @@
 package mundo;
 
+import colas.ColaEnlazada;
 import colas.ICola;
+import colas.NodoCola;
 import pilas.IPila;
+import pilas.PilaEnlazada;
+import pilas.PilaVaciaException;
 
-public class Bahia {
-	public int capacidadBahia;
-	public String[] pila;
-	public String[] cola;
+public class Bahia  {
 	
-	public Bahia(int capacidad) {
-		capacidadBahia=capacidad;
-		String[] pila=new String[capacidadBahia];
-		String[] cola=new String [capacidadBahia];
-	}
-
-	public void push(String x) {
-		// TODO Auto-generated method stub
+	public IPila<Automovil> pila;
+	public ICola<Automovil> cola;
+	
+	
+	public Bahia() {
 		
+		pila=new PilaEnlazada<Automovil>();
+		cola=new ColaEnlazada <Automovil>();
 	}
 
-	public Object unQueue() {
-		// TODO Auto-generated method stub
-		return null;
+
+
+
+	public IPila<Automovil> getPila() {
+		return pila;
 	}
 
-	public void queue(String x) {
-		// TODO Auto-generated method stub
-		
+
+	public void setPila(IPila<Automovil> pila) {
+		this.pila = pila;
 	}
 
+
+	public ICola<Automovil> getCola() {
+		return cola;
+	}
+
+
+	public void setCola(ICola<Automovil> cola) {
+		this.cola = cola;
+	}
+	
+
+	
 }

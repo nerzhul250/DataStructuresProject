@@ -1,28 +1,113 @@
 package mundo;
 
-import colas.ICola;
+import java.util.ArrayList;
 
-public class Parqueadero{
+import colas.ColaEnlazada;
+import colas.ICola;
+import pilas.IPila;
+import tablasHash.ITablaHash;
+import tablasHash.TablaHashEncadenada;
+
+public class Parqueadero  { 
+	
 	Bahia[] bahias;
 	
-	String[] colaLlegadaParqueadero;
+	ICola<Automovil>filaEntrada;
+	ITablaHash<Automovil,Bahia> tabla;
+	ICola<Automovil>filaSalida;
+	
+	int limiteVehiculos;
+	
+	int limiteVehiculosPorBahia;
 	
 	
-	public Parqueadero(int numBahias,int totalCarrosIngresan) {
-		Bahia[] bahias=new Bahia[numBahias];
-		String[] colaLlegadaParqueadero=new String[totalCarrosIngresan];
-	}
-
-
-	public Object unQueue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public void queue(String x) {
-		// TODO Auto-generated method stub
+	public Parqueadero(int numBahias,int totalCarrosIngresan, int capacidadBahia) {
+		
+		limiteVehiculos=totalCarrosIngresan;
+		limiteVehiculosPorBahia=capacidadBahia;
+		Bahia[] bahias=crearBahias(capacidadBahia, numBahias);
+		tabla=new TablaHashEncadenada<Automovil,Bahia>(numBahias);
+		filaEntrada=new ColaEnlazada<Automovil>();
+		filaSalida=new ColaEnlazada<Automovil>();
+		llenarBahias(filaEntrada);
 		
 	}
+	
+
+	public Bahia[] crearBahias(int capacidadPorBahia,int numeroDeBahias) {
+		
+		Bahia retorno[]=new Bahia[numeroDeBahias];
+		
+		for(int i=0;i<numeroDeBahias;i++) {
+			Bahia nueva=new Bahia();
+			retorno[i]=nueva;
+		}
+		
+		return retorno;
+	}
+	
+	public void llenarBahias(ICola<Automovil> filaEntrada) {
+		
+		for(int i=0;i<getBahias().length;i++){
+		
+			for(int j=0;j<this.limiteVehiculosPorBahia;j++){
+			getBahias()[i].getPila().push(filaEntrada.front());
+			tabla.insert(filaEntrada.unQueue(),getBahias()[i]);
+			}	
+		}
+		
+	}
+
+
+	public Bahia[] getBahias() {
+		return bahias;
+	}
+
+
+	public void setBahias(Bahia[] bahias) {
+		this.bahias = bahias;
+	}
+
+
+	public ICola<Automovil> getFilaEntrada() {
+		return filaEntrada;
+	}
+
+
+	public void setFilaEntrada(ICola<Automovil> filaEntrada) {
+		this.filaEntrada = filaEntrada;
+	}
+
+
+	public int getLimiteVehiculos() {
+		return limiteVehiculos;
+	}
+
+
+	public void setLimiteVehiculos(int limiteVehiculos) {
+		this.limiteVehiculos = limiteVehiculos;
+	}
+
+
+	public int getLimiteVehiculosPorBahia() {
+		return limiteVehiculosPorBahia;
+	}
+
+
+	public void setLimiteVehiculosPorBahia(int limiteVehiculosPorBahia) {
+		this.limiteVehiculosPorBahia = limiteVehiculosPorBahia;
+	}
+	
+	public ICola<Automovil> getFilaSalida() {
+		return filaSalida;
+	}
+
+
+	public void setFilaSalida(ICola<Automovil> filaSalida) {
+		this.filaSalida = filaSalida;
+	}
+
+
+
 
 }
