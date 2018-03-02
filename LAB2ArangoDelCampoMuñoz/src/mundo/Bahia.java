@@ -2,7 +2,6 @@ package mundo;
 
 import colas.ColaEnlazada;
 import colas.ICola;
-import colas.NodoCola;
 import pilas.IPila;
 import pilas.PilaEnlazada;
 import pilas.PilaVaciaException;

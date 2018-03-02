@@ -1,9 +1,9 @@
-package colas;
+package nodos;
 
-public class NodoCola<T> {
+public class Nodo<T> {
 	private T elemento;
-	private NodoCola<T> sgt;
-	public NodoCola(T e){
+	private Nodo<T> sgt;
+	public Nodo(T e){
 		elemento=e;
 	}
 	public T getElemento() {
@@ -12,10 +12,10 @@ public class NodoCola<T> {
 	public void setElemento(T elemento) {
 		this.elemento = elemento;
 	}
-	public NodoCola<T> getSgt() {
+	public Nodo<T> getSgt() {
 		return sgt;
 	}
-	public void setSgt(NodoCola<T> sgt) {
+	public void setSgt(Nodo<T> sgt) {
 		this.sgt = sgt;
 	}
 }

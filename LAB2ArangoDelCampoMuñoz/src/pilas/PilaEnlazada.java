@@ -1,10 +1,11 @@
 package pilas;
 
+import nodos.Nodo;
 import tablasHash.NodoHash;
 
 public class PilaEnlazada<T> implements IPila<T> {
 	
-	private NodoPila<T> tope;
+	private Nodo<T> tope;
 	private int numeroElementos;
 	
 	public PilaEnlazada(){
@@ -16,7 +17,7 @@ public class PilaEnlazada<T> implements IPila<T> {
 		if(tope==null){
 			throw new PilaVaciaException("VACIA");
 		}
-		NodoPila<T>n=tope;
+		Nodo<T>n=tope;
 		tope=tope.getSgt();
 		numeroElementos--;
 		return n.getElemento();
@@ -24,7 +25,7 @@ public class PilaEnlazada<T> implements IPila<T> {
 
 	@Override
 	public boolean push(T t) {
-		NodoPila<T>nuevo=new NodoPila<>(t);
+		Nodo<T>nuevo=new Nodo<>(t);
 		nuevo.setSgt(tope);
 		tope=nuevo;
 		numeroElementos++;

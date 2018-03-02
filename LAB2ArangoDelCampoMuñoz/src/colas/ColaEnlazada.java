@@ -1,11 +1,11 @@
 package colas;
 
-import pilas.NodoPila;
+import nodos.Nodo;
 
 public class ColaEnlazada<T> implements ICola<T> {
 	
-	private NodoCola<T> primero;
-	private NodoCola<T> ultimo;
+	private Nodo<T> primero;
+	private Nodo<T> ultimo;
 	private int numeroElementos;
 	
 	public ColaEnlazada(){
@@ -17,10 +17,10 @@ public class ColaEnlazada<T> implements ICola<T> {
 	@Override
 	public boolean queue(T t) {
 		if(primero==null){
-			primero=new NodoCola<T>(t);
+			primero=new Nodo<T>(t);
 			ultimo=primero;
 		}else{
-			NodoCola<T> nuevo=new NodoCola<>(t);
+			Nodo<T> nuevo=new Nodo<>(t);
 			ultimo.setSgt(nuevo);
 			ultimo=nuevo;
 		}
@@ -33,7 +33,7 @@ public class ColaEnlazada<T> implements ICola<T> {
 		if(primero==null){
 			return null;
 		}else{
-			NodoCola<T>aux=primero;
+			Nodo<T>aux=primero;
 			primero=primero.getSgt();
 			return aux.getElemento();
 		}
