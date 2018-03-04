@@ -1,23 +1,41 @@
 package interfaz;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
 import javax.swing.JFrame;
 
-import mundo.Parqueadero;
+import pilas.PilaVaciaException;
+import mundo.ParkingManager;
 
 public class InterfazParqueadero extends JFrame {
 
 	private PanelBahia bahia;
-	private Parqueadero parking;
+	private ParkingManager parking;
+	private PanelArea a;
 	public InterfazParqueadero ()  {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLayout(new BorderLayout());
 		bahia = new PanelBahia(this);
-		add(bahia);
+		a=new PanelArea(this);
+		a.setPreferredSize(new Dimension(200,0));
+		add(bahia,BorderLayout.CENTER);
+		add(a,BorderLayout.EAST);
 		pack();
-//		setSize(500, 500);
 	}
 	public static void main(String[] args) {
 		InterfazParqueadero i = new InterfazParqueadero();
+		i.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		i.setVisible(true);
+	}
+	public void sendInfo(String text) {
+		parking=new ParkingManager(text);
+		try {
+			System.out.println(parking.sacarLosResultadosDelProblemaMasPoderosoDeTodos());
+		} catch (PilaVaciaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

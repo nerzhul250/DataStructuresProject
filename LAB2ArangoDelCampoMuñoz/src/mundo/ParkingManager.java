@@ -51,7 +51,6 @@ public class ParkingManager {
 		String retorno="";
 		for(int i=0;i<this.getParqueaderos().length-1;i++) {
 			retorno+=""+this.getParqueaderos()[i].darResultado()+"\n";
-			
 		}
 		return retorno;
 	}
