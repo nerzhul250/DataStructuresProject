@@ -36,6 +36,21 @@ public class Bahia  {
 		this.cola = cola;
 	}
 	
+	public int movsParaSacarCarro(int a,Automovil b) throws PilaVaciaException{
+		if(this.getPila().top().equals(b)) {
+			return a;
+		}else {
+			this.getCola().queue(getPila().pop());
+			return movsParaSacarCarro(a+1,b);
+		}
+	}
+	
+	public void deColaAPila(){
+		while(getCola().isEmpty()!=true) {
+			getPila().push(getCola().unQueue());
+		}
+		
+	}
 
 	
 }
