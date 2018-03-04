@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 
+import colas.ColaVaciaException;
 import pilas.PilaVaciaException;
 import mundo.ParkingManager;
 
@@ -29,13 +30,18 @@ public class InterfazParqueadero extends JFrame {
 		i.setVisible(true);
 	}
 	public void sendInfo(String text) {
-		parking=new ParkingManager(text);
 		try {
+			parking=new ParkingManager(text);
 			System.out.println(parking.sacarLosResultadosDelProblemaMasPoderosoDeTodos());
 		} catch (PilaVaciaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} catch (ColaVaciaException a) {
+			// TODO Auto-generated catch block
+			a.printStackTrace();
 	}
 
-}
+	}
+	}
+
+

@@ -29,7 +29,7 @@ public class ColaEnlazada<T> implements ICola<T> {
 	}
 	
 	@Override
-	public T unQueue() {
+	public T unQueue() throws ColaVaciaException{
 		if(primero==null){
 			return null;
 		}else{
