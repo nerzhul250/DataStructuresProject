@@ -11,7 +11,6 @@ import tablasHash.TablaHashEncadenada;
 public class Parqueadero  { 
 	
 	Bahia[] bahias;
-	
 	ICola<Automovil>filaEntrada;
 	ITablaHash<Automovil,Bahia> tabla;
 	ICola<Automovil>filaSalida;
