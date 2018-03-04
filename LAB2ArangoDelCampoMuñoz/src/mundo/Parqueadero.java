@@ -63,13 +63,9 @@ public class Parqueadero  {
 	public int sacarCarro(Automovil a) throws PilaVaciaException {
 		int retorno=0;
 		int b=tabla.find(a);
-		
 		Bahia actual=this.getBahias()[b];
-		
-		
 		retorno=	actual.movsParaSacarCarro(0, a);
 		actual.deColaAPila();
-		
 		return retorno;
 	}
 	public String darResultado() throws PilaVaciaException {
