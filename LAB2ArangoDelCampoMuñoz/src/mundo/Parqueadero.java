@@ -51,12 +51,10 @@ public class Parqueadero  {
 	
 		
 		for(int i=0;i<getBahias().length-1;i++){
-		
 			for(int j=0;j<this.limiteVehiculosPorBahia;j++){
 				Automovil beta=filaEntrada.unQueue();
-				System.out.println(beta.getPlaca());
-			getBahias()[i].getPila().push(beta);
-			tabla.insert(beta,i);
+			    getBahias()[i].getPila().push(beta);
+			    tabla.insert(beta,i);
 			}
 			
 		}
@@ -65,7 +63,7 @@ public class Parqueadero  {
 	/*
 	 * Descripcion:retorna la cantidad de movs necesarios para sacr un carro de esa joda
 	 */
-	public int sacarCarro(Automovil a) throws PilaVaciaException {
+	public int sacarCarro(Automovil a) throws PilaVaciaException, ColaVaciaException {
 		int retorno=0;
 		int b=tabla.find(a);
 		Bahia actual=this.getBahias()[b];

@@ -24,12 +24,10 @@ public class ParkingManager {
 		int i=0;
 		System.out.println(Arrays.deepToString(entrada)+"\n");
 			while(casos[casos.length-1]==null){
-				System.out.println(entrada[j]);
-				System.out.println(entrada[j].charAt(0));
 				int cantBahias=Integer.parseInt(entrada[j].charAt(0)+"");
-				System.out.println(entrada[j].charAt(4));
+				
 				int numVehiculosIngresan=Integer.parseInt(entrada[j].charAt(4)+"");
-				System.out.println(entrada[j].charAt(2));
+				
 				int capacidadBahia=Integer.parseInt(entrada[j].charAt(2)+"");
 				
 	
@@ -37,8 +35,8 @@ public class ParkingManager {
 								
 				Parqueadero nuevo=new Parqueadero(cantBahias,numVehiculosIngresan,capacidadBahia);
 				
-				for(int x=j+1;x<numVehiculosIngresan*2;x++) {
-					if(x<numVehiculosIngresan) {
+				for(int x=j+1;x<=j+numVehiculosIngresan*2;x++) {
+					if(x<=numVehiculosIngresan+j) {
 						Automovil pepeElCarroNuevo=new Automovil(entrada[x]);
 						nuevo.getFilaEntrada().queue(pepeElCarroNuevo);
 						
@@ -48,11 +46,14 @@ public class ParkingManager {
 					}
 					
 				}
-				nuevo.llenarBahias(nuevo.getFilaEntrada());
+				
 				casos[i]=nuevo;
+				casos[i].llenarBahias(casos[i].getFilaEntrada());
 				i++;
 				j=2*numVehiculosIngresan+2;
+				
 			}
+			
 			return casos;
 	}
 	
