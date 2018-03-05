@@ -12,10 +12,10 @@ import tablasHash.TablaHashEncadenada;
 
 public class Parqueadero  { 
 	
-	Bahia[] bahias;
-	ICola<Automovil>filaEntrada;
-	ITablaHash<Automovil,Integer> tabla;
-	ICola<Automovil>filaSalida;
+	private Bahia[] bahias;
+	private ICola<Automovil>filaEntrada;
+	private ITablaHash<Automovil,Integer> tabla;
+	private ICola<Automovil>filaSalida;
 	
 	int limiteVehiculos;
 	
@@ -43,16 +43,18 @@ public class Parqueadero  {
 			Bahia nueva=new Bahia();
 			retorno[i]=nueva;
 		}
-		System.out.println(numeroDeBahias);
 		return retorno;
 	}
 	
-	public void llenarBahias(ICola<Automovil> filaEntrada) throws ColaVaciaException {
-	
-		
-		for(int i=0;i<getBahias().length-1;i++){
-			for(int j=0;j<this.limiteVehiculosPorBahia;j++){
+	public void llenarBahias(){
+		boolean es=false;
+		for(int i=0;i<getBahias().length && !es;i++){
+			for(int j=0;j<limiteVehiculosPorBahia && !es;j++){
 				Automovil beta=filaEntrada.unQueue();
+				if(beta==null){
+					es=true;
+					break;
+				}
 			    getBahias()[i].getPila().push(beta);
 			    tabla.insert(beta,i);
 			}
@@ -63,20 +65,20 @@ public class Parqueadero  {
 	/*
 	 * Descripcion:retorna la cantidad de movs necesarios para sacr un carro de esa joda
 	 */
-	public int sacarCarro(Automovil a) throws PilaVaciaException, ColaVaciaException {
-		int retorno=0;
-		int b=tabla.find(a);
-		Bahia actual=this.getBahias()[b];
-		retorno=	actual.movsParaSacarCarro(0, a);
+	public void sacarCarro(Automovil a) throws PilaVaciaException, ColaVaciaException {
+		Integer b=tabla.find(a);
+		Bahia actual=getBahias()[b];
+		actual.movsParaSacarCarro(a);
 		actual.deColaAPila();
-		return retorno;
 	}
 	public String darResultado() throws PilaVaciaException, ColaVaciaException {
 		String retorno="";
-		while(this.getFilaSalida().isEmpty()!=true) {
-			retorno+=" "+this.sacarCarro(this.getFilaSalida().unQueue());
+		while(getFilaSalida().isEmpty()!=true) {
+			sacarCarro(getFilaSalida().unQueue());
 		}
-		
+		for (int i = 0; i < bahias.length; i++) {
+			retorno+=bahias[i].getCarrosMovidos()+" ";
+		}
 		return retorno;
 	}
 

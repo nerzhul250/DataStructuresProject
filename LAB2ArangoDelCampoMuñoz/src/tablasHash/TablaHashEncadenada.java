@@ -84,7 +84,6 @@ public class TablaHashEncadenada<K,V> implements ITablaHash<K,V> {
 	
 	//Why strings have NegativeHashCodes
 	public int hash(K llave) {
-		
 		return (llave.hashCode()&0x7fffffff)%tabla.length;
 	}
 	
