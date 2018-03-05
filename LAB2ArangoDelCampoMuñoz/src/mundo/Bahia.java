@@ -12,11 +12,15 @@ public class Bahia  {
 	public IPila<Automovil> pila;
 	public ICola<Automovil> cola;
 	
+	
 	public Bahia() {
 		
 		pila=new PilaEnlazada<Automovil>();
 		cola=new ColaEnlazada <Automovil>();
 	}
+
+
+
 
 	public IPila<Automovil> getPila() {
 		return pila;
