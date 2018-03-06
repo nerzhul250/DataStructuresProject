@@ -23,7 +23,7 @@ public class InterfazParqueadero extends JFrame {
 		a.setPreferredSize(new Dimension(200,0));
 		add(bahia,BorderLayout.CENTER);
 		add(a,BorderLayout.EAST);
-		pack();
+		setSize(800, 400);
 	}
 	public static void main(String[] args) {
 		InterfazParqueadero i = new InterfazParqueadero();

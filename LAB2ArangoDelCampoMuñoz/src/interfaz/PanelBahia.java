@@ -2,6 +2,7 @@ package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,19 +42,17 @@ public class PanelBahia extends JPanel implements ActionListener{
 		butVerVehiculos.addActionListener(this);
 		butVerVehiculos.setActionCommand(VER_VEHICULOS);
 		setLayout(new BorderLayout());
-		JLabel labBahia = new JLabel();
-		ImageIcon img = new ImageIcon(Toolkit.getDefaultToolkit().getImage("Img/bahia.PNG"));
-		labBahia.setIcon(img);
 		add(butVerSimulacion, BorderLayout.NORTH);
 		add(butIngresarDatos, BorderLayout.SOUTH);
 		add(butVerSiguiente, BorderLayout.EAST);
 		add(butVerVehiculos, BorderLayout.WEST);
-		add(labBahia, BorderLayout.CENTER);
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Image img = Toolkit.getDefaultToolkit().getImage("Img/bahia.PNG");
+		g.drawImage(img, 0, 0, null);
 		g.drawString("Numero de carros", 60, 60);
 	}
 	@Override
