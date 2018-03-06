@@ -7,7 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import colas.ColaVaciaException;
+
 import pilas.PilaVaciaException;
 import mundo.ParkingManager;
 
@@ -37,9 +37,7 @@ public class InterfazParqueadero extends JFrame {
 		} catch (PilaVaciaException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(this,e.getMessage());
-		} catch (ColaVaciaException a) {
-			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(this,a.getMessage());
+	
 	}
 
 	}

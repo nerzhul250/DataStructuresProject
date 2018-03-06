@@ -1,7 +1,6 @@
 package mundo;
 
 import colas.ColaEnlazada;
-import colas.ColaVaciaException;
 import colas.ICola;
 import pilas.IPila;
 import pilas.PilaEnlazada;
@@ -56,7 +55,7 @@ public class Bahia  {
 		getPila().pop();
 	}
 	
-	public void deColaAPila() throws ColaVaciaException{
+	public void deColaAPila() {
 		while(getCola().isEmpty()!=true) {
 			getPila().push(getCola().unQueue());
 		}

@@ -7,17 +7,17 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 
-import colas.ColaVaciaException;
+
 import pilas.PilaVaciaException;
 
 public class ParkingManager {
 	Parqueadero[] parqueaderos;
 	
-	public ParkingManager(String input) throws ColaVaciaException {
+	public ParkingManager(String input)  {
 		parqueaderos=this.reader(input);
 	}
 	
-	public Parqueadero[] reader(String input) throws ColaVaciaException {
+	public Parqueadero[] reader(String input) {
 		String[] entrada=input.split("\n");
 		Parqueadero[] casos=new Parqueadero[Integer.parseInt(entrada[0])];
 		int j=1;
@@ -44,7 +44,7 @@ public class ParkingManager {
 			return casos;
 	}
 	
-	public String sacarLosResultadosDelProblemaMasPoderosoDeTodos() throws PilaVaciaException, ColaVaciaException {
+	public String sacarLosResultadosDelProblemaMasPoderosoDeTodos() throws PilaVaciaException{
 		String retorno="";
 		for(int i=0;i<getParqueaderos().length;i++) {
 			retorno+=getParqueaderos()[i].darResultado()+"\n";
