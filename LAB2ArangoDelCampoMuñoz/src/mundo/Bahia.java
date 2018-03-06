@@ -1,7 +1,6 @@
 package mundo;
 
 import colas.ColaEnlazada;
-import colas.ColaVaciaException;
 import colas.ICola;
 import pilas.IPila;
 import pilas.PilaEnlazada;
@@ -9,12 +8,18 @@ import pilas.PilaVaciaException;
 
 public class Bahia  {
 	
-	public IPila<Automovil> pila;
-	public ICola<Automovil> cola;
+	private IPila<Automovil> pila;
+	private ICola<Automovil> cola;
+	private int carrosMovidos;
 	
-	
+	public int getCarrosMovidos() {
+		return carrosMovidos;
+	}
+	public void setCarrosMovidos(int carrosMovidos) {
+		this.carrosMovidos = carrosMovidos;
+	}
 	public Bahia() {
-		
+		carrosMovidos=0;
 		pila=new PilaEnlazada<Automovil>();
 		cola=new ColaEnlazada <Automovil>();
 	}
@@ -41,17 +46,16 @@ public class Bahia  {
 		this.cola = cola;
 	}
 	
-	public int movsParaSacarCarro(int a,Automovil b) throws PilaVaciaException{
-		if(this.getPila().top().equals(b)) {
-			getPila().pop();
-			return a;
-		}else {
-			this.getCola().queue(getPila().pop());
-			return movsParaSacarCarro(a+1,b);
+	public void movsParaSacarCarro(Automovil b) throws PilaVaciaException{
+		while(!getPila().top().equals(b)){
+			getCola().queue(getPila().pop());			
+			carrosMovidos++;
 		}
+		carrosMovidos++;
+		getPila().pop();
 	}
 	
-	public void deColaAPila() throws ColaVaciaException{
+	public void deColaAPila() {
 		while(getCola().isEmpty()!=true) {
 			getPila().push(getCola().unQueue());
 		}

@@ -7,60 +7,47 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 
-import colas.ColaVaciaException;
+
 import pilas.PilaVaciaException;
 
 public class ParkingManager {
 	Parqueadero[] parqueaderos;
 	
-	public ParkingManager(String input) throws ColaVaciaException {
+	public ParkingManager(String input)  {
 		parqueaderos=this.reader(input);
 	}
 	
-	public Parqueadero[] reader(String input) throws ColaVaciaException {
+	public Parqueadero[] reader(String input) {
 		String[] entrada=input.split("\n");
 		Parqueadero[] casos=new Parqueadero[Integer.parseInt(entrada[0])];
 		int j=1;
 		int i=0;
 		System.out.println(Arrays.deepToString(entrada)+"\n");
 			while(casos[casos.length-1]==null){
-				int cantBahias=Integer.parseInt(entrada[j].charAt(0)+"");
-				
-				int numVehiculosIngresan=Integer.parseInt(entrada[j].charAt(4)+"");
-				
-				int capacidadBahia=Integer.parseInt(entrada[j].charAt(2)+"");
-				
-	
-				
-								
+				String[] B=entrada[j].split("\\s+");
+				int cantBahias=Integer.parseInt(B[0]);
+				int capacidadBahia=Integer.parseInt(B[1]);
+				int numVehiculosIngresan=Integer.parseInt(B[2]);
 				Parqueadero nuevo=new Parqueadero(cantBahias,numVehiculosIngresan,capacidadBahia);
-				
-				for(int x=j+1;x<=j+numVehiculosIngresan*2;x++) {
+				for(int x=j+1;x<=j+(numVehiculosIngresan*2);x++) {
 					if(x<=numVehiculosIngresan+j) {
-						Automovil pepeElCarroNuevo=new Automovil(entrada[x]);
-						nuevo.getFilaEntrada().queue(pepeElCarroNuevo);
-						
+						nuevo.getFilaEntrada().queue(new Automovil(entrada[x]));
 					}else {	
-					Automovil pepeElCarroNuevo=new Automovil(entrada[x]);
-					nuevo.getFilaSalida().queue(pepeElCarroNuevo);
+						nuevo.getFilaSalida().queue(new Automovil(entrada[x]));
 					}
-					
 				}
-				
+				nuevo.llenarBahias();
 				casos[i]=nuevo;
-				casos[i].llenarBahias(casos[i].getFilaEntrada());
 				i++;
-				j=2*numVehiculosIngresan+2;
-				
+				j=2*numVehiculosIngresan+j+1;	
 			}
-			
 			return casos;
 	}
 	
-	public String sacarLosResultadosDelProblemaMasPoderosoDeTodos() throws PilaVaciaException, ColaVaciaException {
+	public String sacarLosResultadosDelProblemaMasPoderosoDeTodos() throws PilaVaciaException{
 		String retorno="";
-		for(int i=0;i<this.getParqueaderos().length-1;i++) {
-			retorno+=""+this.getParqueaderos()[i].darResultado()+"\n";
+		for(int i=0;i<getParqueaderos().length;i++) {
+			retorno+=getParqueaderos()[i].darResultado()+"\n";
 		}
 		return retorno;
 	}
