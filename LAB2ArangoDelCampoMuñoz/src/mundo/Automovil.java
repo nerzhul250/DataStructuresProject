@@ -15,6 +15,11 @@ public class Automovil {
 		}
 		return (int)hash;
 	}
+	@Override
+	public boolean equals(Object obj) {
+		Automovil a=(Automovil)obj;
+		return a.getPlaca().equals(placa);
+	}
 	public String getPlaca() {
 		return placa;
 	}

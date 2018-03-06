@@ -6,7 +6,7 @@ public class ColaEnlazada<T> implements ICola<T> {
 	
 	private Nodo<T> primero;
 	private Nodo<T> ultimo;
-	private int numeroElementos;
+	public int numeroElementos;
 	
 	public ColaEnlazada(){
 		primero=null;
@@ -29,12 +29,13 @@ public class ColaEnlazada<T> implements ICola<T> {
 	}
 	
 	@Override
-	public T unQueue() throws ColaVaciaException{
+	public T unQueue(){
 		if(primero==null){
 			return null;
 		}else{
 			Nodo<T>aux=primero;
 			primero=primero.getSgt();
+			numeroElementos--;
 			return aux.getElemento();
 		}
 	}

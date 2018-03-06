@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import colas.ColaEnlazada;
+import colas.ColaVaciaException;
 import pilas.PilaEnlazada;
 
 public class testColaEnlazada {
@@ -21,10 +22,10 @@ public class testColaEnlazada {
 		ce.queue(1);
 		ce.queue(10);
 		ce.queue(3);
-		assertTrue(ce.unQueue()==2);
-		assertTrue(ce.unQueue()==1);
-		assertTrue(ce.unQueue()==10);
-		assertTrue(ce.unQueue()==3);	
+			assertTrue(ce.unQueue()==1);
+			assertTrue(ce.unQueue()==10);
+			assertTrue(ce.unQueue()==3);	
+			assertTrue(ce.unQueue()==2);
 	}
 
 }
