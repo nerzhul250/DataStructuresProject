@@ -48,17 +48,15 @@ public class Parqueadero  {
 	}
 	
 	public void llenarBahias(ICola<Automovil> filaEntrada) throws ColaVaciaException {
-	
 		
 		for(int i=0;i<getBahias().length-1;i++){
 			for(int j=0;j<this.limiteVehiculosPorBahia;j++){
 				Automovil beta=filaEntrada.unQueue();
+				if(beta!=null) {
 			    getBahias()[i].getPila().push(beta);
-			    tabla.insert(beta,i);
-			}
-			
-		}
-		
+			    tabla.insert(beta,i);}
+			}		
+		}	
 	}
 	/*
 	 * Descripcion:retorna la cantidad de movs necesarios para sacr un carro de esa joda
