@@ -24,9 +24,6 @@ public class Bahia  {
 		cola=new ColaEnlazada <Automovil>();
 	}
 
-
-
-
 	public IPila<Automovil> getPila() {
 		return pila;
 	}

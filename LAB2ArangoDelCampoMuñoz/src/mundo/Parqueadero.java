@@ -78,7 +78,11 @@ public class Parqueadero  {
 			sacarCarro(getFilaSalida().unQueue());
 		}
 		for (int i = 0; i < bahias.length; i++) {
-			retorno+=bahias[i].getCarrosMovidos()+" ";
+			if(i!=bahias.length-1){
+				retorno+=bahias[i].getCarrosMovidos()+" ";				
+			}else{
+				retorno+=bahias[i].getCarrosMovidos();				
+			}
 		}
 		return retorno;
 	}

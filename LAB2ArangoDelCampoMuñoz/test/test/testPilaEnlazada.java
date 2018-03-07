@@ -15,7 +15,7 @@ public class testPilaEnlazada {
 		pe=new PilaEnlazada<>();
 	}
 	@Test
-	public void test() throws PilaVaciaException {
+	public void testPop() throws PilaVaciaException {
 		setUpEscenario1();
 		pe.push(3);
 		pe.push(1);

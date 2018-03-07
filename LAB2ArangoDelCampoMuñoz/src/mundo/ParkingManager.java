@@ -22,7 +22,6 @@ public class ParkingManager {
 		Parqueadero[] casos=new Parqueadero[Integer.parseInt(entrada[0])];
 		int j=1;
 		int i=0;
-		System.out.println(Arrays.deepToString(entrada)+"\n");
 			while(casos[casos.length-1]==null){
 				String[] B=entrada[j].split("\\s+");
 				int cantBahias=Integer.parseInt(B[0]);
