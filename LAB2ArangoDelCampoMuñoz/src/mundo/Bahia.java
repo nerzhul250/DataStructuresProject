@@ -47,25 +47,28 @@ public class Bahia{
 			carrosMovidos++;
 			if(simulado)
 			Thread.sleep(ParkingManager.PAUSAESTANDAR);
-			int addForQueue = identificador + cantidades.length;
-			cantidades[addForQueue] = cantidades[addForQueue]+1;
-			cantidades[identificador] = cantidades[identificador]-1;
+			int addForQueue = identificador + cantidades.length/2;
+			cantidades[addForQueue] += 1;
+			cantidades[identificador] -= 1;
 		}
 		carrosMovidos++;
 		getPila().pop();
 		cantidades[identificador] = cantidades[identificador]-1;
 	}
 	
-	public void deColaAPila(int[]cantidades, int identificador) throws InterruptedException {
+	public void deColaAPila(int[]cantidades, int identificador, boolean simulado) throws InterruptedException {
 		while(getCola().isEmpty()!=true) {
+			if(simulado)
 			Thread.sleep(ParkingManager.PAUSAESTANDAR);
-			int addForQueue = identificador + cantidades.length;
-			cantidades[addForQueue] = cantidades[addForQueue]-1;
+			int addForQueue = identificador + cantidades.length/2;
+			cantidades[addForQueue] -= 1;
 			getPila().push(getCola().deQueue());
-			cantidades[identificador] = cantidades[identificador]+1;
+			cantidades[identificador] +=1;
 		}
-		
 	}
+	/**
+	 * No se usa pa ni madres
+	 */
 	public void dePilaACola(){
 		while(this.getPila().isEmpty()!=true) {
 			this.getCola().queue(this.getPila().pop());

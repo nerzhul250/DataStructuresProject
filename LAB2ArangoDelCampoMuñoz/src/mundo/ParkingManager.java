@@ -11,7 +11,7 @@ import tablasHash.TablaHashEncadenada;
 
 public class ParkingManager extends Thread{
 	
-	public static final int PAUSAESTANDAR = 2000;
+	public static final int PAUSAESTANDAR = 1000;
 	private Parqueadero[] parqueaderos;
 	private int casoActual;
 	private String entrada;
@@ -26,7 +26,8 @@ public class ParkingManager extends Thread{
 	public void run() {	
 		try {
 			parqueaderos = reader(entrada, simulado);
-			sacarLosResultadosDelProblemaMasPoderosoDeTodos();
+			String respuesta =sacarLosResultadosDelProblemaMasPoderosoDeTodos();
+			System.out.println(respuesta);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

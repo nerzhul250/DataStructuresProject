@@ -25,13 +25,8 @@ public class Parqueadero{
 		limiteVehiculos=totalCarrosIngresan;
 		limiteVehiculosPorBahia=capacidadBahia;
 		bahias=crearBahias(capacidadBahia, numBahias);
-		System.out.println("la cantidad de bahias" +numBahias);
 		tabla=new TablaHashEncadenada<Automovil,Integer>(numBahias);
 		cantidadesBahias = new int[numBahias*2];
-		for (int i = 0; i < numBahias*2; i++) {
-			cantidadesBahias[i] = 0;
-			System.out.println("se llena el arreglito" + cantidadesBahias[i]);
-		}
 		filaEntrada=new ColaEnlazada<Automovil>();
 		filaSalida=new ColaEnlazada<Automovil>();
 	}	
@@ -51,6 +46,7 @@ public class Parqueadero{
 		boolean es=false;
 		for(int i=0;i<getBahias().length && !es;i++){
 			for(int j=0;j<limiteVehiculosPorBahia && !es;j++){
+				System.out.println("funciona el hilo principal");
 				if(simulacion)
 				Thread.sleep(ParkingManager.PAUSAESTANDAR);
 				Automovil beta=filaEntrada.deQueue();
@@ -71,9 +67,8 @@ public class Parqueadero{
 	public void sacarCarro(Automovil a, boolean simulado) throws InterruptedException{
 		Integer b=tabla.find(a);
 		Bahia actual=getBahias()[b];
-		System.out.println("probando 0's" +cantidadesBahias[0]);
 		actual.movsParaSacarCarro(a, cantidadesBahias, b, simulado);
-		actual.deColaAPila(cantidadesBahias, b);
+		actual.deColaAPila(cantidadesBahias, b, simulado);
 	}
 	public String darResultado(boolean simulado) throws  InterruptedException{
 		String retorno="";
