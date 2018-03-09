@@ -18,11 +18,13 @@ public class HiloActualizador extends Thread {
 	@Override
 	public void run() {
 		while (enProceso.isAlive()) {
-			if (enProceso.getCasoActual() != miActual)
-				ppal.seCambioCaso();
 			ppal.refresh();
+			if (enProceso.getCasoActual() != miActual){
+				ppal.seCambioCaso();
+				miActual = enProceso.getCasoActual();
+			}
 			try {
-				sleep(ParkingManager.PAUSAESTANDAR-200);
+				sleep(ParkingManager.PAUSAESTANDAR-600);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

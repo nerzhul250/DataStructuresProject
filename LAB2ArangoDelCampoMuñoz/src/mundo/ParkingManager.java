@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.invoke.CallSite;
 import java.util.Arrays;
 
 import tablasHash.TablaHashEncadenada;
@@ -62,6 +63,7 @@ public class ParkingManager extends Thread{
 	public String sacarLosResultadosDelProblemaMasPoderosoDeTodos() throws InterruptedException{
 		String retorno="";
 		for(int i=0;i<getParqueaderos().length;i++) {
+			casoActual = i;
 			retorno+=getParqueaderos()[i].darResultado(simulado)+"\n";
 		}
 		return retorno;
