@@ -16,7 +16,7 @@ import mundo.Automovil;
 import mundo.ParkingManager;
 import mundo.Parqueadero;
 
-public class testParqueadero {
+public class testParkingManager {
 	private ParkingManager pm;
 	private void setUpEscenario1 () {
 	}
@@ -41,6 +41,5 @@ public class testParqueadero {
 			}
 			assertTrue(pm.sacarLosResultadosDelProblemaMasPoderosoDeTodos().equals(sb.toString()));
 		}
-		
 	}
 }

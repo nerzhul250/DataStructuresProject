@@ -4,41 +4,28 @@ public class TablaHashEncadenada<K,V> implements ITablaHash<K,V> {
 	
 	private NodoHash<K,V>[] tabla;
 	private int numeroElementosEnTabla;
-	private int numeroDeColisiones;
 	
 	public TablaHashEncadenada(int tam){
 		tabla=new NodoHash[tam];
 		numeroElementosEnTabla=0;
-		numeroDeColisiones=0;
 	}
 	
 	public int getNumeroElementosEnTabla() {
 		return numeroElementosEnTabla;
 	}
-
-	public void setNumeroElementosEnTabla(int numeroElementosEnTabla) {
-		this.numeroElementosEnTabla = numeroElementosEnTabla;
-	}
-
-	public int getNumeroDeColisiones() {
-		return numeroDeColisiones;
-	}
-
-	public void setNumeroDeColisiones(int numeroDeColisiones) {
-		this.numeroDeColisiones = numeroDeColisiones;
-	}
-
 	public boolean isEmpty() {
 		return numeroElementosEnTabla==0;
 	}
-	//whaHappens when llave already exists?
+	/**
+	 * llave!=null
+	 */
 	public boolean insert(K llave, V valor) {
 		int pos=hash(llave);
 		if(tabla[pos]!=null){
-			numeroDeColisiones++;
 			NodoHash<K,V> first=tabla[pos];
 			NodoHash<K,V> nuevo=new NodoHash<K,V>(llave,valor);
 			nuevo.setSgt(first);
+			
 			tabla[pos]=nuevo;
 		}else{
 			NodoHash<K,V> nuevo=new NodoHash<K,V>(llave,valor);
@@ -47,7 +34,9 @@ public class TablaHashEncadenada<K,V> implements ITablaHash<K,V> {
 		numeroElementosEnTabla++;
 		return true;
 	}
-
+	/**
+	 * llave!=null
+	 */
 	public V find(K llave) {
 		int pos=hash(llave);
 		NodoHash<K,V> current=(NodoHash<K, V>) tabla[pos];
@@ -84,6 +73,7 @@ public class TablaHashEncadenada<K,V> implements ITablaHash<K,V> {
 	
 	//Why strings have NegativeHashCodes
 	public int hash(K llave) {
+		System.out.println((llave.hashCode()&0x7fffffff)%tabla.length);
 		return (llave.hashCode()&0x7fffffff)%tabla.length;
 	}
 	
