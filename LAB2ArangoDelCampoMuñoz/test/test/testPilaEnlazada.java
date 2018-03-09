@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import pilas.PilaEnlazada;
-import pilas.PilaVaciaException;
 import tablasHash.TablaHashEncadenada;
 
 public class testPilaEnlazada {
@@ -21,10 +20,6 @@ public class testPilaEnlazada {
 		pe.push(0);
 		pe.push(10);
 	}
-	//de 150, 87 adults excelente calificaicon
-	// adults calificacion
-	//200, 123 said excelent
-	//alpha=10%
 	@Test
 	public void testPush(){
 		setUpEscenario1();

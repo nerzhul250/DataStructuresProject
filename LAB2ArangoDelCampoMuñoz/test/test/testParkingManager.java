@@ -10,7 +10,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import pilas.PilaVaciaException;
 import colas.ColaEnlazada;
 import mundo.Automovil;
 import mundo.ParkingManager;

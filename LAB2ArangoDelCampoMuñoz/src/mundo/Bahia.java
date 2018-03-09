@@ -4,8 +4,11 @@ import colas.ColaEnlazada;
 import colas.ICola;
 import pilas.IPila;
 import pilas.PilaEnlazada;
+<<<<<<< HEAD
 import pilas.PilaVaciaException;
 import tablasHash.TablaHashEncadenada;
+=======
+>>>>>>> 29332202676395f937fe00c24b31cdb9e478c146
 
 public class Bahia{
 	
@@ -42,7 +45,11 @@ public class Bahia{
 		this.cola = cola;
 	}
 	
+<<<<<<< HEAD
 	public void movsParaSacarCarro(Automovil b, int[] cantidades, int identificador, boolean simulado) throws PilaVaciaException, InterruptedException{
+=======
+	public void movsParaSacarCarro(Automovil b){
+>>>>>>> 29332202676395f937fe00c24b31cdb9e478c146
 		while(!getPila().top().equals(b)){
 			getCola().queue(getPila().pop());
 			carrosMovidos++;
@@ -67,7 +74,7 @@ public class Bahia{
 		}
 		
 	}
-	public void dePilaACola() throws PilaVaciaException {
+	public void dePilaACola(){
 		while(this.getPila().isEmpty()!=true) {
 			this.getCola().queue(this.getPila().pop());
 		}
