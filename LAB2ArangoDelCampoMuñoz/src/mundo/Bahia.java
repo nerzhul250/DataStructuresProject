@@ -28,7 +28,6 @@ public class Bahia  {
 		return pila;
 	}
 
-
 	public void setPila(IPila<Automovil> pila) {
 		this.pila = pila;
 	}
@@ -54,7 +53,7 @@ public class Bahia  {
 	
 	public void deColaAPila() {
 		while(getCola().isEmpty()!=true) {
-			getPila().push(getCola().unQueue());
+			getPila().push(getCola().deQueue());
 		}
 		
 	}

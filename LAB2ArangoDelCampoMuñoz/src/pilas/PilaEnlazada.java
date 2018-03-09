@@ -13,16 +13,15 @@ public class PilaEnlazada<T> implements IPila<T> {
 		numeroElementos=0;
 	}
 	@Override
-	public T pop() throws PilaVaciaException {
+	public T pop(){
 		if(tope==null){
-			throw new PilaVaciaException("VACIA");
+			return null;
 		}
 		Nodo<T>n=tope;
 		tope=tope.getSgt();
 		numeroElementos--;
 		return n.getElemento();
 	}
-
 	@Override
 	public boolean push(T t) {
 		Nodo<T>nuevo=new Nodo<>(t);

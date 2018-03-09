@@ -18,22 +18,16 @@ public class Parqueadero  {
 	private ICola<Automovil>filaSalida;
 	
 	int limiteVehiculos;
-	
 	int limiteVehiculosPorBahia;
 	
-	
 	public Parqueadero(int numBahias,int totalCarrosIngresan, int capacidadBahia)  {
-		
-		
 		limiteVehiculos=totalCarrosIngresan;
 		limiteVehiculosPorBahia=capacidadBahia;
 		bahias=crearBahias(capacidadBahia, numBahias);
 		tabla=new TablaHashEncadenada<Automovil,Integer>(numBahias);
 		filaEntrada=new ColaEnlazada<Automovil>();
-		filaSalida=new ColaEnlazada<Automovil>();
-		
-	}
-	
+		filaSalida=new ColaEnlazada<Automovil>();	
+	}	
 
 	public Bahia[] crearBahias(int capacidadPorBahia,int numeroDeBahias) {
 		
@@ -52,19 +46,18 @@ public class Parqueadero  {
 		boolean es=false;
 		for(int i=0;i<getBahias().length && !es;i++){
 			for(int j=0;j<limiteVehiculosPorBahia && !es;j++){
-				Automovil beta=filaEntrada.unQueue();
+				Automovil beta=filaEntrada.deQueue();
 				if(beta==null){
 					es=true;
 					break;
 				}
-
 			    getBahias()[i].getPila().push(beta);
 			    tabla.insert(beta,i);}
 			}		
 		}	
 	
 	/*
-	 * Descripcion:retorna la cantidad de movs necesarios para sacr un carro de esa joda
+	 * Descripcion:retorna la cantidad de movs necesarios para sacar un carro de esa joda
 	 */
 	public void sacarCarro(Automovil a) throws PilaVaciaException{
 		Integer b=tabla.find(a);
@@ -75,7 +68,7 @@ public class Parqueadero  {
 	public String darResultado() throws PilaVaciaException{
 		String retorno="";
 		while(getFilaSalida().isEmpty()!=true) {
-			sacarCarro(getFilaSalida().unQueue());
+			sacarCarro(getFilaSalida().deQueue());
 		}
 		for (int i = 0; i < bahias.length; i++) {
 			if(i!=bahias.length-1){
@@ -146,9 +139,4 @@ public class Parqueadero  {
 	public void setLimiteVehiculosPorBahia(int limiteVehiculosPorBahia) {
 		this.limiteVehiculosPorBahia = limiteVehiculosPorBahia;
 	}
-	
-
-
-	
-
 }
