@@ -7,9 +7,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 
-
-import pilas.PilaVaciaException;
-
 public class ParkingManager {
 	Parqueadero[] parqueaderos;
 	
@@ -43,7 +40,7 @@ public class ParkingManager {
 			return casos;
 	}
 	
-	public String sacarLosResultadosDelProblemaMasPoderosoDeTodos() throws PilaVaciaException{
+	public String sacarLosResultadosDelProblemaMasPoderosoDeTodos(){
 		String retorno="";
 		for(int i=0;i<getParqueaderos().length;i++) {
 			retorno+=getParqueaderos()[i].darResultado()+"\n";

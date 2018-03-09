@@ -6,7 +6,6 @@ import colas.ColaEnlazada;
 
 import colas.ICola;
 import pilas.IPila;
-import pilas.PilaVaciaException;
 import tablasHash.ITablaHash;
 import tablasHash.TablaHashEncadenada;
 
@@ -59,13 +58,13 @@ public class Parqueadero  {
 	/*
 	 * Descripcion:retorna la cantidad de movs necesarios para sacar un carro de esa joda
 	 */
-	public void sacarCarro(Automovil a) throws PilaVaciaException{
+	public void sacarCarro(Automovil a){
 		Integer b=tabla.find(a);
 		Bahia actual=getBahias()[b];
 		actual.movsParaSacarCarro(a);
 		actual.deColaAPila();
 	}
-	public String darResultado() throws PilaVaciaException{
+	public String darResultado(){
 		String retorno="";
 		while(getFilaSalida().isEmpty()!=true) {
 			sacarCarro(getFilaSalida().deQueue());

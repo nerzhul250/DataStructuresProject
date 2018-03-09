@@ -4,7 +4,6 @@ import colas.ColaEnlazada;
 import colas.ICola;
 import pilas.IPila;
 import pilas.PilaEnlazada;
-import pilas.PilaVaciaException;
 
 public class Bahia  {
 	
@@ -42,7 +41,7 @@ public class Bahia  {
 		this.cola = cola;
 	}
 	
-	public void movsParaSacarCarro(Automovil b) throws PilaVaciaException{
+	public void movsParaSacarCarro(Automovil b){
 		while(!getPila().top().equals(b)){
 			getCola().queue(getPila().pop());			
 			carrosMovidos++;
@@ -57,7 +56,7 @@ public class Bahia  {
 		}
 		
 	}
-	public void dePilaACola() throws PilaVaciaException {
+	public void dePilaACola(){
 		while(this.getPila().isEmpty()!=true) {
 			this.getCola().queue(this.getPila().pop());
 		}
