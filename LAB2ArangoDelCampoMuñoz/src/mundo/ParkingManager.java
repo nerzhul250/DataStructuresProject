@@ -7,22 +7,38 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 
-
 import pilas.PilaVaciaException;
+import tablasHash.TablaHashEncadenada;
 
-public class ParkingManager {
-	Parqueadero[] parqueaderos;
+public class ParkingManager extends Thread{
 	
-	public ParkingManager(String input)  {
-		parqueaderos=this.reader(input);
+	public static final int PAUSAESTANDAR = 2000;
+	private Parqueadero[] parqueaderos;
+	private int casoActual;
+	private String entrada;
+	private boolean simulado;
+	public ParkingManager(String input, boolean simulacion) throws InterruptedException  {
+		entrada = input;
+		simulado = simulacion;
+		start();
 	}
-	
-	public Parqueadero[] reader(String input) {
+	@Override
+	public void run() {	
+		try {
+			parqueaderos = reader(entrada, simulado);
+			sacarLosResultadosDelProblemaMasPoderosoDeTodos();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (PilaVaciaException e) {
+			e.printStackTrace();
+		}
+	}
+	public Parqueadero[] reader(String input, boolean simulacion) throws InterruptedException {
 		String[] entrada=input.split("\n");
-		Parqueadero[] casos=new Parqueadero[Integer.parseInt(entrada[0])];
+		parqueaderos = new Parqueadero[Integer.parseInt(entrada[0])];
 		int j=1;
 		int i=0;
-			while(casos[casos.length-1]==null){
+			while(parqueaderos[parqueaderos.length-1]==null){
 				String[] B=entrada[j].split("\\s+");
 				int cantBahias=Integer.parseInt(B[0]);
 				int capacidadBahia=Integer.parseInt(B[1]);
@@ -35,18 +51,19 @@ public class ParkingManager {
 						nuevo.getFilaSalida().queue(new Automovil(entrada[x]));
 					}
 				}
-				nuevo.llenarBahias();
-				casos[i]=nuevo;
+				casoActual = i;
+				parqueaderos[i]=nuevo;
+				nuevo.llenarBahias(simulacion);
 				i++;
 				j=2*numVehiculosIngresan+j+1;	
 			}
-			return casos;
+			return parqueaderos;
 	}
 	
-	public String sacarLosResultadosDelProblemaMasPoderosoDeTodos() throws PilaVaciaException{
+	public String sacarLosResultadosDelProblemaMasPoderosoDeTodos() throws PilaVaciaException, InterruptedException{
 		String retorno="";
 		for(int i=0;i<getParqueaderos().length;i++) {
-			retorno+=getParqueaderos()[i].darResultado()+"\n";
+			retorno+=getParqueaderos()[i].darResultado(simulado)+"\n";
 		}
 		return retorno;
 	}
@@ -59,5 +76,7 @@ public class ParkingManager {
 		this.parqueaderos = parqueaderos;
 	}
 	
-
+	public int getCasoActual() {
+		return casoActual;
+	}
 }

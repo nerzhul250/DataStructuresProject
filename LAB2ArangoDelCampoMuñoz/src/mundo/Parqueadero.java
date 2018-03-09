@@ -1,5 +1,6 @@
 package mundo;
 
+import java.awt.PageAttributes;
 import java.util.ArrayList;
 
 import colas.ColaEnlazada;
@@ -10,12 +11,13 @@ import pilas.PilaVaciaException;
 import tablasHash.ITablaHash;
 import tablasHash.TablaHashEncadenada;
 
-public class Parqueadero  { 
+public class Parqueadero{ 
 	
 	private Bahia[] bahias;
 	private ICola<Automovil>filaEntrada;
 	private ITablaHash<Automovil,Integer> tabla;
 	private ICola<Automovil>filaSalida;
+	private int [] cantidadesBahias;
 	
 	int limiteVehiculos;
 	int limiteVehiculosPorBahia;
@@ -24,9 +26,15 @@ public class Parqueadero  {
 		limiteVehiculos=totalCarrosIngresan;
 		limiteVehiculosPorBahia=capacidadBahia;
 		bahias=crearBahias(capacidadBahia, numBahias);
+		System.out.println("la cantidad de bahias" +numBahias);
 		tabla=new TablaHashEncadenada<Automovil,Integer>(numBahias);
+		cantidadesBahias = new int[numBahias*2];
+		for (int i = 0; i < numBahias*2; i++) {
+			cantidadesBahias[i] = 0;
+			System.out.println("se llena el arreglito" + cantidadesBahias[i]);
+		}
 		filaEntrada=new ColaEnlazada<Automovil>();
-		filaSalida=new ColaEnlazada<Automovil>();	
+		filaSalida=new ColaEnlazada<Automovil>();
 	}	
 
 	public Bahia[] crearBahias(int capacidadPorBahia,int numeroDeBahias) {
@@ -40,35 +48,38 @@ public class Parqueadero  {
 		return retorno;
 	}
 	
-
-	
-	public void llenarBahias(){
+	public void llenarBahias(boolean simulacion) throws InterruptedException{
 		boolean es=false;
 		for(int i=0;i<getBahias().length && !es;i++){
 			for(int j=0;j<limiteVehiculosPorBahia && !es;j++){
+				if(simulacion)
+				Thread.sleep(ParkingManager.PAUSAESTANDAR);
 				Automovil beta=filaEntrada.deQueue();
 				if(beta==null){
 					es=true;
 					break;
 				}
 			    getBahias()[i].getPila().push(beta);
-			    tabla.insert(beta,i);}
-			}		
+			    tabla.insert(beta,i);
+			    cantidadesBahias[i]= cantidadesBahias[i]+1;
+			}
+			}	
 		}	
 	
 	/*
 	 * Descripcion:retorna la cantidad de movs necesarios para sacar un carro de esa joda
 	 */
-	public void sacarCarro(Automovil a) throws PilaVaciaException{
+	public void sacarCarro(Automovil a, boolean simulado) throws PilaVaciaException, InterruptedException{
 		Integer b=tabla.find(a);
 		Bahia actual=getBahias()[b];
-		actual.movsParaSacarCarro(a);
-		actual.deColaAPila();
+		System.out.println("probando 0's" +cantidadesBahias[0]);
+		actual.movsParaSacarCarro(a, cantidadesBahias, b, simulado);
+		actual.deColaAPila(cantidadesBahias, b);
 	}
-	public String darResultado() throws PilaVaciaException{
+	public String darResultado(boolean simulado) throws PilaVaciaException, InterruptedException{
 		String retorno="";
 		while(getFilaSalida().isEmpty()!=true) {
-			sacarCarro(getFilaSalida().deQueue());
+			sacarCarro(getFilaSalida().deQueue(), simulado);
 		}
 		for (int i = 0; i < bahias.length; i++) {
 			if(i!=bahias.length-1){
@@ -80,6 +91,9 @@ public class Parqueadero  {
 		return retorno;
 	}
 
+	public int[] getCantidadesBahias() {
+		return cantidadesBahias;
+	}
 
 	public Bahia[] getBahias() {
 		return bahias;
