@@ -6,13 +6,9 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-<<<<<<< HEAD
 import hilos.HiloActualizador;
-=======
->>>>>>> 29332202676395f937fe00c24b31cdb9e478c146
 import mundo.ParkingManager;
 import mundo.Parqueadero;
-import pilas.PilaVaciaException;
 import tablasHash.TablaHashEncadenada;
 
 public class InterfazParqueadero extends JFrame {
@@ -37,7 +33,6 @@ public class InterfazParqueadero extends JFrame {
 		i.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		i.setVisible(true);
 	}
-<<<<<<< HEAD
 
 	public void sendInfo(String text, boolean simulacion) {
 		try {
@@ -56,15 +51,6 @@ public class InterfazParqueadero extends JFrame {
 		String texto = panelAreaIngreso.pedirInfo();
 		sendInfo(texto, true);
 	}
-=======
-	public void sendInfo(String text) {
-			parking=new ParkingManager(text);
-			System.out.println(parking.sacarLosResultadosDelProblemaMasPoderosoDeTodos());
-
-		}
-	}
-
->>>>>>> 29332202676395f937fe00c24b31cdb9e478c146
 
 	public void cambiarCasoDePrueba() {
 		Parqueadero p =parkingM.getParqueaderos()[parkingM.getCasoActual()];

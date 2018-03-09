@@ -68,22 +68,14 @@ public class Parqueadero{
 	/*
 	 * Descripcion:retorna la cantidad de movs necesarios para sacar un carro de esa joda
 	 */
-<<<<<<< HEAD
-	public void sacarCarro(Automovil a, boolean simulado) throws PilaVaciaException, InterruptedException{
-=======
-	public void sacarCarro(Automovil a){
->>>>>>> 29332202676395f937fe00c24b31cdb9e478c146
+	public void sacarCarro(Automovil a, boolean simulado) throws InterruptedException{
 		Integer b=tabla.find(a);
 		Bahia actual=getBahias()[b];
 		System.out.println("probando 0's" +cantidadesBahias[0]);
 		actual.movsParaSacarCarro(a, cantidadesBahias, b, simulado);
 		actual.deColaAPila(cantidadesBahias, b);
 	}
-<<<<<<< HEAD
-	public String darResultado(boolean simulado) throws PilaVaciaException, InterruptedException{
-=======
-	public String darResultado(){
->>>>>>> 29332202676395f937fe00c24b31cdb9e478c146
+	public String darResultado(boolean simulado) throws  InterruptedException{
 		String retorno="";
 		while(getFilaSalida().isEmpty()!=true) {
 			sacarCarro(getFilaSalida().deQueue(), simulado);

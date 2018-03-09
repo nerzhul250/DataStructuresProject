@@ -7,21 +7,16 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 
-<<<<<<< HEAD
-import pilas.PilaVaciaException;
 import tablasHash.TablaHashEncadenada;
 
 public class ParkingManager extends Thread{
-=======
-public class ParkingManager {
-	Parqueadero[] parqueaderos;
->>>>>>> 29332202676395f937fe00c24b31cdb9e478c146
 	
 	public static final int PAUSAESTANDAR = 2000;
 	private Parqueadero[] parqueaderos;
 	private int casoActual;
 	private String entrada;
 	private boolean simulado;
+	
 	public ParkingManager(String input, boolean simulacion) throws InterruptedException  {
 		entrada = input;
 		simulado = simulacion;
@@ -33,8 +28,6 @@ public class ParkingManager {
 			parqueaderos = reader(entrada, simulado);
 			sacarLosResultadosDelProblemaMasPoderosoDeTodos();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (PilaVaciaException e) {
 			e.printStackTrace();
 		}
 	}
@@ -65,11 +58,7 @@ public class ParkingManager {
 			return parqueaderos;
 	}
 	
-<<<<<<< HEAD
-	public String sacarLosResultadosDelProblemaMasPoderosoDeTodos() throws PilaVaciaException, InterruptedException{
-=======
-	public String sacarLosResultadosDelProblemaMasPoderosoDeTodos(){
->>>>>>> 29332202676395f937fe00c24b31cdb9e478c146
+	public String sacarLosResultadosDelProblemaMasPoderosoDeTodos() throws InterruptedException{
 		String retorno="";
 		for(int i=0;i<getParqueaderos().length;i++) {
 			retorno+=getParqueaderos()[i].darResultado(simulado)+"\n";
