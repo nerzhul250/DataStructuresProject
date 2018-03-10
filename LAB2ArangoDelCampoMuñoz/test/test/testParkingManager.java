@@ -31,6 +31,7 @@ public class testParkingManager {
 				ka=br.readLine();
 			}
 			pm=new ParkingManager(sb.toString(), false);
+			pm.join();
 			br = new BufferedReader(new FileReader("./TestCases/case_"+i+"_s.txt"));
 			sb=new StringBuilder();
 			ka=br.readLine();

@@ -4,7 +4,6 @@ import java.awt.PageAttributes;
 import java.util.ArrayList;
 
 import colas.ColaEnlazada;
-
 import colas.ICola;
 import pilas.IPila;
 import tablasHash.ITablaHash;
@@ -42,7 +41,7 @@ public class Parqueadero{
 		return retorno;
 	}
 	
-	public void llenarBahias(boolean simulacion) throws InterruptedException{
+	public void llenarBahias(boolean simulacion) throws InterruptedException {
 		boolean es=false;
 		for(int i=0;i<getBahias().length && !es;i++){
 			for(int j=0;j<limiteVehiculosPorBahia && !es;j++){
@@ -70,7 +69,7 @@ public class Parqueadero{
 		actual.movsParaSacarCarro(a, cantidadesBahias, b, simulado);
 		actual.deColaAPila(cantidadesBahias, b, simulado);
 	}
-	public String darResultado(boolean simulado) throws  InterruptedException{
+	public String darResultado(boolean simulado) throws InterruptedException{
 		String retorno="";
 		while(getFilaSalida().isEmpty()!=true) {
 			sacarCarro(getFilaSalida().deQueue(), simulado);

@@ -1,5 +1,7 @@
 package hilos;
 
+import javax.swing.JOptionPane;
+
 import interfaz.InterfazParqueadero;
 import mundo.ParkingManager;
 
@@ -24,10 +26,11 @@ public class HiloActualizador extends Thread {
 				miActual = enProceso.getCasoActual();
 			}
 			try {
-				sleep(ParkingManager.PAUSAESTANDAR-600);
+				sleep(ParkingManager.PAUSAESTANDAR);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
+		JOptionPane.showMessageDialog(ppal,"Output:"+"\n"+enProceso.getResultado());
 	}
 }

@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import mundo.Bahia;
 import tablasHash.TablaHashEncadenada;
 
 public class PanelBahia extends JPanel implements ActionListener{
@@ -28,6 +29,9 @@ public class PanelBahia extends JPanel implements ActionListener{
 	private JButton butVerVehiculos;
 	private InterfazParqueadero ppal;
 	private int[] cantidadesBahia;
+	private Bahia[] bahiasMoves;
+	private int parqueaderoActual;
+	
 	public PanelBahia (InterfazParqueadero inter) {
 		ppal = inter;
 		butVerSimulacion = new JButton(VER_SIMULACION);
@@ -39,20 +43,22 @@ public class PanelBahia extends JPanel implements ActionListener{
 		cantidadesBahia = new int[2];
 		add(butVerSimulacion, BorderLayout.NORTH);
 		add(butVerVehiculos, BorderLayout.WEST);
-		add(new JLabel("alv"));
+		parqueaderoActual = 0;
 	}
 	public void mostrarDatosBahia() {
 		removeAll();
-		setLayout(new GridLayout(cantidadesBahia.length/2 + 2, 3));
+		setLayout(new GridLayout(cantidadesBahia.length/2 + 2, 4));
 		add(butVerSimulacion, BorderLayout.NORTH);
 		add(butVerVehiculos, BorderLayout.WEST);
-		add(new JLabel("alv"));
-		labBahias = new JLabel[cantidadesBahia.length/2][3];
+		add(new JLabel("En Observación:"));
+		add(new JLabel(""+parqueaderoActual));
+		labBahias = new JLabel[cantidadesBahia.length/2][4];
 		add(new JLabel("Bahía #"));
 		add(new JLabel("Estacionados"));
 		add(new JLabel("En ovalo"));
-		for (int i = 1; i <= this.labBahias.length; i++) {
-			for (int j = 0; j < 3; j++) {
+		add(new JLabel("Movimientos"));
+		for (int i = 1; i <= labBahias.length; i++) {
+			for (int j = 0; j < labBahias[0].length; j++) {
 				if(j == 0)
 					labBahias[i-1][j] = new JLabel(""+i);
 				else
@@ -63,12 +69,14 @@ public class PanelBahia extends JPanel implements ActionListener{
 	}
 
 	public void actualizar() {
-		for (int j = 1; j < 3; j++) {
+		for (int j = 1; j < labBahias[0].length; j++) {
 			for (int i = 0; i < labBahias.length; i++) {
 				if(j==1)
 				labBahias[i][j].setText(cantidadesBahia[i] + "");
 				if(j==2)
 					labBahias[i][j].setText(cantidadesBahia[i + labBahias.length] + "");
+				if(j==3)
+					labBahias[i][j].setText(bahiasMoves[i].getCarrosMovidos() + "");
 			}
 		}
 	}
@@ -79,8 +87,10 @@ public class PanelBahia extends JPanel implements ActionListener{
 		if(c.equals(VER_SIMULACION))
 			ppal.verSimulacion();
 	}
-	public void actualizarTabla(int[]cantidadesBahias) {
+	public void actualizarTabla(int[]cantidadesBahias, Bahia[] bahias, int parqueadero) {
 		cantidadesBahia = cantidadesBahias;
+		bahiasMoves = bahias;
+		parqueaderoActual = parqueadero;
 		mostrarDatosBahia();
 	}
 	

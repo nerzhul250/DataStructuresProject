@@ -41,7 +41,7 @@ public class Bahia{
 		this.cola = cola;
 	}
 	
-	public void movsParaSacarCarro(Automovil b, int[] cantidades, int identificador, boolean simulado) throws  InterruptedException{
+	public void movsParaSacarCarro(Automovil b, int[] cantidades, int identificador, boolean simulado) throws InterruptedException{
 		while(!getPila().top().equals(b)){
 			getCola().queue(getPila().pop());
 			carrosMovidos++;
@@ -58,7 +58,7 @@ public class Bahia{
 			Thread.sleep(ParkingManager.PAUSAESTANDAR);
 	}
 	
-	public void deColaAPila(int[]cantidades, int identificador, boolean simulado) throws InterruptedException {
+	public void deColaAPila(int[]cantidades, int identificador, boolean simulado) throws InterruptedException{
 		while(getCola().isEmpty()!=true) {
 			int addForQueue = identificador + cantidades.length/2;
 			cantidades[addForQueue] -= 1;

@@ -8,17 +8,21 @@ import java.io.OutputStreamWriter;
 import java.lang.invoke.CallSite;
 import java.util.Arrays;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import tablasHash.TablaHashEncadenada;
 
 public class ParkingManager extends Thread{
 	
-	public static final int PAUSAESTANDAR = 1000;
+	public static final int PAUSAESTANDAR = 200;
 	private Parqueadero[] parqueaderos;
 	private int casoActual;
 	private String entrada;
 	private boolean simulado;
+	private String resultado;
 	
-	public ParkingManager(String input, boolean simulacion) throws InterruptedException  {
+	public ParkingManager(String input, boolean simulacion){
 		entrada = input;
 		simulado = simulacion;
 		start();
@@ -27,13 +31,17 @@ public class ParkingManager extends Thread{
 	public void run() {	
 		try {
 			parqueaderos = reader(entrada, simulado);
-			String respuesta =sacarLosResultadosDelProblemaMasPoderosoDeTodos();
-			System.out.println(respuesta);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			String respuesta;
+			respuesta = sacarLosResultadosDelProblemaMasPoderosoDeTodos();
+			resultado = respuesta;
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(new JFrame(), "Por favor, no sea tan mañoso");
 		}
 	}
-	public Parqueadero[] reader(String input, boolean simulacion) throws InterruptedException {
+	public String getResultado() {
+		return resultado;
+	}
+	public Parqueadero[] reader(String input, boolean simulacion) throws InterruptedException{
 		String[] entrada=input.split("\n");
 		parqueaderos = new Parqueadero[Integer.parseInt(entrada[0])];
 		int j=1;

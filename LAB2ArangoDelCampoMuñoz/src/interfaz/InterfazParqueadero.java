@@ -40,12 +40,11 @@ public class InterfazParqueadero extends JFrame {
 			Thread.sleep(ParkingManager.PAUSAESTANDAR);
 			if (simulacion) {
 				Parqueadero p =parkingM.getParqueaderos()[parkingM.getCasoActual()];
-				panelBahia.actualizarTabla(p.getCantidadesBahias());	
+				panelBahia.actualizarTabla(p.getCantidadesBahias(), p.getBahias(), parkingM.getCasoActual()+1);	
 				actualizador = new HiloActualizador(this, parkingM);
 				actualizador.start();
 			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
 		}
 	}
 
@@ -59,6 +58,6 @@ public class InterfazParqueadero extends JFrame {
 	}
 	public void seCambioCaso() {
 		Parqueadero p =parkingM.getParqueaderos()[parkingM.getCasoActual()];
-		panelBahia.actualizarTabla(p.getCantidadesBahias());			
+		panelBahia.actualizarTabla(p.getCantidadesBahias(), p.getBahias(), parkingM.getCasoActual()+1);			
 	}
 }
