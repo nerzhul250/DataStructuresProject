@@ -10,7 +10,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import pilas.PilaVaciaException;
 import colas.ColaEnlazada;
 import mundo.Automovil;
 import mundo.ParkingManager;
@@ -31,7 +30,8 @@ public class testParkingManager {
 				sb.append(ka+"\n");
 				ka=br.readLine();
 			}
-			pm=new ParkingManager(sb.toString());
+			pm=new ParkingManager(sb.toString(), false);
+			pm.join();
 			br = new BufferedReader(new FileReader("./TestCases/case_"+i+"_s.txt"));
 			sb=new StringBuilder();
 			ka=br.readLine();
