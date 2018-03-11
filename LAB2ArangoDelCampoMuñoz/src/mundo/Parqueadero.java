@@ -45,7 +45,6 @@ public class Parqueadero{
 		boolean es=false;
 		for(int i=0;i<getBahias().length && !es;i++){
 			for(int j=0;j<limiteVehiculosPorBahia && !es;j++){
-				System.out.println("funciona el hilo principal");
 				if(simulacion)
 				Thread.sleep(ParkingManager.PAUSAESTANDAR);
 				Automovil beta=filaEntrada.deQueue();

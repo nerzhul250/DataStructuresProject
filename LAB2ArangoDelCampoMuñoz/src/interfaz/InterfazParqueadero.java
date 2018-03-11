@@ -5,6 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import hilos.HiloActualizador;
 import mundo.ParkingManager;
@@ -23,7 +24,7 @@ public class InterfazParqueadero extends JFrame {
 		panelBahia = new PanelBahia(this);
 		panelAreaIngreso = new PanelArea(this);
 		panelAreaIngreso.setPreferredSize(new Dimension(200, 0));
-		add(panelBahia, BorderLayout.CENTER);
+		add(new JScrollPane(panelBahia), BorderLayout.CENTER);
 		add(panelAreaIngreso, BorderLayout.EAST);
 		setSize(800, 400);
 	}
