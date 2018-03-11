@@ -57,7 +57,7 @@ public class Parqueadero  {
 		}	
 	
 	/*
-	 * Descripcion:retorna la cantidad de movs necesarios para sacar un carro de esa joda
+	 * Descripcion:retorna la cantidad de movs n
 	 */
 	public void sacarCarro(Automovil a) throws PilaVaciaException{
 		Integer b=tabla.find(a);
