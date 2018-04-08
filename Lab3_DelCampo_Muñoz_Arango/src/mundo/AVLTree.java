@@ -1,8 +1,13 @@
 package mundo;
 
-public class AVLTree<K extends Comparable<K>,V> {
+public class AVLTree<K extends Comparable<K>,V> implements InterfazABB<K, V> {
 	private AVLNode<K,V> raiz;
-	public void insertar(AVLNode<K,V> z) {
+	
+	@Override
+	public void insertar(K key, V value) {
+		insertar(new AVLNode<K,V>(key,value));
+	}
+	private void insertar(AVLNode<K,V> z) {
 		AVLNode<K,V> y=null;
 		AVLNode<K,V> x=raiz;
 		while(x!=null){
@@ -28,6 +33,26 @@ public class AVLTree<K extends Comparable<K>,V> {
 			y.setIzquierdo(z);
 		}else{y.setDerecho(z);}
 		insertarFixeUp(z);
+	}
+	public AVLNode<K,V> consultar(K llave) {
+		AVLNode<K,V> y=null;
+		AVLNode<K,V> x=raiz;
+		while(x!=null){
+			y=x;
+			if(x.getKey().compareTo(llave)>0){
+				x=x.getIzquierdo();
+			}else if(x.getKey().compareTo(llave)<0){
+				x=x.getDerecho();
+			}else{
+				return x;
+			}
+		}
+		return null;
+	}
+	@Override
+	public boolean eliminar(K key) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	private void insertarFixeUp(AVLNode<K, V> z) {
 		AVLNode<K,V> N=z;
@@ -102,20 +127,5 @@ public class AVLTree<K extends Comparable<K>,V> {
 		}
 		y.setDerecho(x);
 		x.setPadre(y);
-	}
-	public AVLNode<K,V> consultar(K llave) {
-		AVLNode<K,V> y=null;
-		AVLNode<K,V> x=raiz;
-		while(x!=null){
-			y=x;
-			if(x.getKey().compareTo(llave)>0){
-				x=x.getIzquierdo();
-			}else if(x.getKey().compareTo(llave)<0){
-				x=x.getDerecho();
-			}else{
-				return x;
-			}
-		}
-		return null;
 	}
 }

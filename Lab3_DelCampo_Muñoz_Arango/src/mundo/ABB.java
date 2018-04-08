@@ -1,13 +1,13 @@
-package ABB;
+package mundo;
 
 import javax.print.attribute.standard.MediaSize.NA;
 
-public class ABB<K extends Comparable, V> implements InterfazABB<K, V> {
+public class ABB<K extends Comparable<K>, V> implements InterfazABB<K, V> {
 
 	private NodoABB<K, V> raiz;
 
 	@Override
-	public void agregar(K key, V value) {
+	public void insertar(K key, V value) {
 		NodoABB<K, V> nuevo = new NodoABB<>(key, value);
 		if (raiz == null)
 			raiz = nuevo;
@@ -47,7 +47,6 @@ public class ABB<K extends Comparable, V> implements InterfazABB<K, V> {
 		}
 	}
 
-	@Override
 	public V buscar(K key) {
 		V valorBuscado = null;
 		int comparison = key.compareTo(raiz.getKey());

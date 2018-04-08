@@ -68,9 +68,9 @@ public class DBMS {
 		for (int i = 1; i <=numeroRegistros ; i++) {
 			fr=new BufferedReader(new FileReader("./Tabla/R"+i+".txt"));
 			String[] A=fr.readLine().split(",");
-			arbolito1.insertar(new RBTNode<String,Integer>(A[c1],i));
-			arbolito2.insertar(new RBTNode<String,Integer>(A[c2],i));
-			arbolito3.insertar(new AVLNode<String,Integer>(A[c3],i));
+			arbolito1.insertar(A[c1],i);
+			arbolito2.insertar(A[c2],i);
+			arbolito3.insertar(A[c3],i);
 		}
 		fr.close();
 	}

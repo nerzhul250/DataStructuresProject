@@ -15,20 +15,20 @@ public class TestRedBlackTree {
 	}
 	private void setUpEscenario2(){
 		rbt=new RedBlackTree<Integer,Integer>();
-		rbt.insertar(new RBTNode<Integer,Integer>(1,1));
-		rbt.insertar(new RBTNode<Integer,Integer>(2,2));
-		rbt.insertar(new RBTNode<Integer,Integer>(3,3));
-		rbt.insertar(new RBTNode<Integer,Integer>(4,4));
-		rbt.insertar(new RBTNode<Integer,Integer>(5,5));
-		rbt.insertar(new RBTNode<Integer,Integer>(6,6));
-		rbt.insertar(new RBTNode<Integer,Integer>(7,7));
-		rbt.insertar(new RBTNode<Integer,Integer>(8,8));
+		rbt.insertar(1,1);
+		rbt.insertar(2,2);
+		rbt.insertar(3,3);
+		rbt.insertar(4,4);
+		rbt.insertar(5,5);
+		rbt.insertar(6,6);
+		rbt.insertar(7,7);
+		rbt.insertar(8,8);
 	}
 	@Test
 	public void testInsertar() {
 		setUpEscenario1();
-		rbt.insertar(new RBTNode<Integer,Integer>(5,3));
-		rbt.insertar(new RBTNode<Integer,Integer>(6,2));
+		rbt.insertar(5,3);
+		rbt.insertar(6,2);
 		assertTrue(rbt.consultar(5).getValor()==3);
 	}
 	@Test

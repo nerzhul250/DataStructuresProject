@@ -2,9 +2,10 @@ package mundo;
 
 import java.util.ArrayList;
 
-public class RedBlackTree<K extends Comparable<K>,V> {
+public class RedBlackTree<K extends Comparable<K>,V> implements InterfazABB<K, V> {
 	public RBTNode<K,V> nil;
 	private RBTNode<K,V> raiz;
+	
 	public RedBlackTree(){
 		nil=new RBTNode<>(null,null);
 		nil.setPadre(nil);
@@ -13,28 +14,17 @@ public class RedBlackTree<K extends Comparable<K>,V> {
 		nil.setColor(Color.BLACK);
 		raiz=nil;
 	}
-	public RBTNode<K, V> getRaiz() {
-		return raiz;
+	@Override
+	public void insertar(K key, V value) {
+		insertar(new RBTNode<K,V>(key,value));
 	}
-	public void setRaiz(RBTNode<K, V> raiz) {
-		this.raiz = raiz;
+
+	@Override
+	public boolean eliminar(K key) {
+		// TODO Auto-generated method stub
+		return false;
 	}
-	public RBTNode<K,V> consultar(K llave){
-		RBTNode<K,V> y=nil;
-		RBTNode<K,V> x=raiz;
-		while(x!=nil){
-			y=x;
-			if(x.getKey().compareTo(llave)>0){
-				x=x.getIzquierdo();
-			}else if(x.getKey().compareTo(llave)<0){
-				x=x.getDerecho();
-			}else{
-				return x;
-			}
-		}
-		return null;
-	}
-	public void insertar(RBTNode<K,V> z){
+	private void insertar(RBTNode<K,V> z){
 		RBTNode<K,V> y=nil;
 		RBTNode<K,V> x=raiz;
 		while(x!=nil){
@@ -65,6 +55,21 @@ public class RedBlackTree<K extends Comparable<K>,V> {
 		z.setDerecho(nil);
 		z.setIzquierdo(nil);
 		insertFixeUp(z);
+	}
+	public RBTNode<K,V> consultar(K llave){
+		RBTNode<K,V> y=nil;
+		RBTNode<K,V> x=raiz;
+		while(x!=nil){
+			y=x;
+			if(x.getKey().compareTo(llave)>0){
+				x=x.getIzquierdo();
+			}else if(x.getKey().compareTo(llave)<0){
+				x=x.getDerecho();
+			}else{
+				return x;
+			}
+		}
+		return null;
 	}
 	private void insertFixeUp(RBTNode<K, V> z) {
 		while(z.getPadre().getColor()==Color.RED){
@@ -135,5 +140,11 @@ public class RedBlackTree<K extends Comparable<K>,V> {
 		}
 		y.setDerecho(x);
 		x.setPadre(y);
+	}
+	public RBTNode<K, V> getRaiz() {
+		return raiz;
+	}
+	public void setRaiz(RBTNode<K, V> raiz) {
+		this.raiz = raiz;
 	}
 }

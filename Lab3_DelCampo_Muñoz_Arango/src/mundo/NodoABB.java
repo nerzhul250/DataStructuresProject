@@ -1,4 +1,4 @@
-package ABB;
+package mundo;
 
 public class NodoABB <K extends Comparable, V>{
 

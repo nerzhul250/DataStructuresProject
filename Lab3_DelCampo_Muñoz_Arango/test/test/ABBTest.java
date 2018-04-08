@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ABB.ABB;
+import mundo.ABB;
 
 public class ABBTest {
 	private ABB <String,Integer> arbolito;
@@ -14,18 +14,18 @@ public class ABBTest {
 	}
 	private void setupEscenario2 () {
 		arbolito = new ABB<>();
-		arbolito.agregar("juicio", 1);
-		arbolito.agregar("castro", 2);
-		arbolito.agregar("xd", 3);
-		arbolito.agregar("infe", 4);
+		arbolito.insertar("juicio", 1);
+		arbolito.insertar("castro", 2);
+		arbolito.insertar("xd", 3);
+		arbolito.insertar("infe", 4);
 	}
 	private void setupEscenario3 () {
 		arbolito = new ABB<>();
-		arbolito.agregar("gonzalez", 1);
-		arbolito.agregar("kase", 2);
-		arbolito.agregar("sapito", 3);
-		arbolito.agregar("astucia", 4);
-		arbolito.agregar("alv", 5);
+		arbolito.insertar("gonzalez", 1);
+		arbolito.insertar("kase", 2);
+		arbolito.insertar("sapito", 3);
+		arbolito.insertar("astucia", 4);
+		arbolito.insertar("alv", 5);
 	}
 	@Test
 	public void testEstaVacio1() {
