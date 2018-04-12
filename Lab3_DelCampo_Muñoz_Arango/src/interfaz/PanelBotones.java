@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -83,7 +85,14 @@ public class PanelBotones extends JPanel implements ActionListener{
 		}else if(e.getActionCommand().equals(CONSULTAR)){
 			
 			try {
-				frame.buscar(Integer.parseInt(txtCampo.getText()), txtLlave.getText());
+				String letras="";
+				ArrayList<String[]> arreglo=frame.buscar(Integer.parseInt(txtCampo.getText()), txtLlave.getText());
+				for (int i = 0; i < arreglo.size(); i++) {
+					letras+=Arrays.toString(arreglo.get(i))+"\n";
+					
+				}
+				JOptionPane.showMessageDialog(this, letras);
+				
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				JOptionPane.showMessageDialog(this, "algo extranio acaba de suceder o eres manoso o habia un error"+"\n por favor no bajes la nota :'(");
