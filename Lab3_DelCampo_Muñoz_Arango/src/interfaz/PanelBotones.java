@@ -30,12 +30,17 @@ public class PanelBotones extends JPanel implements ActionListener{
 	JPanel aux;
 	
 	JPanel panelBusqueda;
-	JTextField txtBuscar;
+	JTextField txtCampo;
+	JTextField txtLlave;
+	
+	
+	
 	JButton btbBuscar;
 	
 	public PanelBotones(FrameBase frame) {
 		setLayout(new BorderLayout());
 		panelCargar();	
+		//panelBuscar();
 	}
 
 
@@ -77,7 +82,12 @@ public class PanelBotones extends JPanel implements ActionListener{
 			    
 		}else if(e.getActionCommand().equals(CONSULTAR)){
 			
-			
+			try {
+				frame.buscar(Integer.parseInt(txtCampo.getText()), txtLlave.getText());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(this, "algo extranio acaba de suceder o eres manoso o habia un error"+"\n por favor no bajes la nota :'(");
+			} 
 			
 			
 			
@@ -93,15 +103,18 @@ public class PanelBotones extends JPanel implements ActionListener{
 		cargarnew.setActionCommand(NUEVA_CONSULTA);
 		
 		 panelBusqueda=new JPanel();
-		 txtBuscar=new JTextField();
+		 txtCampo=new JTextField("Ingrese un campo");
+		 txtLlave=new JTextField("Ingrese un valor a buscar");
 		 
 		 btbBuscar=new JButton("Buscar");
 		 btbBuscar.addActionListener(this);
 		 btbBuscar.setActionCommand(CONSULTAR);
 		 
-		 panelBusqueda.setLayout(new GridLayout(1,3));
+		 panelBusqueda.setLayout(new GridLayout(1,4));
 		 panelBusqueda.add(btbBuscar);
-		 panelBusqueda.add(txtBuscar);
+		 panelBusqueda.add(txtCampo);
+		 panelBusqueda.add(txtLlave);
+
 		 panelBusqueda.add(cargarnew);
 		 add(panelBusqueda,BorderLayout.CENTER);
 		 repaint();
@@ -139,6 +152,7 @@ public class PanelBotones extends JPanel implements ActionListener{
 		add(aux,BorderLayout.CENTER);
 		repaint();
 		revalidate();
+	
 		
 		
 	}

@@ -31,6 +31,9 @@ public class FrameBase extends JFrame {
 	public void definirArboles(int c1,int c2,int c3) throws IOException {
 		mundo.definirCamposRapidos(c1,c2, c3);
 	}
+	public void buscar(int columna,String llave) throws IOException {
+		mundo.consulta(columna, llave);
+	}
 	public static void main(String[] args) {
 		FrameBase inter=new FrameBase();
 		inter.setVisible(true);
