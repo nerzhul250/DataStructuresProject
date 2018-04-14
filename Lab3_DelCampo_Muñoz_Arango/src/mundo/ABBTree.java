@@ -81,27 +81,22 @@ public class ABBTree<K extends Comparable<K>, V> implements InterfazABB<K, V> {
 	}
 
 	private boolean eliminar(K key, ABBNode<K, V> nActual) {
-		if(nActual.getKey().compareTo(key) == 0) {
-			if (esRaiz(nActual)) {
-				
-			}
+		if(nActual.getDer().getKey().compareTo(key) == 0) {
 			if(nActual.getIzq() == null) {
+				
 				if(nActual.getDer() == null) {
 					if(nActual == nActual.getDaddy().getIzq())
 					nActual.getDaddy().setIzq(null);
 					else
 						nActual.getDaddy().setDer(null);
 				}
-				nActual.getDaddy()
+				else {
+//					if (nActual.getDaddy().get)
+//						nActual.getDaddy()
+				}
 			}
 		}
 		return true;
-	}
-
-	private boolean esRaiz(ABBNode<K, V> nActual) {
-		if (nActual.getDaddy() == null)
-		return true;
-		return false;
 	}
 
 }
