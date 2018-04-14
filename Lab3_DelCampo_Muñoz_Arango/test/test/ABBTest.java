@@ -4,23 +4,23 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import mundo.ABB;
+import mundo.ABBTree;
 
 public class ABBTest {
-	private ABB <String,Integer> arbolito;
+	private ABBTree <String,Integer> arbolito;
 	
 	private void setupEscenario1 () {
-		arbolito = new ABB<>();
+		arbolito = new ABBTree<>();
 	}
 	private void setupEscenario2 () {
-		arbolito = new ABB<>();
+		arbolito = new ABBTree<>();
 		arbolito.insertar("juicio", 1);
 		arbolito.insertar("castro", 2);
 		arbolito.insertar("xd", 3);
 		arbolito.insertar("infe", 4);
 	}
 	private void setupEscenario3 () {
-		arbolito = new ABB<>();
+		arbolito = new ABBTree<>();
 		arbolito.insertar("gonzalez", 1);
 		arbolito.insertar("kase", 2);
 		arbolito.insertar("sapito", 3);

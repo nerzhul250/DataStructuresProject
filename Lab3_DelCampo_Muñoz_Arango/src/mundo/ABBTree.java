@@ -2,13 +2,13 @@ package mundo;
 
 import javax.print.attribute.standard.MediaSize.NA;
 
-public class ABB<K extends Comparable<K>, V> implements InterfazABB<K, V> {
+public class ABBTree<K extends Comparable<K>, V> implements InterfazABB<K, V> {
 
-	private NodoABB<K, V> raiz;
+	private ABBNode<K, V> raiz;
 
 	@Override
 	public void insertar(K key, V value) {
-		NodoABB<K, V> nuevo = new NodoABB<>(key, value);
+		ABBNode<K, V> nuevo = new ABBNode<>(key, value);
 		if (raiz == null)
 			raiz = nuevo;
 		else
@@ -20,7 +20,7 @@ public class ABB<K extends Comparable<K>, V> implements InterfazABB<K, V> {
 			return true;
 		return false;
 	}
-	private void agregar(NodoABB nActual, NodoABB<K, V> niu) {
+	private void agregar(ABBNode nActual, ABBNode<K, V> niu) {
 		int comparacion = nActual.getKey().compareTo(niu.getKey());
 		if (comparacion < 0) {
 			if (nActual.getDer() == null)
@@ -57,7 +57,7 @@ public class ABB<K extends Comparable<K>, V> implements InterfazABB<K, V> {
 		return valorBuscado;
 	}
 
-	private V buscar(K key, NodoABB<K,V> nActual) {
+	private V buscar(K key, ABBNode<K,V> nActual) {
 		int comparison = key.compareTo(nActual.getKey());
 		if (comparison == 0)
 			return nActual.getValue();
@@ -74,7 +74,33 @@ public class ABB<K extends Comparable<K>, V> implements InterfazABB<K, V> {
 
 	@Override
 	public boolean eliminar(K key) {
-		// TODO Auto-generated method stub
+		if(raiz == null)
+		return false;
+		else
+			return eliminar(key, raiz);
+	}
+
+	private boolean eliminar(K key, ABBNode<K, V> nActual) {
+		if(nActual.getKey().compareTo(key) == 0) {
+			if (esRaiz(nActual)) {
+				
+			}
+			if(nActual.getIzq() == null) {
+				if(nActual.getDer() == null) {
+					if(nActual == nActual.getDaddy().getIzq())
+					nActual.getDaddy().setIzq(null);
+					else
+						nActual.getDaddy().setDer(null);
+				}
+				nActual.getDaddy()
+			}
+		}
+		return true;
+	}
+
+	private boolean esRaiz(ABBNode<K, V> nActual) {
+		if (nActual.getDaddy() == null)
+		return true;
 		return false;
 	}
 
