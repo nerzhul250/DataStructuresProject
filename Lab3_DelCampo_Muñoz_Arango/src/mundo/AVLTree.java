@@ -1,7 +1,6 @@
 package mundo;
 
 public class AVLTree<K extends Comparable,V> extends ABB<K,V> {
-	private AVLNode<K,V> raiz;
 	
 	@Override
 	public void insertar(K key, V value) {

@@ -21,7 +21,7 @@ public class TestDBMS {
 		File f=new File("./DatosEnCSV/EjecucionPresupuestoImpuestosAlcaldiaVistaHermosa.csv");
 		baseDatos.cargarTabla(f);
 		try {
-			baseDatos.definirCamposRapidos(0,1,2);
+			baseDatos.definirCamposRapidos(2,0,1);
 			ArrayList<String[]> re=baseDatos.consulta(2,"$3165050864.00");
 			for (int i = 0; i < re.size(); i++) {
 				for (int j = 0; j < re.get(i).length; j++) {

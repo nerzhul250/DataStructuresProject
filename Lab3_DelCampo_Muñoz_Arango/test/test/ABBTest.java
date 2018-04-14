@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import mundo.ABB;
-
 public class ABBTest {
 //	private ABB <String,Integer> arbolito;
 //	
