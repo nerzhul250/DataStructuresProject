@@ -24,6 +24,7 @@ public class DBMS {
 	}
 	/**
 	 * @param archivo, es el file con el csv en el
+	 * <pre>Los campos deben de estar en la primera linea del CSV
 	 * @return
 	 */
 	public String[] cargarTabla(File archivo){
@@ -55,9 +56,9 @@ public class DBMS {
 	/**
 	 * Ese metodo inicializa los arboles con toda la informacion que deben de tener
 	 * debe de ser llamado despues de haber inicializado la tabla de un archivo csv
-	 * @param c1 primer campo rapido
-	 * @param c2 segundo campo rapido
-	 * @param c3 tercer campo rapido
+	 * @param c1 primer campo rapido(INDICE EN CAMPOSACTUALES)
+	 * @param c2 segundo campo rapido(INDICE EN CAMPOSACTUALES)
+	 * @param c3 tercer campo rapido(INDICE EN CAMPOSACTUALES)
 	 * @throws IOException
 	 */
 	public void definirCamposRapidos(int c1,int c2,int c3) throws IOException{

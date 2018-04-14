@@ -4,9 +4,9 @@ public class NodoABB <K extends Comparable, V>{
 
 	private K key;
 	private V value;
-	private NodoABB daddy;
-	private NodoABB der;
-	private NodoABB izq;
+	private NodoABB<K,V> daddy;
+	private NodoABB<K,V> derecho;
+	private NodoABB<K,V> izquierdo;
 	
 	public NodoABB (K key, V value) {
 		this.key = key;
@@ -20,28 +20,28 @@ public class NodoABB <K extends Comparable, V>{
 		return value;
 	}
 	
-	public NodoABB getDaddy() {
+	public NodoABB<K,V> getDaddy() {
 		return daddy;
 	}
 
-	public void setDaddy(NodoABB daddy) {
+	public void setDaddy(NodoABB<K,V> daddy) {
 		this.daddy = daddy;
 	}
 
-	public NodoABB getDer() {
-		return der;
+	public NodoABB<K,V> getderecho() {
+		return derecho;
 	}
 
-	public void setDer(NodoABB der) {
-		this.der = der;
+	public void setderecho(NodoABB<K,V> derecho) {
+		this.derecho = derecho;
 	}
 
-	public NodoABB getIzq() {
-		return izq;
+	public NodoABB<K,V> getizquierdo() {
+		return izquierdo;
 	}
 
-	public void setIzq(NodoABB izq) {
-		this.izq = izq;
+	public void setizquierdo(NodoABB<K,V> izquierdo) {
+		this.izquierdo = izquierdo;
 	}
 	
 }

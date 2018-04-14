@@ -23,26 +23,26 @@ public class ABB<K extends Comparable<K>, V> implements InterfazABB<K, V> {
 	private void agregar(NodoABB nActual, NodoABB<K, V> niu) {
 		int comparacion = nActual.getKey().compareTo(niu.getKey());
 		if (comparacion < 0) {
-			if (nActual.getDer() == null)
-				nActual.setDer(niu);
+			if (nActual.getderecho() == null)
+				nActual.setderecho(niu);
 			else
-				agregar(nActual.getDer(), niu);
+				agregar(nActual.getderecho(), niu);
 		} else if (comparacion > 0) {
-			if (nActual.getIzq() == null)
-				nActual.setIzq(niu);
+			if (nActual.getizquierdo() == null)
+				nActual.setizquierdo(niu);
 			else
-				agregar(nActual.getIzq(), niu);
+				agregar(nActual.getizquierdo(), niu);
 		} else {
-			niu.setIzq(nActual.getIzq());
-			niu.setDer(nActual.getDer());
+			niu.setizquierdo(nActual.getizquierdo());
+			niu.setderecho(nActual.getderecho());
 			if (nActual.getDaddy() == null)
 				raiz = niu;
 			else {
 				niu.setDaddy(nActual.getDaddy());
-				if (nActual == nActual.getDaddy().getIzq())
-					nActual.getDaddy().setIzq(niu);
+				if (nActual == nActual.getDaddy().getizquierdo())
+					nActual.getDaddy().setizquierdo(niu);
 				else
-					nActual.getDaddy().setDer(niu);
+					nActual.getDaddy().setderecho(niu);
 			}
 		}
 	}
@@ -62,16 +62,15 @@ public class ABB<K extends Comparable<K>, V> implements InterfazABB<K, V> {
 		if (comparison == 0)
 			return nActual.getValue();
 		else if (comparison > 0) {
-			if(nActual.getDer() != null)
-				return (V) buscar(key, nActual.getDer());
+			if(nActual.getderecho() != null)
+				return (V) buscar(key, nActual.getderecho());
 		}
 		else {
-			if(nActual.getIzq() != null)
-			return (V) buscar(key, nActual.getIzq());
+			if(nActual.getizquierdo() != null)
+			return (V) buscar(key, nActual.getizquierdo());
 		}
 		return null;
 	}
-
 	@Override
 	public boolean eliminar(K key) {
 		// TODO Auto-generated method stub

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +41,7 @@ public class PanelBotones extends JPanel implements ActionListener{
 	JButton btbBuscar;
 	
 	public PanelBotones(FrameBase frame) {
+		this.frame=frame;
 		setLayout(new BorderLayout());
 		panelCargar();	
 		//panelBuscar();
@@ -53,6 +55,7 @@ public class PanelBotones extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(CARGAR)) {
 			 JFileChooser chooser = new JFileChooser();
+			 chooser.setCurrentDirectory(new File("./DatosEnCSV"));
 			    FileNameExtensionFilter filter = new FileNameExtensionFilter("XLS or cvs only","XLSX", "XLS", "csv");
 			    chooser.setFileFilter(filter);
 			    int returnVal = chooser.showOpenDialog(getParent());
@@ -61,8 +64,8 @@ public class PanelBotones extends JPanel implements ActionListener{
 			            chooser.getSelectedFile().getName());
 			       
 			       try {
+		    	    frame.lectorArchivo(chooser.getSelectedFile());
 					frame.definirArboles(Integer.parseInt(opc1.getText()), Integer.parseInt(opc2.getText()), Integer.parseInt(opc3.getText()));
-					frame.lectorArchivo(chooser.getSelectedFile());
 					 panelBuscar();
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
@@ -73,7 +76,8 @@ public class PanelBotones extends JPanel implements ActionListener{
 					JOptionPane.showMessageDialog(null, "Debe indicar el NUMERO de una columna valida ", "Error al digitar los datos", JOptionPane.ERROR_MESSAGE, null);
 					panelCargar();
 				}catch(Exception e10 ) {
-					JOptionPane.showMessageDialog(null,"Un error fatal ha ocurrido"+"\n"+" tenemos un grupo de simios trabajando para solucionaro"+"\n"+"si los ves muestrales esto вѣдиглагольживѣтекраткойюсъ большой іотированныйюсъ малый іотированный", "Error al digitar los datos", JOptionPane.ERROR_MESSAGE, null);
+					e10.printStackTrace();
+					JOptionPane.showMessageDialog(null,"Un error fatal ha ocurrido"+"\n"+" tenemos un grupo de simios trabajando para solucionaro"+"\n"+"si los ves muestrales esto Ð²Ñ£Ð´Ð¸Ð³Ð»Ð°Ð³Ð¾Ð»ÑŒÐ¶Ð¸Ð²Ñ£Ñ‚ÐµÐºÑ€Ð°Ñ‚ÐºÐ¾Ð¹ÑŽÑ�ÑŠ Ð±Ð¾Ð»ÑŒÑˆÐ¾Ð¹ Ñ–Ð¾Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ÑŽÑ�ÑŠ Ð¼Ð°Ð»Ñ‹Ð¹ Ñ–Ð¾Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹", "Error al digitar los datos", JOptionPane.ERROR_MESSAGE, null);
 					panelCargar();
 			      }
 			      
@@ -89,12 +93,12 @@ public class PanelBotones extends JPanel implements ActionListener{
 				ArrayList<String[]> arreglo=frame.buscar(Integer.parseInt(txtCampo.getText()), txtLlave.getText());
 				for (int i = 0; i < arreglo.size(); i++) {
 					letras+=Arrays.toString(arreglo.get(i))+"\n";
-					
 				}
 				JOptionPane.showMessageDialog(this, letras);
 				
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
+				e1.printStackTrace();
 				JOptionPane.showMessageDialog(this, "algo extranio acaba de suceder o eres manoso o habia un error"+"\n por favor no bajes la nota :'(");
 			} 
 			
