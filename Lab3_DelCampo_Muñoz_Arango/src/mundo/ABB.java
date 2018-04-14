@@ -2,79 +2,117 @@ package mundo;
 
 import javax.print.attribute.standard.MediaSize.NA;
 
-public class ABB<K extends Comparable<K>, V> implements InterfazABB<K, V> {
+public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> {
 
-	private NodoABB<K, V> raiz;
-
-	@Override
-	public void insertar(K key, V value) {
-		NodoABB<K, V> nuevo = new NodoABB<>(key, value);
-		if (raiz == null)
-			raiz = nuevo;
-		else
-			agregar(raiz, nuevo);
+	protected NodoABB<K, V> raiz;
+	
+	public ABB() {
+		raiz=null;
 	}
 	
+	protected void insertar(NodoABB<K,V> z,Object nil){
+		NodoABB<K,V> y=null;
+		if(nil!=null)
+			y=(NodoABB<K, V>) nil;			
+		NodoABB<K,V> x=raiz;
+		while(x!=nil){
+			y=x;
+			if(x.compareTo(z)>0){
+				x=x.getIzquierdo();
+			}else if(x.compareTo(z)<0){
+				x=x.getDerecho();
+			}else{
+				NodoABB<K,V> w=x.getClon();
+				while(w!=null){
+					x=w;
+					w=w.getClon();
+				}
+				x.setClon(z);
+				NodoABB<K, V> p=null;
+				if(nil!=null) 
+					p=(NodoABB<K, V>)nil;
+				z.setDerecho(p);
+				z.setIzquierdo(p);
+				z.setPadre(p);
+				return;
+			}
+		}
+		z.setPadre(y);
+		if(y==nil){
+			raiz=z;
+		}else if(y.compareTo(z)>0){
+			y.setIzquierdo(z);
+		}else{y.setDerecho(z);}
+		NodoABB<K, V> p=null;
+		if(nil!=null) 
+			p=(NodoABB<K, V>)nil;
+		z.setDerecho(p);
+		z.setIzquierdo(p);
+	}
+
+	public NodoABB<K, V> consultar(K key,Object nil) {
+		NodoABB<K,V> y=null;
+		if(nil!=null)
+			y=(NodoABB<K, V>) nil;
+		NodoABB<K,V> x=raiz;
+		while(x!=nil){
+			y=x;
+			if(x.getKey().compareTo(key)>0){
+				x=x.getIzquierdo();
+			}else if(x.getKey().compareTo(key)<0){
+				x=x.getDerecho();
+			}else{
+				return x;
+			}
+		}
+		return null;
+	}
+	protected void leftRotate(NodoABB<K, V> x,Object nil){
+		NodoABB<K, V> y=x.getDerecho();
+		x.setDerecho(y.getIzquierdo());
+		if(y.getIzquierdo()!=nil){
+			y.getIzquierdo().setPadre(x);
+		}
+		y.setPadre(x.getPadre());
+		if(x.getPadre()==nil){
+			raiz=y;
+		}else if(x==x.getPadre().getIzquierdo()){
+			x.getPadre().setIzquierdo(y);
+		}else{
+			x.getPadre().setDerecho(y);
+		}
+		y.setIzquierdo(x);
+		x.setPadre(y);
+	}
+	protected void rightRotate(NodoABB<K, V> x,Object nil){
+		NodoABB<K, V> y=x.getIzquierdo();
+		x.setIzquierdo(y.getDerecho());
+		if(y.getDerecho()!=nil){
+			y.getDerecho().setPadre(x);
+		}
+		y.setPadre(x.getPadre());
+		if(x.getPadre()==nil){
+			raiz=y;
+		}else if(x==x.getPadre().getIzquierdo()){
+			x.getPadre().setIzquierdo(y);
+		}else{
+			x.getPadre().setDerecho(y);
+		}
+		y.setDerecho(x);
+		x.setPadre(y);
+	}
 	public boolean estaVacio () {
 		if(raiz == null)
 			return true;
 		return false;
 	}
-	private void agregar(NodoABB nActual, NodoABB<K, V> niu) {
-		int comparacion = nActual.getKey().compareTo(niu.getKey());
-		if (comparacion < 0) {
-			if (nActual.getderecho() == null)
-				nActual.setderecho(niu);
-			else
-				agregar(nActual.getderecho(), niu);
-		} else if (comparacion > 0) {
-			if (nActual.getizquierdo() == null)
-				nActual.setizquierdo(niu);
-			else
-				agregar(nActual.getizquierdo(), niu);
-		} else {
-			niu.setizquierdo(nActual.getizquierdo());
-			niu.setderecho(nActual.getderecho());
-			if (nActual.getDaddy() == null)
-				raiz = niu;
-			else {
-				niu.setDaddy(nActual.getDaddy());
-				if (nActual == nActual.getDaddy().getizquierdo())
-					nActual.getDaddy().setizquierdo(niu);
-				else
-					nActual.getDaddy().setderecho(niu);
-			}
-		}
+	public NodoABB<K, V> getRaiz() {
+		return raiz;
 	}
 
-	public V buscar(K key) {
-		V valorBuscado = null;
-		int comparison = key.compareTo(raiz.getKey());
-		if (comparison == 0)
-			valorBuscado = raiz.getValue();
-		else
-			valorBuscado = buscar(key, raiz);
-		return valorBuscado;
+	public void setRaiz(NodoABB<K, V> raiz) {
+		this.raiz = raiz;
 	}
-
-	private V buscar(K key, NodoABB<K,V> nActual) {
-		int comparison = key.compareTo(nActual.getKey());
-		if (comparison == 0)
-			return nActual.getValue();
-		else if (comparison > 0) {
-			if(nActual.getderecho() != null)
-				return (V) buscar(key, nActual.getderecho());
-		}
-		else {
-			if(nActual.getizquierdo() != null)
-			return (V) buscar(key, nActual.getizquierdo());
-		}
-		return null;
-	}
-	@Override
-	public boolean eliminar(K key) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	public abstract void insertar(K key, V value);
+	public abstract boolean eliminar(K key);
 }

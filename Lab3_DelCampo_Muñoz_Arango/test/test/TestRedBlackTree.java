@@ -29,7 +29,7 @@ public class TestRedBlackTree {
 		setUpEscenario1();
 		rbt.insertar(5,3);
 		rbt.insertar(6,2);
-		assertTrue(rbt.consultar(5).getValor()==3);
+		assertTrue(rbt.consultar(5,rbt.nil).getValue()==3);
 	}
 	@Test
 	public void testBalanceo() {
