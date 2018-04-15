@@ -79,15 +79,9 @@ public class PanelBotones extends JPanel implements ActionListener{
 					e10.printStackTrace();
 					JOptionPane.showMessageDialog(null,"Un error fatal ha ocurrido"+"\n"+" tenemos un grupo de simios trabajando para solucionaro"+"\n"+"si los ves muestrales esto Ð²Ñ£Ð´Ð¸Ð³Ð»Ð°Ð³Ð¾Ð»ÑŒÐ¶Ð¸Ð²Ñ£Ñ‚ÐµÐºÑ€Ð°Ñ‚ÐºÐ¾Ð¹ÑŽÑ�ÑŠ Ð±Ð¾Ð»ÑŒÑˆÐ¾Ð¹ Ñ–Ð¾Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ÑŽÑ�ÑŠ Ð¼Ð°Ð»Ñ‹Ð¹ Ñ–Ð¾Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹", "Error al digitar los datos", JOptionPane.ERROR_MESSAGE, null);
 					panelCargar();
-			      }
-			      
-			       
-			    }
-			    
-			    
-			    
+			      }  
+			    }		    
 		}else if(e.getActionCommand().equals(CONSULTAR)){
-			
 			try {
 				String letras="";
 				ArrayList<String[]> arreglo=frame.buscar(Integer.parseInt(txtCampo.getText()), txtLlave.getText());

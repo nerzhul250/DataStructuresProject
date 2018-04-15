@@ -86,41 +86,41 @@ public class DBMS {
 	 */
 	public ArrayList<String[]> consulta(int campo,String llave) throws IOException{
 		if(camposRapidos.containsKey(campo)){
-			int arbol=camposRapidos.get(campo);
+			Integer arbol=camposRapidos.get(campo);
 			ArrayList<Integer>registros=new ArrayList<Integer>();
 			RBTNode<String,Integer> n=null;
 			AVLNode<String,Integer> a=null;
 			switch(arbol){
 				case 1:
-					n=arbolito1.consultar(llave);
+					n=(RBTNode<String, Integer>) arbolito1.consultar(llave,arbolito1.nil);
 					if(n==null){
 						registros=null;
 					}else{
 						while(n!=null){
-							registros.add(n.getValor());
-							n=n.getClon();
+							registros.add((Integer) n.getValue());
+							n=(RBTNode<String, Integer>) n.getClon();
 						}
 					}
 					break;
 				case 2:
-					n=arbolito2.consultar(llave);
+					n=(RBTNode<String, Integer>) arbolito2.consultar(llave,arbolito2.nil);
 					if(n==null){
 						registros=null;
 					}else{
 						while(n!=null){
-							registros.add(n.getValor());
-							n=n.getClon();
+							registros.add((Integer) n.getValue());
+							n=(RBTNode<String, Integer>) n.getClon();
 						}
 					}
 					break;
 				case 3:
-					a=arbolito3.consultar(llave);
+					a=(AVLNode<String, Integer>) arbolito3.consultar(llave,null);
 					if(a==null){
 						registros=null;
 					}else{
 						while(a!=null){
-							registros.add(a.getValor());
-							a=a.getClon();
+							registros.add((Integer) a.getValue());
+							a=(AVLNode<String, Integer>) a.getClon();
 						}
 					}
 					break;
