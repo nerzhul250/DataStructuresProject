@@ -2,8 +2,10 @@ package mundo;
 
 public class NodoABB <K extends Comparable, V> implements Comparable{
 
+	
 	protected K key;
 	protected V value;
+	protected int altura;
 	protected NodoABB<K,V> padre;
 	protected NodoABB<K,V> derecho;
 	protected NodoABB<K,V> izquierdo;
@@ -67,6 +69,18 @@ public class NodoABB <K extends Comparable, V> implements Comparable{
 			izquierdo.recorrerSubArbol(string+"L",nil);
 		if(derecho!=nil)
 			derecho.recorrerSubArbol(string+"R",nil);
+	}
+	public void actualizarAltura() {
+		if(derecho==null && izquierdo==null) {
+			altura=-1;
+		}else if(derecho==null) {
+			altura=izquierdo.altura;
+		}else if(izquierdo==null) {
+			altura=derecho.altura;
+		}else {
+			altura=Math.max(derecho.altura,izquierdo.altura);
+		}
+		altura++;
 	}
 	@Override
 	public int compareTo(Object o) {

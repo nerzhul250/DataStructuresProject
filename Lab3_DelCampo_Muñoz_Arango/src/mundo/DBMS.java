@@ -86,7 +86,7 @@ public class DBMS {
 	 */
 	public ArrayList<String[]> consulta(int campo,String llave) throws IOException{
 		if(camposRapidos.containsKey(campo)){
-			int arbol=camposRapidos.get(campo);
+			Integer arbol=camposRapidos.get(campo);
 			ArrayList<Integer>registros=new ArrayList<Integer>();
 			RBTNode<String,Integer> n=null;
 			AVLNode<String,Integer> a=null;

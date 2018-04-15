@@ -18,9 +18,19 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		while(x!=nil){
 			y=x;
 			if(x.compareTo(z)>0){
+				NodoABB<K,V>padre=x;
 				x=x.getIzquierdo();
+				if(x!=nil && padre.altura==x.altura+1)padre.altura++;
+				if(padre.getDerecho()==nil && x==nil) {
+					padre.altura++;
+				}
 			}else if(x.compareTo(z)<0){
+				NodoABB<K,V>padre=x;
 				x=x.getDerecho();
+				if(x!=nil && padre.altura==x.altura+1)padre.altura++;
+				if(padre.getIzquierdo()==nil && x==nil) {
+					padre.altura++;
+				}
 			}else{
 				NodoABB<K,V> w=x.getClon();
 				while(w!=null){
@@ -83,6 +93,8 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		}
 		y.setIzquierdo(x);
 		x.setPadre(y);
+		x.actualizarAltura();
+		y.actualizarAltura();
 	}
 	protected void rightRotate(NodoABB<K, V> x,Object nil){
 		NodoABB<K, V> y=x.getIzquierdo();
@@ -100,6 +112,8 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		}
 		y.setDerecho(x);
 		x.setPadre(y);
+		x.actualizarAltura();
+		y.actualizarAltura();
 	}
 	public boolean estaVacio () {
 		if(raiz == null)
@@ -109,7 +123,6 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 	public NodoABB<K, V> getRaiz() {
 		return raiz;
 	}
-
 	public void setRaiz(NodoABB<K, V> raiz) {
 		this.raiz = raiz;
 	}

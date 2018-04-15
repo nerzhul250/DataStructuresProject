@@ -15,24 +15,53 @@ public class TestDBMS {
 	private void setUpEscenario1(){
 		baseDatos=new DBMS();
 	}
-	@Test
-	public void testCargaDatos() {
-		setUpEscenario1();
+	private void setupEscenario2() {
+		baseDatos=new DBMS();
 		File f=new File("./DatosEnCSV/EjecucionPresupuestoImpuestosAlcaldiaVistaHermosa.csv");
 		baseDatos.cargarTabla(f);
 		try {
 			baseDatos.definirCamposRapidos(2,0,1);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testCargaDatos() {
+		setUpEscenario1();
+		//PROBANDO CARGA
+		File f=new File("./DatosEnCSV/EjecucionPresupuestoImpuestosAlcaldiaVistaHermosa.csv");
+		baseDatos.cargarTabla(f);
+		try {
+			//PROBANDO QUE CARGÓ
+			baseDatos.definirCamposRapidos(2,0,1);
 			ArrayList<String[]> re=baseDatos.consulta(2,"$3165050864.00");
+			if(re.size()==0)throw new Exception("FUCK");
 			for (int i = 0; i < re.size(); i++) {
 				for (int j = 0; j < re.get(i).length; j++) {
 					System.out.print(re.get(i)[j]+" ");
 				}
 				System.out.println();
 			}
-		} catch (IOException e) {
-			System.out.println("FUCK");
+		} catch (Exception e) {
+			assertTrue(false);
 		}
-		
 	}
-
+	@Test
+	public void testConsultaDatos() {
+		setupEscenario2();
+		ArrayList<String[]> re;
+		try {
+			re = baseDatos.consulta(1,"$31650");
+			if(re!=null) throw new Exception("FUCK");
+			re=baseDatos.consulta(1,"INGRESOS ADMINISTRACION CENTRAL");
+			if(re==null) throw new Exception("FUCK");
+			re=baseDatos.consulta(3,"$2825005520.00");
+			if(re==null) throw new Exception("FUCK");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
 }
