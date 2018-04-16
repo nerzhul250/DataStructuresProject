@@ -92,7 +92,7 @@ public class DBMS {
 			AVLNode<String,Integer> a=null;
 			switch(arbol){
 				case 1:
-					n=(RBTNode<String, Integer>) arbolito1.consultar(llave,arbolito1.nil);
+					n=(RBTNode<String, Integer>) arbolito1.consultar(llave);
 					if(n==null){
 						registros=null;
 					}else{
@@ -103,7 +103,7 @@ public class DBMS {
 					}
 					break;
 				case 2:
-					n=(RBTNode<String, Integer>) arbolito2.consultar(llave,arbolito2.nil);
+					n=(RBTNode<String, Integer>) arbolito2.consultar(llave);
 					if(n==null){
 						registros=null;
 					}else{
@@ -114,7 +114,7 @@ public class DBMS {
 					}
 					break;
 				case 3:
-					a=(AVLNode<String, Integer>) arbolito3.consultar(llave,null);
+					a=(AVLNode<String, Integer>) arbolito3.consultar(llave);
 					if(a==null){
 						registros=null;
 					}else{

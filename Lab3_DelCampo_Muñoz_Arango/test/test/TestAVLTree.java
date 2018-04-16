@@ -36,7 +36,7 @@ public class TestAVLTree {
 		setUpEscenario1();
 		avl.insertar("a",3);
 		avl.insertar("HOLA",2);
-		assertTrue(avl.consultar("a",null).getValue()==3);
+		assertTrue(avl.consultar("a").getValue()==3);
 	}
 	@Test
 	public void testBalanceo() {
