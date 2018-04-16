@@ -3,7 +3,6 @@ package mundo;
 import java.util.ArrayList;
 
 public class RedBlackTree<K extends Comparable,V> extends ABB<K,V> {
-	public RBTNode<K,V> nil;
 	
 	public RedBlackTree(){
 		super();
@@ -11,7 +10,7 @@ public class RedBlackTree<K extends Comparable,V> extends ABB<K,V> {
 		nil.setPadre(nil);
 		nil.setDerecho(nil);
 		nil.setIzquierdo(nil);
-		nil.setColor(Color.BLACK);
+		((RBTNode<K, V>) nil).setColor(Color.BLACK);
 		raiz=nil;
 	}
 	@Override
@@ -20,11 +19,12 @@ public class RedBlackTree<K extends Comparable,V> extends ABB<K,V> {
 		insertar(z,nil);
 		insertFixeUp(z);
 	}
-	@Override
-	public boolean eliminar(K key) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+//	@Override
+//	public boolean eliminar(K key) {
+//		super.eliminar(key);
+//		// completar
+//		return false;
+//	}
 	private void insertFixeUp(RBTNode<K, V> z) {
 		while(((RBTNode<K, V>) z.getPadre()).getColor()==Color.RED){
 			if(z.getPadre()==z.getPadre().getPadre().getIzquierdo()){

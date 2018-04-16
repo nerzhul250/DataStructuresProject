@@ -1,6 +1,6 @@
 package mundo;
 
-public class NodoABB <K extends Comparable, V> implements Comparable{
+public abstract class NodoABB <K extends Comparable, V> implements Comparable{
 
 	
 	protected K key;
