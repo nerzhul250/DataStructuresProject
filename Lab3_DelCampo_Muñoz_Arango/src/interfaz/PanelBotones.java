@@ -25,20 +25,20 @@ public class PanelBotones extends JPanel implements ActionListener{
 	public final static String CONSULTAR="CONSULTAR";
 	public final static String NUEVA_CONSULTA="consulta nueva";
 	
-	JButton butonCrgar;
-	FrameBase frame;
-	JTextField opc1;
-	JTextField opc2;
-	JTextField opc3;
-	JPanel aux;
+	private JButton butonCrgar;
+	private FrameBase frame;
+	private JTextField opc1;
+	private JTextField opc2;
+	private JTextField opc3;
+	private JPanel aux;
 	
-	JPanel panelBusqueda;
-	JTextField txtCampo;
-	JTextField txtLlave;
+	private JPanel panelBusqueda;
+	private JTextField txtCampo;
+	private JTextField txtLlave;
 	
 	
 	
-	JButton btbBuscar;
+	private JButton btbBuscar;
 	
 	public PanelBotones(FrameBase frame) {
 		this.frame=frame;

@@ -19,7 +19,7 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		NodoABB<K, V> x = raiz;
 		while (x != nil) {
 			y = x;
-			if (x.compareTo(z) > 0) {
+			if (x.compareTo(z) > 0) {           
 				NodoABB<K, V> padre = x;
 				x = x.getIzquierdo();
 				if (x != nil && padre.altura == x.altura + 1)

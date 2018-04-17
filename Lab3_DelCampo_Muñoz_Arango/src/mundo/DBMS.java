@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class DBMS {
@@ -21,6 +22,12 @@ public class DBMS {
 	private AVLTree<String,Integer> arbolito3;
 	
 	public DBMS(){
+	}
+
+	public String giveDataForTable() {
+		String retorno="";
+		
+		return retorno;
 	}
 	/**
 	 * @param archivo, es el file con el csv en el
@@ -154,5 +161,27 @@ public class DBMS {
 				return registro;
 			}
 		}
+		
+	}
+	public String[][] getMatrix() throws IOException{
+		String[][] matrix=new String[numeroRegistros][camposActuales.length] ;
+		BufferedReader br=null;
+		for (int i = 0; i < numeroRegistros; i++) {
+			int joda=i+1;
+			br=new BufferedReader(new FileReader("./Tabla/R"+joda+".txt"));
+			String[] A=br.readLine().split(",");
+			for(int j=0;j<camposActuales.length;j++) {
+				matrix[i][j]=A[j];
+			}
+				
+		}
+		br.close();
+//		for(int s=0;s<numeroRegistros;s++){
+//			System.out.println(Arrays.toString(matrix[s]));
+//		}
+		return matrix;
+	}
+	public String[] getCampos() {
+		return camposActuales;
 	}
 }
