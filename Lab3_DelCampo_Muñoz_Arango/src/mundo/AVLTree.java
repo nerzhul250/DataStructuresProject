@@ -5,7 +5,7 @@ public class AVLTree<K extends Comparable,V> extends ABB<K,V> {
 	@Override
 	public void insertar(K key, V value) {
 		AVLNode<K,V> z=new AVLNode<K,V>(key,value);
-		insertar(z,null);
+		insertar(z);
 		insertarFixeUp(z);
 	}
 	@Override

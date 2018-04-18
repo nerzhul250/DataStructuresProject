@@ -16,7 +16,7 @@ public class PanelDatos extends JPanel{
 	public  PanelDatos(String[][] a, String[]b) {
 		 tabla=new JTable(a,b); 
 		  JS=new JScrollPane(tabla);
-		  JS.setPreferredSize(new Dimension(b[0].length()*275,150));
+		  JS.setPreferredSize(new Dimension(b[0].length()*160,150));
 		 add(JS);
 		
 	}

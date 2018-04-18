@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,149 +21,168 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class PanelBotones extends JPanel implements ActionListener{
-	
-	public final static String CARGAR="cargar";
-	public final static String CONSULTAR="CONSULTAR";
-	public final static String NUEVA_CONSULTA="consulta nueva";
-	
+public class PanelBotones extends JPanel implements ActionListener {
+
+	public final static String CARGAR = "cargar";
+	public final static String CONSULTAR = "CONSULTAR";
+	public final static String NUEVA_CONSULTA = "consulta nueva";
+
 	private JButton butonCrgar;
 	private FrameBase frame;
 	private JTextField opc1;
 	private JTextField opc2;
 	private JTextField opc3;
 	private JPanel aux;
-	
+
 	private JPanel panelBusqueda;
 	private JTextField txtCampo;
 	private JTextField txtLlave;
-	
-	
-	
+
 	private JButton btbBuscar;
-	
+
 	public PanelBotones(FrameBase frame) {
-		this.frame=frame;
+		this.frame = frame;
 		setLayout(new BorderLayout());
-		panelCargar();	
-		//panelBuscar();
+		panelCargar();
+		// panelBuscar();
 	}
-
-
-	
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals(CARGAR)) {
-			 JFileChooser chooser = new JFileChooser();
-			 chooser.setCurrentDirectory(new File("./DatosEnCSV"));
-			    FileNameExtensionFilter filter = new FileNameExtensionFilter("XLS or cvs only","XLSX", "XLS", "csv");
-			    chooser.setFileFilter(filter);
-			    int returnVal = chooser.showOpenDialog(getParent());
-			    if(returnVal == JFileChooser.APPROVE_OPTION) {
-			       JOptionPane.showMessageDialog(this, "You chose to open this file: " +
-			            chooser.getSelectedFile().getName());
-			       
-			       try {
-		    	    frame.lectorArchivo(chooser.getSelectedFile());
-					frame.definirArboles(Integer.parseInt(opc1.getText()), Integer.parseInt(opc2.getText()), Integer.parseInt(opc3.getText()));
-					 panelBuscar();
-				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, "Debe indicar el NUMERO de una columna valida ", "Error al digitar los datos", JOptionPane.ERROR_MESSAGE, null);
-					panelCargar();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, "Debe indicar el NUMERO de una columna valida ", "Error al digitar los datos", JOptionPane.ERROR_MESSAGE, null);
-					panelCargar();
-				}catch(Exception e10 ) {
-					e10.printStackTrace();
-					JOptionPane.showMessageDialog(null,"Un error fatal ha ocurrido"+"\n"+" tenemos un grupo de simios trabajando para solucionaro"+"\n"+"si los ves muestrales esto Ð²Ñ£Ð´Ð¸Ð³Ð»Ð°Ð³Ð¾Ð»ÑŒÐ¶Ð¸Ð²Ñ£Ñ‚ÐµÐºÑ€Ð°Ñ‚ÐºÐ¾Ð¹ÑŽÑ�ÑŠ Ð±Ð¾Ð»ÑŒÑˆÐ¾Ð¹ Ñ–Ð¾Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ÑŽÑ�ÑŠ Ð¼Ð°Ð»Ñ‹Ð¹ Ñ–Ð¾Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹", "Error al digitar los datos", JOptionPane.ERROR_MESSAGE, null);
-					panelCargar();
-			      }  
-			    }		    
-		}else if(e.getActionCommand().equals(CONSULTAR)){
+		if (e.getActionCommand().equals(CARGAR)) {
+			int entrada1 = 0;
+			int entrada2 = 1;
+			int entrada3 = 2;
 			try {
-				String letras="";
-				ArrayList<String[]> arreglo=frame.buscar(Integer.parseInt(txtCampo.getText()), txtLlave.getText());
+				entrada1 = Integer.parseInt(opc1.getText());
+				entrada2 = Integer.parseInt(opc2.getText());
+				entrada3 = Integer.parseInt(opc3.getText());
+
+				JFileChooser chooser = new JFileChooser();
+				chooser.setCurrentDirectory(new File("./DatosEnCSV"));
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("XLS or cvs only", "XLSX", "XLS", "csv");
+				chooser.setFileFilter(filter);
+				int returnVal = chooser.showOpenDialog(getParent());
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					JOptionPane.showMessageDialog(this,
+							"You chose to open this file: " + chooser.getSelectedFile().getName());
+
+					try {
+						frame.lectorArchivo(chooser.getSelectedFile());
+						frame.definirArboles(entrada1, entrada2, entrada3);
+						panelBuscar();
+					} catch (IOException e1) {
+						JOptionPane.showMessageDialog(null, "Debe indicar el NUMERO de una columna valida ",
+								"Error al digitar los datos", JOptionPane.ERROR_MESSAGE, null);
+						panelCargar();
+					} catch (Exception e10) {
+						e10.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Un error fatal ha ocurrido" + "\n"
+								+ " tenemos un grupo de simios trabajando para solucionaro" + "\n"
+								+ "si los ves muestrales esto Ð²Ñ£Ð´Ð¸Ð³Ð»Ð°Ð³Ð¾Ð»ÑŒÐ¶Ð¸Ð²Ñ£Ñ‚ÐµÐºÑ€Ð°Ñ‚ÐºÐ¾Ð¹ÑŽÑ�ÑŠ Ð±Ð¾Ð»ÑŒÑˆÐ¾Ð¹ Ñ–Ð¾Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ÑŽÑ�ÑŠ Ð¼Ð°Ð»Ñ‹Ð¹ Ñ–Ð¾Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹",
+								"Error al digitar los datos", JOptionPane.ERROR_MESSAGE, null);
+						panelCargar();
+					}
+				}
+			} catch (NumberFormatException e1) {
+				JOptionPane.showMessageDialog(null, "Debe indicar el NUMERO de una columna valida ",
+						"Error al digitar los datos", JOptionPane.ERROR_MESSAGE, null);
+				panelCargar();
+			}
+		} else if (e.getActionCommand().equals(CONSULTAR)) {
+			try {
+				String letras = "";
+				ArrayList<String[]> arreglo = frame.buscar(Integer.parseInt(txtCampo.getText()), txtLlave.getText());
 				for (int i = 0; i < arreglo.size(); i++) {
-					letras+=Arrays.toString(arreglo.get(i))+"\n";
+					letras += Arrays.toString(arreglo.get(i)) + "\n";
 				}
 				JOptionPane.showMessageDialog(this, letras);
-				
+
+			} catch (NumberFormatException e2) {
+				JOptionPane.showMessageDialog(null, "Debe indicar el NUMERO de una columna valida ",
+						"Error al digitar los datos", JOptionPane.ERROR_MESSAGE, null);
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
-				JOptionPane.showMessageDialog(this, "algo extranio acaba de suceder o eres manoso o habia un error"+"\n por favor no bajes la nota :'(");
-			} 
-			
-			
-			
-		}else if(e.getActionCommand().equals(NUEVA_CONSULTA)) {
+				JOptionPane.showMessageDialog(this, "algo extranio acaba de suceder o eres manoso o habia un error"
+						+ "\n por favor no bajes la nota :'(");
+			}
+
+		} else if (e.getActionCommand().equals(NUEVA_CONSULTA)) {
 			panelCargar();
 		}
-		
+
 	}
+
 	public void panelBuscar() {
 		this.removeAll();
-		JButton cargarnew=new JButton("Cargar Nuevo Archivo");
+		JButton cargarnew = new JButton("Cargar Nuevo Archivo");
 		cargarnew.addActionListener(this);
 		cargarnew.setActionCommand(NUEVA_CONSULTA);
-		
-		 panelBusqueda=new JPanel();
-		 txtCampo=new JTextField("Ingrese un campo");
-		 txtLlave=new JTextField("Ingrese un valor a buscar");
-		 
-		 btbBuscar=new JButton("Buscar");
-		 btbBuscar.addActionListener(this);
-		 btbBuscar.setActionCommand(CONSULTAR);
-		 
-		 panelBusqueda.setLayout(new GridLayout(1,4));
-		 panelBusqueda.add(btbBuscar);
-		 panelBusqueda.add(txtCampo);
-		 panelBusqueda.add(txtLlave);
 
-		 panelBusqueda.add(cargarnew);
-		 add(panelBusqueda,BorderLayout.CENTER);
-		 repaint();
-		 revalidate();
-		 
+		panelBusqueda = new JPanel();
+		txtCampo = new JTextField("Ingrese un campo (# de la columna)");
+		txtLlave = new JTextField("Ingrese un valor a buscar");
+		FocusListener entraTexto = new FocusListener() {
+
+			@Override
+			public void focusLost(FocusEvent e) {
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				// if(txtCampo.hasFocus())
+				txtCampo.selectAll();
+				// else
+				txtLlave.selectAll();
+			}
+		};
+		txtCampo.addFocusListener(entraTexto);
+		txtLlave.addFocusListener(entraTexto);
+		btbBuscar = new JButton("Buscar");
+		btbBuscar.addActionListener(this);
+		btbBuscar.setActionCommand(CONSULTAR);
+
+		panelBusqueda.setLayout(new GridLayout(1, 4));
+		panelBusqueda.add(btbBuscar);
+		panelBusqueda.add(txtCampo);
+		panelBusqueda.add(txtLlave);
+
+		panelBusqueda.add(cargarnew);
+		add(panelBusqueda, BorderLayout.CENTER);
+		repaint();
+		revalidate();
+
 	}
+
 	public void panelCargar() {
 		this.removeAll();
-		aux=new JPanel();
-		aux.setLayout(new GridLayout(2,3));
-		opc1=new JTextField("1");
-		opc2=new JTextField("2");
-		opc3=new JTextField("3");
-		 
-		JLabel aux1=new JLabel("llamado rapido 1");
-		JLabel aux2=new JLabel("llamado rapido 2");
-		JLabel aux3=new JLabel("llamado rapido 3");
-		
-		
-		butonCrgar=new JButton("Cargar");
+		aux = new JPanel();
+		aux.setLayout(new GridLayout(2, 3));
+		opc1 = new JTextField("1");
+		opc2 = new JTextField("2");
+		opc3 = new JTextField("3");
+
+		JLabel aux1 = new JLabel("llamado rapido 1");
+		JLabel aux2 = new JLabel("llamado rapido 2");
+		JLabel aux3 = new JLabel("llamado rapido 3");
+
+		butonCrgar = new JButton("Cargar");
 		aux.add(aux1);
 		aux.add(aux2);
 		aux.add(aux3);
 		aux.add(opc1);
 		aux.add(opc2);
 		aux.add(opc3);
-		
-		
-		
+
 		butonCrgar.addActionListener(this);
 		butonCrgar.setActionCommand(CARGAR);
-		
-		setLayout(new GridLayout(1,3));
-		add(butonCrgar,BorderLayout.EAST);
-		add(aux,BorderLayout.CENTER);
+
+		setLayout(new GridLayout(1, 3));
+		add(butonCrgar, BorderLayout.EAST);
+		add(aux, BorderLayout.CENTER);
 		repaint();
 		revalidate();
-	
-		
-		
+
 	}
 
 }

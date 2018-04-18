@@ -16,7 +16,7 @@ public class RedBlackTree<K extends Comparable,V> extends ABB<K,V> {
 	@Override
 	public void insertar(K key, V value) {
 		RBTNode<K,V> z =new RBTNode<K,V>(key,value);
-		insertar(z,nil);
+		insertar(z);
 		insertFixeUp(z);
 	}
 //	@Override

@@ -12,7 +12,7 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		raiz = nil;
 	}
 
-	protected void insertar(NodoABB<K, V> z, Object nil) {
+	protected void insertar(NodoABB<K, V> z) {
 		NodoABB<K, V> y = null;
 		if (nil != null)
 			y = (NodoABB<K, V>) nil;
