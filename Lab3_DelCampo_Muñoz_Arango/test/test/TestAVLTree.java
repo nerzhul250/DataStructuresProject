@@ -39,6 +39,18 @@ public class TestAVLTree {
 		assertTrue(avl.consultar("a").getValue()==3);
 	}
 	
+	public void testConsultar() {
+		setUpEscenario2();
+		assertTrue(avl.consultar("e").getValue() == 75);
+		assertTrue(avl.consultar("l").getValue() == 489);
+		assertTrue(avl.consultar("f").getValue() == 3);
+		assertTrue(avl.consultar("o").getValue() == 96);
+		assertTrue(avl.consultar("a").getValue() == 3);
+		assertTrue(avl.consultar("b").getValue() == 36);
+	}
+	/**
+	 * No se implementó el balanceo respectivo
+	 */
 	@Test
 	public void testEliminar () {
 		setUpEscenario2();

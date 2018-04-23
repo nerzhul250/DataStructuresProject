@@ -8,11 +8,7 @@ public class AVLTree<K extends Comparable,V> extends ABB<K,V> {
 		insertar(z);
 		insertarFixeUp(z);
 	}
-	@Override
-	public boolean eliminar(K key) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 	private void insertarFixeUp(AVLNode<K, V> z) {
 		AVLNode<K,V> N=z;
 		AVLNode<K,V> P=(AVLNode<K, V>) z.getPadre();

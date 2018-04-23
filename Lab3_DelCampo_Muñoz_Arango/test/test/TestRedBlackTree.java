@@ -30,12 +30,14 @@ public class TestRedBlackTree {
 		setUpEscenario1();
 		rbt.insertar(5,3);
 		rbt.insertar(6,2);
-		assertTrue(rbt.consultar(5).getValue()==3);
 	}
 	@Test
-	public void testBalanceo() {
+	public void testConsultar() {
 		setUpEscenario2();
-		rbt.getRaiz().recorrerSubArbol("",rbt.nil);
+		assertTrue(rbt.consultar(3).getValue()==3);
+		assertTrue(rbt.consultar(2).getValue() == 2);
+		assertTrue(rbt.consultar(7).getValue() == 7);
+		assertTrue(rbt.consultar(8).getValue() == 8);
 	}
 	@Test
 	public void testEliminar () {
