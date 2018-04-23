@@ -84,7 +84,7 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		return null;
 	}
 
-	protected void leftRotate(NodoABB<K, V> x, Object nil) {
+	protected void leftRotate(NodoABB<K, V> x) {
 		NodoABB<K, V> y = x.getDerecho();
 		x.setDerecho(y.getIzquierdo());
 		if (y.getIzquierdo() != nil) {
@@ -104,7 +104,7 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		y.actualizarAltura();
 	}
 
-	protected void rightRotate(NodoABB<K, V> x, Object nil) {
+	protected void rightRotate(NodoABB<K, V> x) {
 		NodoABB<K, V> y = x.getIzquierdo();
 		x.setIzquierdo(y.getDerecho());
 		if (y.getDerecho() != nil) {

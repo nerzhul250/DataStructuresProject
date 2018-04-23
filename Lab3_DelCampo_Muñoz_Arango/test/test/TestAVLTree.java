@@ -38,9 +38,23 @@ public class TestAVLTree {
 		avl.insertar("HOLA",2);
 		assertTrue(avl.consultar("a").getValue()==3);
 	}
+	
 	@Test
-	public void testBalanceo() {
+	public void testEliminar () {
 		setUpEscenario2();
-		avl.getRaiz().recorrerSubArbol("",null);
+		assertTrue(avl.consultar("h").getValue() == 456);
+		assertTrue(avl.eliminar("h"));
+		assertTrue(avl.consultar("h") == null);
+		assertTrue(avl.consultar("b").getValue() == 36);
+		assertTrue(avl.eliminar("b"));
+		assertTrue(avl.consultar("b") == null);
+		assertTrue(avl.consultar("a").getValue() == 3);
+		assertTrue(avl.eliminar("a"));
+		assertTrue(avl.consultar("a") == null);
+		assertTrue(avl.consultar("m").getValue() == 465);
+		assertTrue(avl.eliminar("m"));
+		assertTrue(avl.consultar("m") == null);
 	}
+	
+	
 }
