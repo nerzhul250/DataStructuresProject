@@ -40,7 +40,7 @@ public class FrameBase extends JFrame {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(this, "todo se fue al carajo");
+			JOptionPane.showMessageDialog(this, "c mamo");
 		}
 	}
 	public void definirArboles(int c1,int c2,int c3) throws IOException {

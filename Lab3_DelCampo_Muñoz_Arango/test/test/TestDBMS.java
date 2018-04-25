@@ -23,7 +23,7 @@ public class TestDBMS {
 			baseDatos.definirCamposRapidos(2,0,1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail();
 		}
 	}
 	@Test
@@ -44,7 +44,7 @@ public class TestDBMS {
 				System.out.println();
 			}
 		} catch (Exception e) {
-			assertTrue(false);
+			fail();
 		}
 	}
 	@Test
@@ -59,8 +59,7 @@ public class TestDBMS {
 			re=baseDatos.consulta(3,"$2825005520.00");
 			if(re==null) throw new Exception("FUCK");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail();
 		}
 	
 	}

@@ -20,10 +20,10 @@ public class RedBlackTree<K extends Comparable,V> extends ABB<K,V> {
 		insertFixeUp(z);
 	}
 //	@Override
-//	public boolean eliminar(K key) {
+//	public NodoABB eliminar(K key) {
 //		super.eliminar(key);
 //		// completar
-//		return false;
+//		return nil;
 //	}
 	private void insertFixeUp(RBTNode<K, V> z) {
 		while(((RBTNode<K, V>) z.getPadre()).getColor()==Color.RED){
@@ -36,11 +36,11 @@ public class RedBlackTree<K extends Comparable,V> extends ABB<K,V> {
 					z=(RBTNode<K, V>) z.getPadre().getPadre();
 				}else if(z==z.getPadre().getDerecho()){
 					z=(RBTNode<K, V>) z.getPadre();
-					leftRotate(z,nil);
+					leftRotate(z);
 				}else{
 					((RBTNode<K, V>) z.getPadre()).setColor(Color.BLACK);
 					((RBTNode<K, V>) z.getPadre().getPadre()).setColor(Color.RED);
-					rightRotate(z.getPadre().getPadre(),nil);
+					rightRotate(z.getPadre().getPadre());
 				}
 			}else{
 				RBTNode<K,V> y =(RBTNode<K, V>) z.getPadre().getPadre().getIzquierdo();
@@ -51,11 +51,11 @@ public class RedBlackTree<K extends Comparable,V> extends ABB<K,V> {
 					z=(RBTNode<K, V>) z.getPadre().getPadre();
 				}else if(z==z.getPadre().getIzquierdo()){
 					z=(RBTNode<K, V>) z.getPadre();
-					rightRotate(z,nil);
+					rightRotate(z);
 				}else{
 					((RBTNode<K, V>) z.getPadre()).setColor(Color.BLACK);
 					((RBTNode<K, V>) z.getPadre().getPadre()).setColor(Color.RED);
-					leftRotate(z.getPadre().getPadre(),nil);
+					leftRotate(z.getPadre().getPadre());
 				}
 			}
 		}

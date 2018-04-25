@@ -8,11 +8,7 @@ public class AVLTree<K extends Comparable,V> extends ABB<K,V> {
 		insertar(z);
 		insertarFixeUp(z);
 	}
-	@Override
-	public boolean eliminar(K key) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 	private void insertarFixeUp(AVLNode<K, V> z) {
 		AVLNode<K,V> N=z;
 		AVLNode<K,V> P=(AVLNode<K, V>) z.getPadre();
@@ -24,12 +20,12 @@ public class AVLTree<K extends Comparable,V> extends ABB<K,V> {
 					 if (P.balanceFactor() == 1) { // The left column in the picture
 						 // ==> the temporary P.balanceFactor() == 2 ==> rebalancing is required.
 						 if (N.balanceFactor() == -1) { // Left Right Case
-							 leftRotate(N,null); // Reduce to Left Left Case
+							 leftRotate(N); // Reduce to Left Left Case
 							 N.actualizarFactorBalance();
 							 ((AVLNode)N.getPadre()).actualizarFactorBalance();
 						 }
 						 // Left Left Case
-						 rightRotate(P,null);
+						 rightRotate(P);
 						 P.actualizarFactorBalance();
 						 ((AVLNode)P.getPadre()).actualizarFactorBalance();
 						 break; // Leave the loop
@@ -43,12 +39,12 @@ public class AVLTree<K extends Comparable,V> extends ABB<K,V> {
 					 if (P.balanceFactor() == -1) { // The right column in the picture
 						 // ==> the temporary P.balanceFactor() == -2 ==> rebalancing is required.
 						 if (N.balanceFactor() == 1) { // Right Left Case
-							 rightRotate(N,null); // Reduce to Right Right Case
+							 rightRotate(N); // Reduce to Right Right Case
 							 N.actualizarFactorBalance();
 							 ((AVLNode)N.getPadre()).actualizarFactorBalance();
 						 }
 						 // Right Right Case
-						 leftRotate(P,null);
+						 leftRotate(P);
 						 P.actualizarFactorBalance();
 						 ((AVLNode)P.getPadre()).actualizarFactorBalance();
 						 break; // Leave the loop
