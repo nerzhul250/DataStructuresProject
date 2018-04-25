@@ -17,7 +17,6 @@ public class FrameBase extends JFrame {
 	private PanelDatos panelDatos;
 	private DBMS mundo;
 	
-	
 	public FrameBase(){
 	mundo=new DBMS();
 	setLayout(new BorderLayout());
