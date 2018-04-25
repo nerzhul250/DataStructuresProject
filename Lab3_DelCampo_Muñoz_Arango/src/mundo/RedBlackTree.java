@@ -20,10 +20,10 @@ public class RedBlackTree<K extends Comparable,V> extends ABB<K,V> {
 		insertFixeUp(z);
 	}
 //	@Override
-//	public boolean eliminar(K key) {
+//	public NodoABB eliminar(K key) {
 //		super.eliminar(key);
 //		// completar
-//		return false;
+//		return nil;
 //	}
 	private void insertFixeUp(RBTNode<K, V> z) {
 		while(((RBTNode<K, V>) z.getPadre()).getColor()==Color.RED){

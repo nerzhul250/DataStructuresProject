@@ -55,16 +55,16 @@ public class TestAVLTree {
 	public void testEliminar () {
 		setUpEscenario2();
 		assertTrue(avl.consultar("h").getValue() == 456);
-		assertTrue(avl.eliminar("h"));
+		avl.eliminar("h");
 		assertTrue(avl.consultar("h") == null);
 		assertTrue(avl.consultar("b").getValue() == 36);
-		assertTrue(avl.eliminar("b"));
+		avl.eliminar("b");
 		assertTrue(avl.consultar("b") == null);
 		assertTrue(avl.consultar("a").getValue() == 3);
-		assertTrue(avl.eliminar("a"));
+		avl.eliminar("a");
 		assertTrue(avl.consultar("a") == null);
 		assertTrue(avl.consultar("m").getValue() == 465);
-		assertTrue(avl.eliminar("m"));
+		avl.eliminar("m");
 		assertTrue(avl.consultar("m") == null);
 	}
 	

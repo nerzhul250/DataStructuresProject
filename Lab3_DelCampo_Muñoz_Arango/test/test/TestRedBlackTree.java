@@ -43,16 +43,16 @@ public class TestRedBlackTree {
 	public void testEliminar () {
 		setUpEscenario2();
 		assertTrue(rbt.consultar(2).getValue() == 2);
-		assertTrue(rbt.eliminar(2));
+		rbt.eliminar(2);
 		assertTrue(rbt.consultar(2) == null);
 		assertTrue(rbt.consultar(1).getValue() == 1);
-		assertTrue(rbt.eliminar(1));
+		rbt.eliminar(1);
 		assertTrue(rbt.consultar(1) == null);
 		assertTrue(rbt.consultar(5).getValue() == 5);
-		assertTrue(rbt.eliminar(5));
+		rbt.eliminar(5);
 		assertTrue(rbt.consultar(5) == null);
 		assertTrue(rbt.consultar(3).getValue() == 3);
-		assertTrue(rbt.eliminar(3));
+		rbt.eliminar(3);
 		assertTrue(rbt.consultar(3) == null);
 	}
 }

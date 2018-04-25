@@ -140,9 +140,9 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 
 	public abstract void insertar(K key, V value);
 
-	public boolean eliminar(K key) {
+	public NodoABB eliminar(K key) {
 		if (raiz == nil)
-			return false;
+			return nil;
 		return eliminar(key, raiz);
 	}
 
@@ -153,10 +153,11 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		return mayor;
 	}
 
-	private boolean eliminar(K key, NodoABB<K, V> nActual) {
+	private NodoABB eliminar(K key, NodoABB<K, V> nActual) {
 		NodoABB<K, V> padre = nActual.getPadre();
 		NodoABB<K, V> izq = nActual.getIzquierdo();
 		NodoABB<K, V> der = nActual.getDerecho();
+		NodoABB<K, V> reemplazo = nil;
 		if (nActual.getKey().compareTo(key) == 0) {
 			if (izq == nil) {
 				if (nActual != raiz) {
@@ -164,12 +165,15 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 						padre.setIzquierdo(der);
 					else
 						padre.setDerecho(der);
-					if(der != nil)
+					if(der != nil) {
+						reemplazo = der;
 						der.setPadre(padre);
+					}
 				} else
 					raiz = der;
 			} else {
 				NodoABB<K, V> mayorIzq = mayor(izq);
+				reemplazo = mayorIzq.getIzquierdo();
 				eliminar(mayorIzq.getKey(), izq);
 				if (nActual == raiz)
 					raiz = mayorIzq;
@@ -184,17 +188,17 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 				mayorIzq.setIzquierdo(nActual.getIzquierdo());
 				mayorIzq.setDerecho(der);
 			}
+			return reemplazo;
 		} else if (nActual.getKey().compareTo(key) > 0) {
 			if (izq == nil)
-				return false;
+				return nil;
 			else
-				eliminar(key, izq);
+				return eliminar(key, izq);
 		} else {
 			if (der == nil)
-				return false;
+				return nil;
 			else
-				eliminar(key, der);
+				return eliminar(key, der);
 		}
-		return true;
 	}
 }
