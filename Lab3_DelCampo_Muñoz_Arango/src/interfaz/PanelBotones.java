@@ -96,7 +96,6 @@ public class PanelBotones extends JPanel implements ActionListener {
 		add(aux, BorderLayout.CENTER);
 		repaint();
 		revalidate();
-		
 	}
 
 	public void panelCargar() {
