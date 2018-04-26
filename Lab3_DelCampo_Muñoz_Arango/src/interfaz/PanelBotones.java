@@ -27,7 +27,7 @@ public class PanelBotones extends JPanel implements ActionListener {
 	public final static String CARGAR = "cargar";
 	public final static String CONSULTAR = "CONSULTAR";
 	public final static String NUEVA_CONSULTA = "consulta nueva";
-	public final static String DEFINIR_CAMPOS_RAPIDOS = "campos rapidos jajajajjajajajjajaxdxdxdxdxdxdxdxlolololololo";
+	public final static String DEFINIR_CAMPOS_RAPIDOS = "campos rapidos";
 
 	private JButton butonCrgar;
 	private FrameBase frame;
@@ -103,7 +103,7 @@ public class PanelBotones extends JPanel implements ActionListener {
 	}
 
 	public void panelCargar() {
-		JLabel saludo=new JLabel("hola vienvenido al sistema, selecciona tu arvhivo para continuar");
+		JLabel saludo=new JLabel("hola bienvenido al sistema, selecciona tu archivo para continuar");
 		
 		this.removeAll();
 		aux = new JPanel();

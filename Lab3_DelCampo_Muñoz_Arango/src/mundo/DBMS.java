@@ -168,11 +168,14 @@ public class DBMS {
 		for (int i = 0; i < numeroRegistros; i++) {
 			int joda=i+1;
 			br=new BufferedReader(new FileReader("./Tabla/R"+joda+".txt"));
-			String[] A=br.readLine().split(",");
-			for(int j=0;j<camposActuales.length;j++) {
-				matrix[i][j]=A[j];
-			}
-				
+			String B=br.readLine();
+			System.out.println(B);
+			String[] A=B.split(",");
+			try {	
+				for(int j=0;j<camposActuales.length;j++) {
+					matrix[i][j]=A[j];
+				}				
+			}catch(Exception e) {continue;}
 		}
 		br.close();
 //		for(int s=0;s<numeroRegistros;s++){
