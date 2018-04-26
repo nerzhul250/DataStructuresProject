@@ -1,6 +1,6 @@
 package mundo;
 
-public class AVLNode<K,V> extends NodoABB {
+public class AVLNode<K,V> extends ABBNode {
 	
 	private int balanceFactor;
 	

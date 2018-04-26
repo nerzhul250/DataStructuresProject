@@ -4,23 +4,23 @@ import javax.print.attribute.standard.MediaSize.NA;
 
 public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> {
 
-	protected NodoABB<K, V> raiz;
-	public NodoABB<K, V> nil;
+	protected ABBNode<K, V> raiz;
+	public ABBNode<K, V> nil;
 
 	public ABB() {
 		nil = null;
 		raiz = nil;
 	}
 
-	protected void insertar(NodoABB<K, V> z) {
-		NodoABB<K, V> y = null;
+	protected void insertar(ABBNode<K, V> z) {
+		ABBNode<K, V> y = null;
 		if (nil != null)
-			y = (NodoABB<K, V>) nil;
-		NodoABB<K, V> x = raiz;
+			y = (ABBNode<K, V>) nil;
+		ABBNode<K, V> x = raiz;
 		while (x != nil) {
 			y = x;
 			if (x.compareTo(z) > 0) {           
-				NodoABB<K, V> padre = x;
+				ABBNode<K, V> padre = x;
 				x = x.getIzquierdo();
 				if (x != nil && padre.altura == x.altura + 1)
 					padre.altura++;
@@ -28,7 +28,7 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 					padre.altura++;
 				}
 			} else if (x.compareTo(z) < 0) {
-				NodoABB<K, V> padre = x;
+				ABBNode<K, V> padre = x;
 				x = x.getDerecho();
 				if (x != nil && padre.altura == x.altura + 1)
 					padre.altura++;
@@ -36,15 +36,15 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 					padre.altura++;
 				}
 			} else {
-				NodoABB<K, V> w = x.getClon();
+				ABBNode<K, V> w = x.getClon();
 				while (w != null) {
 					x = w;
 					w = w.getClon();
 				}
 				x.setClon(z);
-				NodoABB<K, V> p = null;
+				ABBNode<K, V> p = null;
 				if (nil != null)
-					p = (NodoABB<K, V>) nil;
+					p = (ABBNode<K, V>) nil;
 				z.setDerecho(p);
 				z.setIzquierdo(p);
 				z.setPadre(p);
@@ -59,18 +59,21 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		} else {
 			y.setDerecho(z);
 		}
-		NodoABB<K, V> p = null;
+		ABBNode<K, V> p = null;
 		if (nil != null)
-			p = (NodoABB<K, V>) nil;
+			p = (ABBNode<K, V>) nil;
 		z.setDerecho(p);
 		z.setIzquierdo(p);
 	}
 
-	public NodoABB<K, V> consultar(K key) {
-		NodoABB<K, V> y = null;
+	public ABBNode<K, V> consultar(K key) {
+		if(key==null) {
+			return null;
+		}
+		ABBNode<K, V> y = null;
 		if (nil != null)
-			y = (NodoABB<K, V>) nil;
-		NodoABB<K, V> x = raiz;
+			y = (ABBNode<K, V>) nil;
+		ABBNode<K, V> x = raiz;
 		while (x != nil) {
 			y = x;
 			if (x.getKey().compareTo(key) > 0) {
@@ -84,8 +87,8 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		return null;
 	}
 
-	protected void leftRotate(NodoABB<K, V> x) {
-		NodoABB<K, V> y = x.getDerecho();
+	protected void leftRotate(ABBNode<K, V> x) {
+		ABBNode<K, V> y = x.getDerecho();
 		x.setDerecho(y.getIzquierdo());
 		if (y.getIzquierdo() != nil) {
 			y.getIzquierdo().setPadre(x);
@@ -104,8 +107,8 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		y.actualizarAltura();
 	}
 
-	protected void rightRotate(NodoABB<K, V> x) {
-		NodoABB<K, V> y = x.getIzquierdo();
+	protected void rightRotate(ABBNode<K, V> x) {
+		ABBNode<K, V> y = x.getIzquierdo();
 		x.setIzquierdo(y.getDerecho());
 		if (y.getDerecho() != nil) {
 			y.getDerecho().setPadre(x);
@@ -130,23 +133,23 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		return false;
 	}
 
-	public NodoABB<K, V> getRaiz() {
+	public ABBNode<K, V> getRaiz() {
 		return raiz;
 	}
 
-	public void setRaiz(NodoABB<K, V> raiz) {
+	public void setRaiz(ABBNode<K, V> raiz) {
 		this.raiz = raiz;
 	}
 	
 	public abstract void insertar(K key, V value);
 	
-	public abstract NodoABB<K,V> eliminar(K key);
+	public abstract ABBNode<K,V> eliminar(K key);
 
-	private NodoABB<K, V> sucesor(NodoABB<K,V> x) {
+	private ABBNode<K, V> sucesor(ABBNode<K,V> x) {
 		if(x.getDerecho()!=nil) {
 			return minimo(x.getDerecho());
 		}
-		NodoABB<K,V> y=x.getPadre();
+		ABBNode<K,V> y=x.getPadre();
 		while(y!=nil && x==y.getDerecho()) {
 			x=y;
 			y=y.getPadre();
@@ -154,21 +157,21 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 		return y;
 	}
 
-	private NodoABB<K, V> minimo(NodoABB<K, V> d) {
-		NodoABB<K,V>actual=d;
+	private ABBNode<K, V> minimo(ABBNode<K, V> d) {
+		ABBNode<K,V>actual=d;
 		while(actual.getIzquierdo()!=nil) {
 			actual=actual.getIzquierdo();
 		}
 		return actual;
 	}
-	protected NodoABB[] eliminar(NodoABB<K, V> z) {
-		NodoABB<K,V> y=nil;
+	protected ABBNode[] eliminar(ABBNode<K, V> z) {
+		ABBNode<K,V> y=nil;
 		if (z.getDerecho()==nil || z.getIzquierdo()==nil) {
 			y=z;
 		}else{
 			y=sucesor(z);
 		}
-		NodoABB<K,V> x=nil;
+		ABBNode<K,V> x=nil;
 		if(y.getIzquierdo()!=nil) {
 			x=y.getIzquierdo();
 		}else {
@@ -195,7 +198,7 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 			z.setKey(y.getKey());
 			z.setValue(y.getValue());
 		}
-		NodoABB<K,V>[]ans=new NodoABB[2];
+		ABBNode<K,V>[]ans=new ABBNode[2];
 		ans[0]=x;
 		ans[1]=y;
 		return ans;

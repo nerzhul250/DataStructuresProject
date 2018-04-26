@@ -15,9 +15,11 @@ public class RedBlackTree<K extends Comparable,V> extends ABB<K,V> {
 	}
 	@Override
 	public void insertar(K key, V value) {
-		RBTNode<K,V> z =new RBTNode<K,V>(key,value);
-		insertar(z);
-		insertFixeUp(z);
+		if(key!=null && value!=null) {
+			RBTNode<K,V> z =new RBTNode<K,V>(key,value);
+			insertar(z);
+			insertFixeUp(z);
+		}
 	}
 	private void insertFixeUp(RBTNode<K, V> z) {
 		while(((RBTNode<K, V>) z.getPadre()).getColor()==Color.RED){
@@ -112,9 +114,9 @@ public class RedBlackTree<K extends Comparable,V> extends ABB<K,V> {
 		x.setColor(Color.BLACK);
 	}
 	@Override
-	public NodoABB<K, V> eliminar(K key) {
-		NodoABB<K,V>z=consultar(key);
-		NodoABB[] params=null;
+	public ABBNode<K, V> eliminar(K key) {
+		ABBNode<K,V>z=consultar(key);
+		ABBNode[] params=null;
 		if(z!=null) {
 			params=eliminar(z);
 		}else {

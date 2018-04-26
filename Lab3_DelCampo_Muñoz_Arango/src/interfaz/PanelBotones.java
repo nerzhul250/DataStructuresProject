@@ -18,6 +18,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -29,7 +31,7 @@ public class PanelBotones extends JPanel implements ActionListener {
 	public final static String NUEVA_CONSULTA = "consulta nueva";
 	public final static String DEFINIR_CAMPOS_RAPIDOS = "campos rapidos";
 
-	private JButton butonCrgar;
+	private JButton butonCargar;
 	private FrameBase frame;
 	private JComboBox opc1;
 	private JComboBox opc2;
@@ -46,7 +48,6 @@ public class PanelBotones extends JPanel implements ActionListener {
 		this.frame = frame;
 		setLayout(new BorderLayout());
 		panelCargar();
-		// panelBuscar();
 	}
 
 	
@@ -59,10 +60,6 @@ public class PanelBotones extends JPanel implements ActionListener {
 		panelBusqueda = new JPanel();
 		txtCampo = new JComboBox(frame.getTitulos());
 		txtLlave = new JTextField("Ingrese un valor a buscar");
-		
-
-		
-		
 		
 		btbBuscar = new JButton("Buscar");
 		btbBuscar.addActionListener(this);
@@ -83,19 +80,19 @@ public class PanelBotones extends JPanel implements ActionListener {
 		this.removeAll();
 		aux = new JPanel();
 		aux.setLayout(new GridLayout(1, 5));
-		butonCrgar = new JButton("definir llamados");
-		butonCrgar.addActionListener(this);
-		butonCrgar.setActionCommand(DEFINIR_CAMPOS_RAPIDOS);
+		butonCargar = new JButton("definir llamados");
+		butonCargar.addActionListener(this);
+		butonCargar.setActionCommand(DEFINIR_CAMPOS_RAPIDOS);
 		opc1 = new JComboBox(frame.getTitulos());
 		opc2 = new JComboBox(frame.getTitulos());
 		opc3 = new JComboBox(frame.getTitulos());
 
-		JLabel aux1 = new JLabel("seleccione los llmados rapidos");
+		JLabel aux1 = new JLabel("seleccione los llamados rapidos");
 		aux.add(aux1);
 		aux.add(opc1);
 		aux.add(opc2);
 		aux.add(opc3);
-		aux.add(butonCrgar);
+		aux.add(butonCargar);
 		add(aux, BorderLayout.CENTER);
 		repaint();
 		revalidate();
@@ -103,17 +100,18 @@ public class PanelBotones extends JPanel implements ActionListener {
 	}
 
 	public void panelCargar() {
-		JLabel saludo=new JLabel("hola bienvenido al sistema, selecciona tu archivo para continuar");
+		JLabel saludo=new JLabel("<html>Bienvenido al sistema, selecciona tu archivo para continuar.<br>"
+				+ "Se puede demorar dado que se necesita tiempo para inicializar todos los archivos</html>");
 		
 		this.removeAll();
 		aux = new JPanel();
 		aux.setLayout(new GridLayout(2, 3));
-		butonCrgar = new JButton("Cargar");
-		butonCrgar.addActionListener(this);
-		butonCrgar.setActionCommand(CARGAR);
+		butonCargar = new JButton("Cargar");
+		butonCargar.addActionListener(this);
+		butonCargar.setActionCommand(CARGAR);
 
 		setLayout(new GridLayout(1, 3));
-		add(butonCrgar, BorderLayout.CENTER);
+		add(butonCargar, BorderLayout.CENTER);
 	    add(saludo,BorderLayout.EAST);
 		repaint();
 		revalidate();
@@ -135,8 +133,6 @@ public class PanelBotones extends JPanel implements ActionListener {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					JOptionPane.showMessageDialog(this,
 							"You chose to open this file: " + chooser.getSelectedFile().getName());
-					
-
 					try {
 						frame.lectorArchivo(chooser.getSelectedFile());
 						PanelDefinicCamposRapidos();
@@ -156,20 +152,22 @@ public class PanelBotones extends JPanel implements ActionListener {
 			}
 		} else if (e.getActionCommand().equals(CONSULTAR)) {
 			try {
-				String letras = "";
 				ArrayList<String[]> arreglo = frame.buscar(txtCampo.getSelectedIndex(), txtLlave.getText());
-				for (int i = 0; i < arreglo.size(); i++) {
-					letras += Arrays.toString(arreglo.get(i)) + "\n";
+				Object[] cols = frame.getTitulos();
+				Object[][] rows =new Object[arreglo.size()][cols.length];
+				for (int i = 0; i < rows.length; i++) {
+					rows[i]=arreglo.get(i);
 				}
-				JOptionPane.showMessageDialog(this, letras);
-
+				JTable table = new JTable(rows, cols);
+				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				JScrollPane JS=new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+				JOptionPane.showMessageDialog(frame, JS);
+				
 			} catch (NumberFormatException e2) {
 				JOptionPane.showMessageDialog(null, "Debe indicar el NUMERO de una columna valida ",
 						"Error al digitar los datos", JOptionPane.ERROR_MESSAGE, null);
 			} catch (Exception e1) {
-				e1.printStackTrace();
-				JOptionPane.showMessageDialog(this, "algo extranio acaba de suceder o eres manoso o habia un error"
-						+ "\n por favor no bajes la nota :'(");
+				JOptionPane.showMessageDialog(this, "No se pudo encontrar registros con las especificaciones dadas");
 			}
 
 		} else if (e.getActionCommand().equals(NUEVA_CONSULTA)) {
@@ -188,13 +186,13 @@ public class PanelBotones extends JPanel implements ActionListener {
 					frame.definirArboles(entrada1, entrada2, entrada3);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(this, "uy uy hubo errorer");
+					JOptionPane.showMessageDialog(this, "hubo errores, reinicie el programa");
 				}
 				panelBuscar();
 				
 				
 			}else {
-				JOptionPane.showMessageDialog(this, "debes eleguir tres campos diferentes pillin");
+				JOptionPane.showMessageDialog(this, "debes elegir tres campos diferentes");
 			}
 			
 		}

@@ -38,16 +38,19 @@ public class TestAVLTree {
 		avl.insertar("a",3);
 		avl.insertar("HOLA",2);
 		assertTrue(avl.consultar("a").getValue()==3);
+		assertTrue(avl.consultar("HOLA").getValue()==2);
+		try {
+			avl.insertar(null,null);			
+		}catch(Exception e) {assertTrue(false);}
+		avl.insertar("hhhhhhhhhhhhhhhhhhhhhhffdssassdfgjmnbvgfr",240245904);
 	}
 	
 	public void testConsultar() {
 		setUpEscenario2();
 		assertTrue(avl.consultar("e").getValue() == 75);
 		assertTrue(avl.consultar("l").getValue() == 489);
-		assertTrue(avl.consultar("f").getValue() == 3);
-		assertTrue(avl.consultar("o").getValue() == 96);
-		assertTrue(avl.consultar("a").getValue() == 3);
-		assertTrue(avl.consultar("b").getValue() == 36);
+		assertTrue(avl.consultar(null) ==null);
+		assertTrue(avl.consultar("hlbb")==null);
 	}
 	
 	@Test
@@ -85,6 +88,7 @@ public class TestAVLTree {
 		((AVLNode)avl.getRaiz()).recorrerSubArbol("",null);
 		System.out.println("PARTICION");
 		
+		assertTrue(avl.eliminar(null)==null);
 	}
 	
 	

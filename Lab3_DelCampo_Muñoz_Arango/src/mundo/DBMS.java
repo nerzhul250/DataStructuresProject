@@ -166,21 +166,19 @@ public class DBMS {
 		String[][] matrix=new String[numeroRegistros][camposActuales.length] ;
 		BufferedReader br=null;
 		for (int i = 0; i < numeroRegistros; i++) {
-			int joda=i+1;
-			br=new BufferedReader(new FileReader("./Tabla/R"+joda+".txt"));
+			br=new BufferedReader(new FileReader("./Tabla/R"+(i+1)+".txt"));
 			String B=br.readLine();
-			System.out.println(B);
 			String[] A=B.split(",");
 			try {	
 				for(int j=0;j<camposActuales.length;j++) {
 					matrix[i][j]=A[j];
 				}				
-			}catch(Exception e) {continue;}
+			}catch(Exception e) {
+				i--;
+				continue;
+			}
 		}
 		br.close();
-//		for(int s=0;s<numeroRegistros;s++){
-//			System.out.println(Arrays.toString(matrix[s]));
-//		}
 		return matrix;
 	}
 	public String[] getCampos() {

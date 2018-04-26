@@ -18,15 +18,16 @@ public class FrameBase extends JFrame {
 	private DBMS mundo;
 	
 	public FrameBase(){
-	mundo=new DBMS();
-	setLayout(new BorderLayout());
-	panelButones=new PanelBotones(this);
-
-	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-	
-	add(panelButones,BorderLayout.SOUTH);
-	pack();
-}
+		setTitle("DBMS");
+		mundo=new DBMS();
+		setLayout(new BorderLayout());
+		panelButones=new PanelBotones(this);
+		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		add(panelButones,BorderLayout.SOUTH);
+		pack();
+    }
 	public String[] getTitulos() {
 		return mundo.getCampos();
 	}

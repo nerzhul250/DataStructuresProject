@@ -3,14 +3,14 @@ package mundo;
 enum Color{
 	BLACK,RED
 }
-public class RBTNode<K extends Comparable,V> extends NodoABB {
+public class RBTNode<K extends Comparable,V> extends ABBNode {
 	
 	private Color color;
 	public RBTNode(K llave, V valor){
 		super(llave,valor);
 		color=Color.RED;
 	}
-	public void recorrerSubArbol(String string, NodoABB<K,V> nil) {
+	public void recorrerSubArbol(String string, ABBNode<K,V> nil) {
 		System.out.println(string+"color: "+color+" "+getValue()+" "+key);
 		if(izquierdo!=nil)
 			((RBTNode)izquierdo).recorrerSubArbol(string+"L",nil);

@@ -14,11 +14,10 @@ public class PanelDatos extends JPanel{
 	private JScrollPane JS;
 	
 	public  PanelDatos(String[][] a, String[]b) {
-		 tabla=new JTable(a,b); 
-		  JS=new JScrollPane(tabla);
-		  JS.setPreferredSize(new Dimension(b[0].length()*160,150));
-		 add(JS);
-		
+		 tabla=new JTable(a,b);
+		 tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		 JS=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		 add(JS);		
 	}
 	
 

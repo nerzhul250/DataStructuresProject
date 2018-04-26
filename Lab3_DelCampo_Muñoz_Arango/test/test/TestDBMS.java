@@ -46,6 +46,7 @@ public class TestDBMS {
 		} catch (Exception e) {
 			fail();
 		}
+		
 	}
 	@Test
 	public void testConsultaDatos() {

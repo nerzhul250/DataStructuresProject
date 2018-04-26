@@ -30,14 +30,23 @@ public class TestRedBlackTree {
 		setUpEscenario1();
 		rbt.insertar(5,3);
 		rbt.insertar(6,2);
+		assertTrue(rbt.consultar(5).getValue()==3);
+		try {
+			rbt.insertar(null,null);
+			
+		}catch(Exception e){assertTrue(false);}
+		rbt.insertar(125698745,254698752);
+		assertTrue(rbt.consultar(125698745).getValue()==254698752);
+		((RBTNode)rbt.getRaiz()).recorrerSubArbol("",rbt.nil);
+		System.out.println("PARTICION");
 	}
 	@Test
 	public void testConsultar() {
 		setUpEscenario2();
 		assertTrue(rbt.consultar(3).getValue()==3);
 		assertTrue(rbt.consultar(2).getValue() == 2);
-		assertTrue(rbt.consultar(7).getValue() == 7);
-		assertTrue(rbt.consultar(8).getValue() == 8);
+		assertTrue(rbt.consultar(546)==null);
+		assertTrue(rbt.consultar(null)==null);
 	}
 	@Test
 	public void testEliminar () {
@@ -57,21 +66,7 @@ public class TestRedBlackTree {
 		rbt.eliminar(1);
 		assertTrue(rbt.consultar(1) == null);
 		
-		((RBTNode)rbt.getRaiz()).recorrerSubArbol("",rbt.nil);
-		System.out.println("PARTICION");
-		
-		assertTrue(rbt.consultar(5).getValue() == 5);
-		rbt.eliminar(5);
-		assertTrue(rbt.consultar(5) == null);
-		
-		((RBTNode)rbt.getRaiz()).recorrerSubArbol("",rbt.nil);
-		System.out.println("PARTICION");
-		
-		assertTrue(rbt.consultar(3).getValue() == 3);
-		rbt.eliminar(3);
-		assertTrue(rbt.consultar(3) == null);
-		
-		((RBTNode)rbt.getRaiz()).recorrerSubArbol("",rbt.nil);
-		System.out.println("PARTICION");
+		assertTrue(rbt.eliminar(456)==null);
+		assertTrue(rbt.eliminar(null)==null);
 	}
 }

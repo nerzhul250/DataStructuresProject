@@ -4,9 +4,11 @@ public class AVLTree<K extends Comparable,V> extends ABB<K,V> {
 	
 	@Override
 	public void insertar(K key, V value) {
-		AVLNode<K,V> z=new AVLNode<K,V>(key,value);
-		insertar(z);
-		insertarFixeUp(z);
+		if(key!=null && value!=null) {
+			AVLNode<K,V> z=new AVLNode<K,V>(key,value);
+			insertar(z);
+			insertarFixeUp(z);
+		}
 	}
 	private void insertarFixeUp(AVLNode<K, V> z) {
 		AVLNode<K,V> N=z;
@@ -60,9 +62,12 @@ public class AVLTree<K extends Comparable,V> extends ABB<K,V> {
 		}
 	}
 	@Override
-	public NodoABB<K, V> eliminar(K key) {
-		NodoABB<K,V>z=consultar(key);
-		NodoABB[] params=null;
+	public ABBNode<K, V> eliminar(K key) {
+		if(key==null) {
+			return null;
+		}
+		ABBNode<K,V>z=consultar(key);
+		ABBNode[] params=null;
 		if(z!=null) {
 			params=eliminar(z);
 		}else {
