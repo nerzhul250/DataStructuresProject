@@ -28,5 +28,12 @@ public class AVLNode<K,V> extends NodoABB {
 			balanceFactor=izquierdo.altura-derecho.altura;
 		}
 	}
-
+	
+	public void recorrerSubArbol(String string, AVLNode nil) {
+		System.out.println(string+"color: "+getValue()+" "+key);
+		if(izquierdo!=nil)
+			((AVLNode)izquierdo).recorrerSubArbol(string+"L",nil);
+		if(derecho!=nil)
+			((AVLNode)derecho).recorrerSubArbol(string+"R",nil);
+	}
 }

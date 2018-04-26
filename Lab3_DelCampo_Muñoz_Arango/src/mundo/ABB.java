@@ -137,68 +137,67 @@ public abstract class ABB<K extends Comparable, V> implements InterfazABB<K, V> 
 	public void setRaiz(NodoABB<K, V> raiz) {
 		this.raiz = raiz;
 	}
-
+	
 	public abstract void insertar(K key, V value);
+	
+	public abstract NodoABB<K,V> eliminar(K key);
 
-	public NodoABB eliminar(K key) {
-		if (raiz == nil)
-			return nil;
-		return eliminar(key, raiz);
-	}
-
-	private NodoABB<K, V> mayor(NodoABB nodo) {
-		NodoABB mayor = nodo;
-		while (mayor.getDerecho() != nil)
-			mayor = mayor.getDerecho();
-		return mayor;
-	}
-
-	private NodoABB eliminar(K key, NodoABB<K, V> nActual) {
-		NodoABB<K, V> padre = nActual.getPadre();
-		NodoABB<K, V> izq = nActual.getIzquierdo();
-		NodoABB<K, V> der = nActual.getDerecho();
-		NodoABB<K, V> reemplazo = nil;
-		if (nActual.getKey().compareTo(key) == 0) {
-			if (izq == nil) {
-				if (nActual != raiz) {
-					if (padre.getIzquierdo() == nActual)
-						padre.setIzquierdo(der);
-					else
-						padre.setDerecho(der);
-					if(der != nil) {
-						reemplazo = der;
-						der.setPadre(padre);
-					}
-				} else
-					raiz = der;
-			} else {
-				NodoABB<K, V> mayorIzq = mayor(izq);
-				reemplazo = mayorIzq.getIzquierdo();
-				eliminar(mayorIzq.getKey(), izq);
-				if (nActual == raiz)
-					raiz = mayorIzq;
-				mayorIzq.setPadre(padre);
-				if (padre != nil) {
-					if (padre.getIzquierdo() == nActual)
-						padre.setIzquierdo(mayorIzq);
-					else
-						padre.setDerecho(mayorIzq);
-				}
-				// se vuelve a escoger porque mayorIzq pudo ser Izq y se repite
-				mayorIzq.setIzquierdo(nActual.getIzquierdo());
-				mayorIzq.setDerecho(der);
-			}
-			return reemplazo;
-		} else if (nActual.getKey().compareTo(key) > 0) {
-			if (izq == nil)
-				return nil;
-			else
-				return eliminar(key, izq);
-		} else {
-			if (der == nil)
-				return nil;
-			else
-				return eliminar(key, der);
+	private NodoABB<K, V> sucesor(NodoABB<K,V> x) {
+		if(x.getDerecho()!=nil) {
+			return minimo(x.getDerecho());
 		}
+		NodoABB<K,V> y=x.getPadre();
+		while(y!=nil && x==y.getDerecho()) {
+			x=y;
+			y=y.getPadre();
+		}
+		return y;
+	}
+
+	private NodoABB<K, V> minimo(NodoABB<K, V> d) {
+		NodoABB<K,V>actual=d;
+		while(actual.getIzquierdo()!=nil) {
+			actual=actual.getIzquierdo();
+		}
+		return actual;
+	}
+	protected NodoABB[] eliminar(NodoABB<K, V> z) {
+		NodoABB<K,V> y=nil;
+		if (z.getDerecho()==nil || z.getIzquierdo()==nil) {
+			y=z;
+		}else{
+			y=sucesor(z);
+		}
+		NodoABB<K,V> x=nil;
+		if(y.getIzquierdo()!=nil) {
+			x=y.getIzquierdo();
+		}else {
+			x=y.getDerecho();
+		}
+		
+		if(x!=null) {
+			x.setPadre(y.getPadre());	
+		}
+		if(y.getPadre()==nil) {
+			raiz=x;
+		}else {
+			if(y==y.getPadre().getIzquierdo()) {
+				y.getPadre().setIzquierdo(x);
+			}else {
+				y.getPadre().setDerecho(x);
+			}
+		}
+		if(nil==null && x==null) {
+			x=y.getPadre();
+		}
+		
+		if(y!=z) {
+			z.setKey(y.getKey());
+			z.setValue(y.getValue());
+		}
+		NodoABB<K,V>[]ans=new NodoABB[2];
+		ans[0]=x;
+		ans[1]=y;
+		return ans;
 	}
 }

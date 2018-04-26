@@ -8,7 +8,6 @@ public class AVLTree<K extends Comparable,V> extends ABB<K,V> {
 		insertar(z);
 		insertarFixeUp(z);
 	}
-	
 	private void insertarFixeUp(AVLNode<K, V> z) {
 		AVLNode<K,V> N=z;
 		AVLNode<K,V> P=(AVLNode<K, V>) z.getPadre();
@@ -58,6 +57,71 @@ public class AVLTree<K extends Comparable,V> extends ABB<K,V> {
 				 N = P;
 				 P = (AVLNode<K, V>) N.getPadre();
 			}while(P!=null);
+		}
+	}
+	@Override
+	public NodoABB<K, V> eliminar(K key) {
+		NodoABB<K,V>z=consultar(key);
+		NodoABB[] params=null;
+		if(z!=null) {
+			params=eliminar(z);
+		}else {
+			return null;
+		}
+		System.out.println(params[0].getKey());
+		deleteFixeUp((AVLNode)params[0]);
+		return params[1];
+	}
+	private void deleteFixeUp(AVLNode N) {
+		AVLNode G=null;
+		for (AVLNode X = (AVLNode) N.getPadre(); X != null; X = G) { 
+		    G = (AVLNode) X.getPadre(); 
+		    if (N == X.getIzquierdo()) {
+		        if (X.balanceFactor() < 0) { 
+		        	AVLNode Z = (AVLNode) X.getDerecho();
+		            int b = Z.balanceFactor();
+		            if (b > 0) {
+		            	rightRotate(Z);
+		            	Z.actualizarFactorBalance();
+		            	leftRotate(X);
+		            	X.actualizarFactorBalance();
+		            }else {
+		            	System.out.println("HERE");
+		            	leftRotate(X);
+		            	X.actualizarFactorBalance();
+		            }
+		        } else {
+		            if (X.balanceFactor() == 0) {
+		                X.setBalanceFactor(-1);
+		                break; 
+		            }
+		            N = X;
+		            N.setBalanceFactor(0);
+		            continue;
+		        }
+		    } else { 
+		        if (X.balanceFactor() > 0) {
+		            AVLNode Z = (AVLNode) X.getIzquierdo();
+		            int b = Z.balanceFactor();
+		            if (b < 0) {
+		            	leftRotate(Z);
+		            	Z.actualizarFactorBalance();
+		            	rightRotate(X);
+		            	X.actualizarFactorBalance();
+		            }else {
+		            	rightRotate(X);
+		            	X.actualizarFactorBalance();
+		            }
+		        } else {
+		            if (X.balanceFactor() == 0) {
+		            	X.setBalanceFactor(1);
+		                break; 
+		            }
+		            N = X;
+		            N.setBalanceFactor(0);
+		            continue;
+		        }
+		    }
 		}
 	}
 }

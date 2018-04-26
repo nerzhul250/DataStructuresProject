@@ -19,12 +19,6 @@ public class RedBlackTree<K extends Comparable,V> extends ABB<K,V> {
 		insertar(z);
 		insertFixeUp(z);
 	}
-//	@Override
-//	public NodoABB eliminar(K key) {
-//		super.eliminar(key);
-//		// completar
-//		return nil;
-//	}
 	private void insertFixeUp(RBTNode<K, V> z) {
 		while(((RBTNode<K, V>) z.getPadre()).getColor()==Color.RED){
 			if(z.getPadre()==z.getPadre().getPadre().getIzquierdo()){
@@ -60,5 +54,75 @@ public class RedBlackTree<K extends Comparable,V> extends ABB<K,V> {
 			}
 		}
 		((RBTNode<K, V>) raiz).setColor(Color.BLACK);
+	}
+	private void deleteFixeUp(RBTNode<K,V> x) {
+		while(x!=raiz && x.getColor()==Color.BLACK) {
+			if(x==x.getPadre().getIzquierdo()) {
+				RBTNode<K, V> w=(RBTNode<K, V>)x.getPadre().getDerecho();
+				if(w.getColor()==Color.RED) {
+					w.setColor(Color.BLACK);
+					((RBTNode<K,V>)x.getPadre()).setColor(Color.RED);
+					leftRotate(x.getPadre());
+					w=((RBTNode<K,V>)x.getPadre().getDerecho());
+				}
+				if(((RBTNode<K,V>)w.getIzquierdo()).getColor()==Color.BLACK &&
+						((RBTNode<K,V>)w.getDerecho()).getColor()==Color.BLACK) {
+					w.setColor(Color.RED);
+					x=(RBTNode<K,V>)x.getPadre();
+				}else{
+					if(((RBTNode<K,V>)w.getDerecho()).getColor()==Color.BLACK) {
+						((RBTNode<K,V>)w.getIzquierdo()).setColor(Color.BLACK);
+						w.setColor(Color.RED);
+						rightRotate(w);
+						w=(RBTNode<K, V>) x.getPadre().getDerecho();
+					}
+					w.setColor(((RBTNode<K, V>)x.getPadre()).getColor());
+					((RBTNode<K, V>)x.getPadre()).setColor(Color.BLACK);
+					((RBTNode<K, V>)w.getDerecho()).setColor(Color.BLACK);
+					leftRotate(x.getPadre());
+					x=(RBTNode<K, V>) raiz;
+				}
+			}else {
+				RBTNode<K, V> w=(RBTNode<K, V>)x.getPadre().getIzquierdo();
+				if(w.getColor()==Color.RED) {
+					w.setColor(Color.BLACK);
+					((RBTNode<K,V>)x.getPadre()).setColor(Color.RED);
+					rightRotate(x.getPadre());
+					w=((RBTNode<K,V>)x.getPadre().getIzquierdo());
+				}
+				if(((RBTNode<K,V>)w.getDerecho()).getColor()==Color.BLACK &&
+						((RBTNode<K,V>)w.getIzquierdo()).getColor()==Color.BLACK) {
+					w.setColor(Color.RED);
+					x=(RBTNode<K,V>)x.getPadre();
+				}else {
+					if(((RBTNode<K,V>)w.getIzquierdo()).getColor()==Color.BLACK) {
+						((RBTNode<K,V>)w.getDerecho()).setColor(Color.BLACK);
+						w.setColor(Color.RED);
+						leftRotate(w);
+						w=(RBTNode<K, V>) x.getPadre().getIzquierdo();
+					}
+					w.setColor(((RBTNode<K, V>)x.getPadre()).getColor());
+					((RBTNode<K, V>)x.getPadre()).setColor(Color.BLACK);
+					((RBTNode<K, V>)w.getIzquierdo()).setColor(Color.BLACK);
+					rightRotate(x.getPadre());
+					x=(RBTNode<K, V>) raiz;
+				}
+			}
+		}
+		x.setColor(Color.BLACK);
+	}
+	@Override
+	public NodoABB<K, V> eliminar(K key) {
+		NodoABB<K,V>z=consultar(key);
+		NodoABB[] params=null;
+		if(z!=null) {
+			params=eliminar(z);
+		}else {
+			return null;
+		}
+		if(((RBTNode)params[1]).getColor()==Color.BLACK) {
+			deleteFixeUp((RBTNode)params[0]);
+		}
+		return params[1];
 	}
 }

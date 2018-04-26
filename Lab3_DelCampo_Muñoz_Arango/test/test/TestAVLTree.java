@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import mundo.AVLTree;
 import mundo.RedBlackTree;
+import mundo.AVLNode;
 
 public class TestAVLTree {
 	
@@ -48,24 +49,42 @@ public class TestAVLTree {
 		assertTrue(avl.consultar("a").getValue() == 3);
 		assertTrue(avl.consultar("b").getValue() == 36);
 	}
-	/**
-	 * No se implementó el balanceo respectivo
-	 */
+	
 	@Test
 	public void testEliminar () {
 		setUpEscenario2();
+		
+		((AVLNode)avl.getRaiz()).recorrerSubArbol("",null);
+		System.out.println("PARTICION");
+		
 		assertTrue(avl.consultar("h").getValue() == 456);
 		avl.eliminar("h");
 		assertTrue(avl.consultar("h") == null);
+		
+		((AVLNode)avl.getRaiz()).recorrerSubArbol("",null);
+		System.out.println("PARTICION");
+		
 		assertTrue(avl.consultar("b").getValue() == 36);
 		avl.eliminar("b");
 		assertTrue(avl.consultar("b") == null);
+		
+		((AVLNode)avl.getRaiz()).recorrerSubArbol("",null);
+		System.out.println("PARTICION");
+		
 		assertTrue(avl.consultar("a").getValue() == 3);
 		avl.eliminar("a");
 		assertTrue(avl.consultar("a") == null);
+		
+		((AVLNode)avl.getRaiz()).recorrerSubArbol("",null);
+		System.out.println("PARTICION");
+		
 		assertTrue(avl.consultar("m").getValue() == 465);
 		avl.eliminar("m");
 		assertTrue(avl.consultar("m") == null);
+		
+		((AVLNode)avl.getRaiz()).recorrerSubArbol("",null);
+		System.out.println("PARTICION");
+		
 	}
 	
 	

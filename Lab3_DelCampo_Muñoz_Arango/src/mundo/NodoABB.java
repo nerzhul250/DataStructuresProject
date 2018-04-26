@@ -63,13 +63,6 @@ public abstract class NodoABB <K extends Comparable, V> implements Comparable{
 	public void setClon(NodoABB<K, V> clon) {
 		this.clon = clon;
 	}
-	public void recorrerSubArbol(String string, NodoABB<K,V> nil) {
-		System.out.println(string+" "+key);
-		if(izquierdo!=nil)
-			izquierdo.recorrerSubArbol(string+"L",nil);
-		if(derecho!=nil)
-			derecho.recorrerSubArbol(string+"R",nil);
-	}
 	public void actualizarAltura() {
 		if(derecho==null && izquierdo==null) {
 			altura=-1;
