@@ -3,14 +3,15 @@ package world;
 import java.util.ArrayList;
 
 public class Web {
-
+	
+	private IGraph<String,String> net;
+	
 	public Web() {
 		// TODO - implement Web.Web
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * 
 	 * @param startingPoint
 	 * @param depth
 	 */
