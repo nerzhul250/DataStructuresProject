@@ -12,9 +12,34 @@ public class Edge<V, E> {
 	 * @param v1
 	 * @param v2
 	 */
-	public Edge(E e, V v1, V v2) {
-		// TODO - implement Edge.Edge
-		throw new UnsupportedOperationException();
+	public Edge(E e, Vertex<V,E> v1, Vertex<V,E> v2) {
+		label=e;
+		origin=v1;
+		ending=v2;
+	}
+
+	public E getLabel() {
+		return label;
+	}
+
+	public void setLabel(E label) {
+		this.label = label;
+	}
+
+	public Vertex<V, E> getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(Vertex<V, E> origin) {
+		this.origin = origin;
+	}
+
+	public Vertex<V, E> getEnding() {
+		return ending;
+	}
+
+	public void setEnding(Vertex<V, E> ending) {
+		this.ending = ending;
 	}
 
 }

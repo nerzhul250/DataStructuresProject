@@ -1,5 +1,7 @@
 package world;
 
+import java.util.ArrayList;
+
 public interface IGraph<V, E> {
 
 	/**
@@ -9,5 +11,6 @@ public interface IGraph<V, E> {
 	 * @param v2
 	 */
 	boolean addEdge(E e, V v1, V v2);
-
+	ArrayList<V> getVertices();
+	ArrayList<Object[]> getEdges();
 }

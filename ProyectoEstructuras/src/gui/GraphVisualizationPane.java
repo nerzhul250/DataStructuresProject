@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.TitledBorder;
 
 import edu.uci.ics.jung.algorithms.layout.KKLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
@@ -15,12 +17,16 @@ import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
 public class GraphVisualizationPane extends JPanel{
 	
-	public static final int WIDTH=1200;
-	public static final int HEIGHT=650;
+	public static final int GRAPHWIDTH=3000;
+	public static final int GRAPHHEIGHT=3000;
 	
 	private Graph<String, String> g;
+	private BasicVisualizationServer<String,String> vv;
 	
 	public GraphVisualizationPane() {
+		
+		setBorder(new TitledBorder("THEGRAPH"));
+		
         g = new SparseMultigraph<String, String>();
         for (int i = 0; i < 3; i++) {
         	g.addVertex(i+"");
@@ -34,10 +40,10 @@ public class GraphVisualizationPane extends JPanel{
         
         
 		Layout<String, String> layout = new KKLayout(g);
-		layout.setSize(new Dimension(WIDTH,HEIGHT));
+		layout.setSize(new Dimension(GRAPHWIDTH,GRAPHHEIGHT));
 		
-		BasicVisualizationServer<String,String> vv =new BasicVisualizationServer<String,String>(layout);
-		vv.setPreferredSize(new Dimension(WIDTH,HEIGHT));
+		vv =new BasicVisualizationServer<String,String>(layout);
+		vv.setPreferredSize(new Dimension(GRAPHWIDTH,GRAPHHEIGHT));
 		vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
 		vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
 		
@@ -45,21 +51,39 @@ public class GraphVisualizationPane extends JPanel{
 	}
 	
 	public void remakeGraph(ArrayList<String>vertices,ArrayList<String[]>edges) {
-		Iterator<String>vers=g.getVertices().iterator();
-		Iterator<String>edgs=g.getEdges().iterator();
-		while(edgs.hasNext()) {
-			g.removeEdge(edgs.next());
+		
+		Iterator<String>it=g.getEdges().iterator();
+		ArrayList<String>jas=new ArrayList<String>(); 
+		while(it.hasNext()) {
+			jas.add(it.next());
 		}
-		while(vers.hasNext()) {
-			g.removeVertex(vers.next());
+		it=g.getVertices().iterator();
+		for (int i = 0; i < jas.size(); i++) {
+			g.removeEdge(jas.get(i));
 		}
+		
+		jas=new ArrayList<String>();
+		while(it.hasNext()) {
+			jas.add(it.next());
+		}
+		it=null;
+		for (int i = 0; i < jas.size(); i++) {
+			g.removeVertex(jas.get(i));
+		}		
+		
 		for (int i = 0; i < vertices.size(); i++) {
 			g.addVertex(vertices.get(i));
 		}
 		for (int i = 0; i < edges.size(); i++) {
 			String[] A=edges.get(i);
-			g.addEdge(A[2],A[0],A[1]);
+			int a=0;
+			while(g.containsEdge(A[0]+"_"+a)) {
+				a++;
+			}
+			g.addEdge(A[0]+"_"+a,A[1],A[2]);
 		}
+		vv.repaint();
+		vv.revalidate();
 	}
 
 }

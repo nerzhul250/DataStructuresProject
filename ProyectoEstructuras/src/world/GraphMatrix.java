@@ -3,7 +3,7 @@ package world;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GraphMatrix<V, E> implements IGraph {
+public class GraphMatrix<V, E> implements IGraph<V,E> {
 
 	private ArrayList<E>[][] edges;
 	private HashMap<Integer, V> graph;
@@ -27,7 +27,7 @@ public class GraphMatrix<V, E> implements IGraph {
 		throw new UnsupportedOperationException();
 	}
 
-	public ArrayList<E>[][] getEdges() {
+	public ArrayList<E>[][] getEdgesArray() {
 		return this.edges;
 	}
 
@@ -38,6 +38,16 @@ public class GraphMatrix<V, E> implements IGraph {
 	public int getInteger(V v) {
 		// TODO - implement GraphMatrix.getInteger
 		throw new UnsupportedOperationException();
+	}
+	@Override
+	public ArrayList<V> getVertices() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ArrayList<Object[]> getEdges() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
