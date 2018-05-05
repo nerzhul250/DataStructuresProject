@@ -85,4 +85,34 @@ public class GraphList<V, E> implements IGraph<V,E> {
 		return A;
 	}
 
+	@Override
+	public boolean addVertex(V v) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public E getLabel(V v1, V v2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<V> getNeighbors(V v) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isThereEdge(V v1, V v2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDirected() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
