@@ -111,8 +111,7 @@ public class GraphList<V, E> implements IGraph<V,E> {
 
 	@Override
 	public boolean isDirected() {
-		// TODO Auto-generated method stub
-		return false;
+		return !undirected;
 	}
 
 }

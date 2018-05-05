@@ -2,12 +2,23 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="D:/ImportantFiles/ProgrammingStuff/Java/Libraries/jung2-2_0_1"/>
-	<classpathentry kind="lib" path="D:/ImportantFiles/ProgrammingStuff/Java/Libraries/jung2-2_0_1/jung-visualization-2.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/ImportantFiles/ProgrammingStuff/Java/Libraries/jung2-2_0_1/jung-graph-impl-2.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/ImportantFiles/ProgrammingStuff/Java/Libraries/jung2-2_0_1/jung-jai-2.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/ImportantFiles/ProgrammingStuff/Java/Libraries/jung2-2_0_1/jung-io-2.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/ImportantFiles/ProgrammingStuff/Java/Libraries/jung2-2_0_1/vecmath-1.3.1.jar"/>
-	<classpathentry kind="lib" path="D:/ImportantFiles/ProgrammingStuff/Java/Libraries/jsoup-1.11.3.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/collections-generic-4.01.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/colt-1.2.0.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/concurrent-1.3.4.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/j3d-core-1.3.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/jung-3d-2.0.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/jung-3d-demos-2.0.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/jung-algorithms-2.0.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/jung-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/jung-graph-impl-2.0.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/jung-io-2.0.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/jung-jai-2.0.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/jung-jai-samples-2.0.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/jung-samples-2.0.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/jung-visualization-2.0.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/vecmath-1.3.1.jar"/>
+	<classpathentry kind="lib" path="libraries/graphPainter/wstx-asl-3.2.6.jar"/>
+	<classpathentry kind="lib" path="libraries/webScrapper/jsoup-1.11.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
