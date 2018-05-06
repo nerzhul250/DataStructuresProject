@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class Vertex<V, E> {
-
+	public final static int WHITE=0;
+	public final static int BLACK=1;
 	private Vertex<V,E> ancestor;
 	private V value;
 	private int color;
@@ -18,11 +19,16 @@ public class Vertex<V, E> {
 	public Vertex(V v) {
 		edges=new HashMap<Vertex<V,E>,ArrayList<Edge<V,E>>>();
 		ancestor=null;
-		color=0;
+		color=WHITE;
 		d=0;
 		value=v;
 	}
-
+	public int getColor() {
+		return this.color;
+	}
+	public void setColor(int color) {
+		this.color=color;
+	}
 	public V getValue() {
 		return value;
 	}
