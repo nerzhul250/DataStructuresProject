@@ -4,18 +4,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GraphMatrix<V, E> implements IGraph<V,E> {
-
+	
+	boolean undirected;
+	/**
+	 * There are no nulls in edges.
+	 */
 	private ArrayList<E>[][] edges;
-	private HashMap<Integer, V> graph;
-	private HashMap<V, Integer> aux;
+	private HashMap<Integer, V> intToValue;
+	private HashMap<V, Integer> valueToint;
 
-	public GraphMatrix() {
-		// TODO - implement GraphMatrix.GraphMatrix
-		throw new UnsupportedOperationException();
+	public GraphMatrix(boolean un) {
+		undirected=un;
+		for (int i = 0; i < edges.length; i++) {
+			for (int j = 0; j < edges.length; j++) {
+				edges[i][j]=new ArrayList<E>();
+			}
+		}
 	}
 	@Override
 	public boolean addEdge(Object e, Object v1, Object v2) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	/**
@@ -66,8 +73,9 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 	}
 	@Override
 	public boolean isThereEdge(V v1, V v2) {
-		// TODO Auto-generated method stub
-		return false;
+		int i=valueToint.get(v1);
+		int j=valueToint.get(v2);
+		return !edges[i][j].isEmpty();
 	}
 	@Override
 	public boolean isDirected() {

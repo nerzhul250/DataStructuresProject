@@ -9,6 +9,7 @@ public class GraphList<V, E> implements IGraph<V,E> {
 	
 	
 	private boolean undirected;
+	
 	private HashMap<V,Vertex<V,E>>graph;
 	private HashSet<Edge<V,E>>edges;
 	
