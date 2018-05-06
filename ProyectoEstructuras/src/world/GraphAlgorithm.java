@@ -29,12 +29,13 @@ public class GraphAlgorithm<V,E> {
 	public GraphList<V,E> BFS(V v,GraphList<V,E> elGrafo,GraphList<V,E> theGraph) {
 		
 		ArrayList<V> vecinos=elGrafo.getNeighbors(v);
+		if(!vecinos.isEmpty()) {
 		for (int i = 0; i < vecinos.size(); i++) {
 			if(((Vertex) vecinos.get(i)).getColor()==Vertex.WHITE){
 				theGraph.addEdge(elGrafo.getLabel(v, vecinos.get(i)), v, vecinos.get(i));
 				BFS(vecinos.get(i),elGrafo,theGraph);
 			}
-		}
+		}}
 		return theGraph;	
 	}
 
