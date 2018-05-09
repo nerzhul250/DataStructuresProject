@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class GraphList<V, E> implements IGraph<V,E> {
+public class GraphList<V, E extends Comparable<E>> implements IGraph<V,E> {
 	
 	
 	private boolean undirected;
@@ -52,7 +52,9 @@ public class GraphList<V, E> implements IGraph<V,E> {
 	public Iterator<V> valuesIterator() {
 		return graph.keySet().iterator();
 	}
-
+	public Iterator<Edge<V,E>> edgeIterator(){
+		return edges.iterator();
+	}
 	/**
 	 * 
 	 * @param v
@@ -74,7 +76,7 @@ public class GraphList<V, E> implements IGraph<V,E> {
 	@Override
 	public ArrayList<Object[]> getEdges() {
 		ArrayList<Object[]>A=new ArrayList<Object[]>(); 
-		Iterator<Edge<V,E>>edgy=edges.iterator();
+		Iterator<Edge<V,E>>edgy=edgeIterator();
 		while(edgy.hasNext()) {
 			Edge<V,E> e=edgy.next();
 			Object[] E=new Object[3];
@@ -113,6 +115,11 @@ public class GraphList<V, E> implements IGraph<V,E> {
 	@Override
 	public boolean isDirected() {
 		return !undirected;
+	}
+
+	@Override
+	public int getNumberOfVertices() {
+		return graph.size();
 	}
 
 }

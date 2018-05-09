@@ -82,5 +82,9 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	@Override
+	public int getNumberOfVertices() {
+		return edges.length;
+	}
 
 }

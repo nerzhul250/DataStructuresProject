@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="tests"/>
 	<classpathentry kind="lib" path="libraries/graphPainter/collections-generic-4.01.jar"/>
 	<classpathentry kind="lib" path="libraries/graphPainter/colt-1.2.0.jar"/>
 	<classpathentry kind="lib" path="libraries/graphPainter/concurrent-1.3.4.jar"/>
@@ -20,5 +21,6 @@
 	<classpathentry kind="lib" path="libraries/graphPainter/vecmath-1.3.1.jar"/>
 	<classpathentry kind="lib" path="libraries/graphPainter/wstx-asl-3.2.6.jar"/>
 	<classpathentry kind="lib" path="libraries/webScrapper/jsoup-1.11.3.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

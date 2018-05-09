@@ -1,6 +1,6 @@
 package world;
 
-public class Edge<V, E> {
+public class Edge<V, E extends Comparable<E>> implements Comparable<Edge<V,E>>{
 
 	private E label;
 	private Vertex<V, E> origin;
@@ -40,6 +40,11 @@ public class Edge<V, E> {
 
 	public void setEnding(Vertex<V, E> ending) {
 		this.ending = ending;
+	}
+
+	@Override
+	public int compareTo(Edge<V, E> o) {
+		return label.compareTo(o.getLabel());
 	}
 
 }

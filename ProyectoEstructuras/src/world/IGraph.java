@@ -54,4 +54,5 @@ public interface IGraph<V, E> {
 	 * @return true if directed, false otherwise
 	 */
 	public boolean isDirected();
+	public int getNumberOfVertices();
 }
