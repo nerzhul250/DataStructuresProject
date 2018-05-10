@@ -10,7 +10,7 @@ public class Vertex<V, E extends Comparable<E>> {
 	private Vertex<V,E> ancestor;
 	private V value;
 	private int color;
-	private int d;
+	private double d;
 	private HashMap<Vertex<V,E>,ArrayList<Edge<V,E>>> edges;
 	/**
 	 * 
@@ -81,6 +81,12 @@ public class Vertex<V, E extends Comparable<E>> {
 	}
 	public void setAncestor(Vertex<V, E> ancestor) {
 		this.ancestor = ancestor;
+	}
+	public double getD() {
+		return d;
+	}
+	public void setD(double d) {
+		this.d = d;
 	}
 	
 }

@@ -7,7 +7,6 @@ import java.util.Iterator;
 
 public class GraphList<V, E extends Comparable<E>> implements IGraph<V,E> {
 	
-	
 	private boolean undirected;
 	
 	private HashMap<V,Vertex<V,E>>graph;
@@ -64,7 +63,7 @@ public class GraphList<V, E extends Comparable<E>> implements IGraph<V,E> {
 	}
 
 	@Override
-	public ArrayList<V> getVertices() {
+	public ArrayList<V> getValues() {
 		ArrayList<V>vers=new ArrayList<V>();
 		Iterator<V>it=valuesIterator();
 		while(it.hasNext()) {

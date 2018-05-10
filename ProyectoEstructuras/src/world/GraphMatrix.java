@@ -47,7 +47,7 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public ArrayList<V> getVertices() {
+	public ArrayList<V> getValues() {
 		// TODO Auto-generated method stub
 		return null;
 	}

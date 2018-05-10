@@ -20,7 +20,7 @@ public interface IGraph<V, E> {
 	/**
 	 * @return list containing all values representing vertices in the graph
 	 */
-	public ArrayList<V> getVertices();
+	public ArrayList<V> getValues();
 	/**
 	 * 
 	 * @return list of arrays of the following form

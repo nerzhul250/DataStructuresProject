@@ -102,7 +102,7 @@ public class Web {
 	}
 
 	public ArrayList<Domain> getDomains() {
-		return net.getVertices();
+		return net.getValues();
 	}
 
 	public ArrayList<Object[]> getLinks() {

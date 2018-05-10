@@ -6,36 +6,11 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Queue;
 
-class UnionFind{
-	private int[] parent;
-	public UnionFind(int numberVertices) {
-		parent=new int[numberVertices];
-		for (int i = 0; i < parent.length; i++) {
-			parent[i]=i;
-		}
-	}
-	public int find(int x) {
-		if (parent[x] == x) {
-			return x;
-		} else {
-			parent[x] = find(parent[x]);
-			return parent[x];
-		}
-	}
-	public void unite(int x, int y) {
-		parent[find(x)] = find(y);
-	}
-}
-class ObjComparator<E extends Comparable<E>> implements Comparator<Object[]>{
-	@Override
-	public int compare(Object[] o1, Object[] o2) {
-		E a=(E)o1[0];
-		E b=(E)o2[0];
-		return a.compareTo(b);
-	}
-}
+import auxiliarDataStructures.MinHeap;
+import auxiliarDataStructures.ObjComparator;
+import auxiliarDataStructures.UnionFind;
+
 public class GraphAlgorithm<V,E extends Comparable<E>> {
 
 	/**
@@ -70,7 +45,7 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 	/**
 	 * <pos>:g is unchanged
 	 * @param g
-	 * return and IGraph containing the ancestors Formed by the dfs
+	 * return and IGraph containing the vertices and edges of g with the ancestors Formed by the dfs
 	 */
 	public IGraph<V,E> dfs(IGraph<V, E> g) {
 		GraphList<V,E> dfsTree=new GraphList<V,E>(true);
@@ -129,7 +104,6 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 		IGraph<V,E> retorno=elGrafo;
 		return retorno;
 	}
-
 	/**
 	 * <pos>:g is unchanged
 	 * @param g
@@ -172,11 +146,34 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 	/**
 	 * <pos>: g is unchanged
 	 * @param g
-	 * return an IGraph representing the minimum spanning tree of g made by prim
+	 * return an IGraph with the same vertices and edges as g but with the tree formed by prim  ancestors 
 	 */
 	public IGraph<V,E> prim(IGraph<V, E> g) {
-		// TODO - implement GraphAlgorithm.prim
-		throw new UnsupportedOperationException();
+		//Igraph to MSTPrim
+		GraphList<V,E>MSTPrim=new GraphList<V,E>(true);
+		ArrayList<Object[]> edges=g.getEdges();
+		for (int i = 0; i < edges.size(); i++) {
+			MSTPrim.addEdge((E)edges.get(i)[0],(V)edges.get(i)[1],(V)edges.get(i)[2]);	
+		}
+		ArrayList<Vertex<V,E>>vertices=new ArrayList<Vertex<V,E>>();
+		ArrayList<V>values=MSTPrim.getValues();
+		for (int i = 0; i < vertices.size(); i++) {
+			vertices.add(MSTPrim.getVertex(values.get(i)));
+		}
+		MinHeap<V,E>priorityQueue=new MinHeap<V,E>(vertices);
+		while(!priorityQueue.isEmpty()) {
+			Vertex<V,E> u=priorityQueue.extractMin();
+			Iterator<Vertex<V,E>> it=u.neighborIterator();
+			while(it.hasNext()) {
+				Vertex<V,E> w=it.next();
+				E lab=u.getEdges(w).get(0).getLabel();
+				if(priorityQueue.contains(w)&&((double)lab)<w.getD()) {
+					w.setAncestor(u);
+					w.setD(((double)lab));
+				}
+			}
+		}
+		return MSTPrim;
 	}
 
 }
