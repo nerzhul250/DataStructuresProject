@@ -78,9 +78,8 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 		return !edges[i][j].isEmpty();
 	}
 	@Override
-	public boolean isDirected() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isUndirected() {
+		return undirected;
 	}
 	@Override
 	public int getNumberOfVertices() {

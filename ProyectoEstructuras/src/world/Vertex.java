@@ -20,7 +20,7 @@ public class Vertex<V, E extends Comparable<E>> {
 		cycleAncestors=new ArrayList<Vertex<V,E>>();
 		edges=new HashMap<Vertex<V,E>,ArrayList<Edge<V,E>>>();
 		ancestor=null;
-		d=Integer.MAX_VALUE;
+		d=Double.MAX_VALUE;
 		value=v;
 	}
 	public int getColor() {
@@ -87,6 +87,12 @@ public class Vertex<V, E extends Comparable<E>> {
 	}
 	public void setD(double d) {
 		this.d = d;
+	}
+	public void addCycleAncestor(Vertex<V,E> v) {
+		cycleAncestors.add(v);
+	}
+	public ArrayList<Vertex<V,E>> getCycleAncestors(){
+		return cycleAncestors;
 	}
 	
 }

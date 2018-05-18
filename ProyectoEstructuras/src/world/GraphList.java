@@ -112,8 +112,8 @@ public class GraphList<V, E extends Comparable<E>> implements IGraph<V,E> {
 	}
 
 	@Override
-	public boolean isDirected() {
-		return !undirected;
+	public boolean isUndirected() {
+		return undirected;
 	}
 
 	@Override
