@@ -95,8 +95,12 @@ public class GraphList<V, E extends Comparable<E>> implements IGraph<V,E> {
 
 	@Override
 	public E getLabel(V v1, V v2) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Edge<V,E>>edges=getVertex(v1).getEdges(getVertex(v2));
+		if(edges==null) {
+			return null;
+		}else {
+			return edges.get(0).getLabel();			
+		}
 	}
 
 	@Override

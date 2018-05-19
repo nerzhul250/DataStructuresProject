@@ -1,20 +1,22 @@
 package auxiliarDataStructures;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import world.Vertex;
 
 public class MinHeap<V,E extends Comparable<E>>{
-	private HashSet<Vertex<V,E>> vertexSet;
+	private HashMap<Vertex<V,E>,Integer> vertexSet;
 	private Vertex<V,E>[] A;
 	private int heapSize;
 	public MinHeap(ArrayList<Vertex<V,E>> G){
 		A=new Vertex[G.size()];
 		heapSize=G.size()-1;
+		vertexSet=new HashMap<Vertex<V,E>,Integer>();
 		for (int i = 0; i < A.length; i++) {
 			A[i]=G.get(i);
-			vertexSet.add(G.get(i));
+			vertexSet.put(G.get(i),i);
 		}
 		buildHeap();
 	}
@@ -39,6 +41,8 @@ public class MinHeap<V,E extends Comparable<E>>{
 			smallest=r;
 		}
 		if(smallest!=i){
+			vertexSet.replace(A[i],smallest);
+			vertexSet.replace(A[smallest],i);
 			Vertex<V,E> temp=A[i];
 			A[i]=A[smallest];
 			A[smallest]=temp;
@@ -46,12 +50,15 @@ public class MinHeap<V,E extends Comparable<E>>{
 		}
 	}
 	public boolean contains(Vertex<V,E> o) {
-		return vertexSet.contains(o);
+		return vertexSet.containsKey(o);
 	}
-	private void decreaseKey(int i,double d){
+	public void decreaseKey(Vertex<V,E> v,double d){
+		int i=vertexSet.get(v);
 		A[i].setD(d);
 		int parent=(int) Math.ceil((i/2.0)-1);
 		while(i>0 && A[parent].getD()>A[i].getD()){
+			vertexSet.replace(A[parent],i);
+			vertexSet.replace(A[i],parent);
 			Vertex temp=A[parent];
 			A[parent]=A[i];
 			A[i]=temp;

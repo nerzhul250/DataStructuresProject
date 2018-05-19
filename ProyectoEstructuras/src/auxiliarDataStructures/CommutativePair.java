@@ -1,12 +1,17 @@
 package auxiliarDataStructures;
 
-public class Pair<K,V> {
+import java.util.HashSet;
+
+public class CommutativePair<K,V> {
+	HashSet<Object>values;
 	private K key;
 	private V value;
-	
-	public Pair(K k,V v) {
+	public CommutativePair(K k,V v) {
 		key=k;
 		value=v;
+		values=new HashSet<Object>();
+		values.add(key);
+		values.add(value);
 	}
 	
 	public K getKey() {
@@ -24,11 +29,11 @@ public class Pair<K,V> {
 	
 	@Override
 	public int hashCode() {
-		return (key.hashCode()+value.hashCode())%Integer.MAX_VALUE;
+		return values.hashCode();
 	}
 	@Override
 	public boolean equals(Object obj) {
-		Pair<K,V> p=(Pair<K,V>)obj;
+		CommutativePair<K,V> p=(CommutativePair<K,V>)obj;
 		if((key.equals(p.key)&&value.equals(p.value)) || (key.equals(p.value)&&value.equals(p.key))) {
 			return true;
 		}

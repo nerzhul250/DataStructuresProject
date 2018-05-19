@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 import auxiliarDataStructures.MinHeap;
 import auxiliarDataStructures.ObjComparator;
-import auxiliarDataStructures.Pair;
+import auxiliarDataStructures.CommutativePair;
 import auxiliarDataStructures.UnionFind;
 
 public class GraphAlgorithm<V,E extends Comparable<E>> {
@@ -82,7 +82,7 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 	 * @param g
 	 */
 	public IGraph<V,E> dijkstra(IGraph<V, E> g,V v) {
-		//Igraph to MSTPrim
+		//Igraph to dijkstra
 		GraphList<V,E>dijkstraTree=new GraphList<V,E>(g.isUndirected());
 		ArrayList<Object[]> edges=g.getEdges();
 		for (int i = 0; i < edges.size(); i++) {
@@ -90,7 +90,7 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 		}
 		ArrayList<Vertex<V,E>>vertices=new ArrayList<Vertex<V,E>>();
 		ArrayList<V>values=dijkstraTree.getValues();
-		for (int i = 0; i < vertices.size(); i++) {
+		for (int i = 0; i < values.size(); i++) {
 			vertices.add(dijkstraTree.getVertex(values.get(i)));
 		}
 		dijkstraTree.getVertex(v).setD(0);
@@ -101,9 +101,9 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 			while(it.hasNext()) {
 				Vertex<V,E> w=it.next();
 				E lab=u.getEdges(w).get(0).getLabel();
-				if(priorityQueue.contains(w)&&((double)lab)+u.getD()<w.getD()) {
+				if((Double.valueOf(lab.toString()))+u.getD()<w.getD()) {
 					w.setAncestor(u);
-					w.setD(((double)lab)+u.getD());
+					priorityQueue.decreaseKey(w,Double.valueOf(lab.toString())+u.getD());
 				}
 			}
 		}
@@ -113,13 +113,13 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 	/**
 	 * @param g
 	 */
-	public HashMap<Pair<V,V>,Double> floydWarshall(IGraph<V, E> g) {
+	public HashMap<CommutativePair<V,V>,Double> floydWarshall(IGraph<V, E> g) {
 		ArrayList<V>values=g.getValues();
-		HashMap<Pair<V,V>,Double>matrix=new HashMap<>();
+		HashMap<CommutativePair<V,V>,Double>matrix=new HashMap<>();
 		for (int i = 0; i < values.size(); i++) {
 			for (int j = 0; j < values.size(); j++) {
-				Pair<V,V>pair=new Pair<>(values.get(i),values.get(j));
-				if(!matrix.containsKey(pair) && !values.get(i).equals(values.get(j))) {
+				CommutativePair<V,V>pair=new CommutativePair<>(values.get(i),values.get(j));
+				if(!matrix.containsKey(pair)) {
 					E label=g.getLabel(values.get(i),values.get(j));
 					double val=0;
 					if(label==null) {
@@ -127,7 +127,7 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 							val=Double.MAX_VALUE;
 						}
 					}else {
-						val=(Double)label;
+						val=Double.parseDouble(label.toString());
 					}
 					matrix.put(pair,val);
 				}
@@ -136,13 +136,13 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 		for (int k = 0; k < values.size(); k++) {
 			for (int i = 0; i < values.size(); i++) {
 				for (int j = 0; j < values.size(); j++) {
-					if(i!=j) {
-						Pair<V,V>pair1=new Pair<>(values.get(i),values.get(j));
-						Pair<V,V>pair2=new Pair<>(values.get(i),values.get(k));
-						Pair<V,V>pair3=new Pair<>(values.get(k),values.get(j));
-						double dis1=matrix.get(pair1);
-						double dis2=matrix.get(pair2);
-						double dis3=matrix.get(pair3);
+					if(i!=j && k!=i && k!=j) {
+						CommutativePair<V,V>pair1=new CommutativePair<>(values.get(i),values.get(j));
+						CommutativePair<V,V>pair2=new CommutativePair<>(values.get(i),values.get(k));
+						CommutativePair<V,V>pair3=new CommutativePair<>(values.get(k),values.get(j));
+						Double dis1=matrix.get(pair1);
+						Double dis2=matrix.get(pair2);
+						Double dis3=matrix.get(pair3);
 						if(dis1>dis2+dis3) {
 							matrix.replace(pair1,dis2+dis3);
 						}
@@ -196,7 +196,7 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 	 * @param g
 	 * return an IGraph with the same vertices and edges as g but with the tree formed by prim  ancestors 
 	 */
-	public IGraph<V,E> prim(IGraph<V, E> g) {
+	public IGraph<V,E> prim(IGraph<V, E> g,V v) {
 		//Igraph to MSTPrim
 		GraphList<V,E>MSTPrim=new GraphList<V,E>(g.isUndirected());
 		ArrayList<Object[]> edges=g.getEdges();
@@ -205,9 +205,10 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 		}
 		ArrayList<Vertex<V,E>>vertices=new ArrayList<Vertex<V,E>>();
 		ArrayList<V>values=MSTPrim.getValues();
-		for (int i = 0; i < vertices.size(); i++) {
+		for (int i = 0; i < values.size(); i++) {
 			vertices.add(MSTPrim.getVertex(values.get(i)));
 		}
+		MSTPrim.getVertex(v).setD(0);		
 		MinHeap<V,E>priorityQueue=new MinHeap<V,E>(vertices);
 		while(!priorityQueue.isEmpty()) {
 			Vertex<V,E> u=priorityQueue.extractMin();
@@ -215,9 +216,9 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 			while(it.hasNext()) {
 				Vertex<V,E> w=it.next();
 				E lab=u.getEdges(w).get(0).getLabel();
-				if(priorityQueue.contains(w)&&((double)lab)<w.getD()) {
+				if(priorityQueue.contains(w)&&Double.valueOf(lab.toString())<w.getD()) {
 					w.setAncestor(u);
-					w.setD(((double)lab));
+					priorityQueue.decreaseKey(w,Double.valueOf(lab.toString()));
 				}
 			}
 		}
