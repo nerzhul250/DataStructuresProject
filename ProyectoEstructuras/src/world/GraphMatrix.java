@@ -128,7 +128,7 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 		ArrayList<V>  aux=new ArrayList<V>();
 		int a=valueToint.get(v);
 		for (int i = 0; i < edges.length; i++) {
-			if(edges[a][i]!=null) {
+			if(edges[a][i].size()!=0) {
 				aux.add(intToValue.get(i));
 			}
 		}

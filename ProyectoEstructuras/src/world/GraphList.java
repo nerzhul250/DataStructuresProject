@@ -89,8 +89,18 @@ public class GraphList<V, E extends Comparable<E>> implements IGraph<V,E> {
 
 	@Override
 	public boolean addVertex(V v) {
+		Vertex<V,E> v11=null;
 		// TODO Auto-generated method stub
-		return false;
+		if(graph.containsKey(v)) {
+			
+			return false;
+		}else {
+			v11=new Vertex<V,E>(v);
+			graph.put(v,v11);
+			return true;
+			
+		}
+		
 	}
 
 	@Override
@@ -106,13 +116,40 @@ public class GraphList<V, E extends Comparable<E>> implements IGraph<V,E> {
 	@Override
 	public ArrayList<V> getNeighbors(V v) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<V> aux=new ArrayList<V>();
+		if(edges.contains(v)) {
+			ArrayList<Object[]> theEdges=this.getEdges();
+			for (int i = 0; i < theEdges.size(); i++) {
+				Object end=theEdges.get(i)[2];
+				Object start=theEdges.get(i)[1];
+				if(end==v) {
+					aux.add((V) start);
+				}else if(start==v) {
+					aux.add((V) end);
+				}
+			}	
+		}
+		return aux;
+		
 	}
 
 	@Override
 	public boolean isThereEdge(V v1, V v2) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean retorno=false;
+		if(edges.contains(v1)&&edges.contains(v2)) {
+			ArrayList<Object[]> theEdges=this.getEdges();
+			for (int i = 0; i < theEdges.size(); i++) {
+				Object end=theEdges.get(i)[2];
+				Object start=theEdges.get(i)[1];
+				if((end==v2&&start==v1)||(end==v1&&start==v2)) {
+					retorno=true;
+					break;
+				}
+			}
+			
+		}
+		return retorno;
 	}
 
 	@Override
