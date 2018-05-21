@@ -14,30 +14,34 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 	private HashMap<V, Integer> valueToint;
 
 	public GraphMatrix(boolean un) {
+		intToValue=new HashMap<Integer, V>();
+		valueToint=new HashMap<V, Integer> ();
 		undirected=un;
-		ArrayList[][] edges=new ArrayList[1][1];
-		for (int i = 0; i < edges.length; i++) {
-			for (int j = 0; j < edges.length; j++) {
-				edges[i][j]=new ArrayList<E>();
-			}
-		}
+		edges=new ArrayList[0][0];
+		
 	}
 	@Override
 	public boolean addEdge(E e, V v1, V v2) {
-		if(!valueToint.containsKey(v1)||!valueToint.containsKey(v2)) {
-			expandMatrix();
+		if(!valueToint.containsKey(v1)) {
+			expandMatrix(v1);
+			
+		}if(!valueToint.containsKey(v2)) {
+			expandMatrix(v2);
 		}
-	edges[valueToint.get(v1)][valueToint.get(v2)].add(e);
+	   edges[valueToint.get(v1)][valueToint.get(v2)].add(e);
 		
+		
+	
 		return true;
 	}
 	
 	/**
 	 * expands matrix in one column
 	 */
-	public void expandMatrix() {
-		ArrayList<E>[][] aux=new ArrayList[edges.length+1][edges.length+1] ;
-		
+	public void expandMatrix(V v) {
+		ArrayList<E>[][] aux=new ArrayList[this.edges.length+1][this.edges.length+1] ;
+		valueToint.put(v, aux.length-1);
+		intToValue.put(aux.length-1, v);
 		for (int i = 0; i < aux.length; i++) {
 			for (int j = 0; j < aux.length; j++) {
 				aux[i][j]=new ArrayList<E>();
@@ -49,19 +53,22 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 				aux[i][j]=edges[i][j];
 			}
 		}
+		
 		edges=aux;	
 	}
 	/**
 	 * 
 	 * @param v
 	 */
-	public V getValue(int v) throws Exception{
-		// TODO - implement GraphMatrix.getValue
-		if(valueToint.containsKey(v)) {
-			return intToValue.get(v);
-		}throw new Exception("El valor no fue encontrado");
+	public V getValue(int v) {
 		
-	}
+		
+			return intToValue.get(v);
+		
+			
+}
+		
+	
 
 	public ArrayList<E>[][] getEdgesArray() {
 		return this.edges;
@@ -72,17 +79,21 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 	 * @param v
 	 */
 	public int getInteger(V v) throws Exception{
-		// TODO - implement GraphMatrix.getInteger
+		
+		
 		if(valueToint.containsKey(v)) {
 			return valueToint.get(v);
-		}throw new Exception("El valor no fue encontrado");
+		}else{
+			throw new Exception("El valor no fue encontrado");
+		}
 			
 	}
 	@Override
 	public ArrayList<V> getValues() {
-		// TODO Auto-generated method stub
+		
 		ArrayList<V> hi=new ArrayList<V> ();
 		for (int i = 0; i < edges.length; i++) {
+		
 				 hi.add(intToValue.get(i));
 			
 		}
@@ -93,21 +104,20 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 	public ArrayList<Object[]> getEdges() {
 		// TODO Auto-generated method stub
 		ArrayList<Object[]> aux=new ArrayList<Object[]>();
-		int elAux=0;
 		for (int i = 0; i < edges.length; i++) {
 			 for (int j = 0; j < edges.length; j++) {
 				 aux.add(new Object[]{edges[i][j].get(0),intToValue.get(i),intToValue.get(j)});
-				elAux++;
 			}
 			
 		}
 		return aux;
 	}
+	
 	@Override
 	public boolean addVertex(V v) {
 		// TODO Auto-generated method stub
 		if(!valueToint.containsKey(v)) {
-			this.expandMatrix();
+			this.expandMatrix(v);
 			return true;
 		}else
 		return false;
@@ -149,5 +159,6 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 	public int getNumberOfVertices() {
 		return edges.length;
 	}
+	
 
 }
