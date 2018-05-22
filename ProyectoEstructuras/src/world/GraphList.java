@@ -17,7 +17,7 @@ public class GraphList<V, E extends Comparable<E>> implements IGraph<V,E> {
 		edges=new HashSet<Edge<V,E>>();
 		undirected=un;
 	}
-	
+	//done
 	@Override
 	public boolean addEdge(E e, V v1, V v2) {
 		Vertex<V,E> v11=null;

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import world.GraphList;
 import world.GraphMatrix;
+import world.Vertex;
 
 class TestGraphList {
 	
@@ -22,7 +23,7 @@ class TestGraphList {
 		
 	}
 
-	
+	//done
 	@Test
 	void testAddEdge() {
 		setUpEscenario1();
@@ -31,8 +32,14 @@ class TestGraphList {
 		 
 		assertTrue(gm.getNumberOfVertices()==4);
 	}
+	@Test
+    void testGetVertex(){
+		setUpEscenario1();
+		Vertex<String, Integer> alpah=new Vertex<String, Integer>("pepe");
+		assertTrue(gm.getVertex("pepe").getValue().equals(alpah.getValue()));
+	}
 
-	
+	//done
 	@Test
 	void testGetValues(){
 		setUpEscenario1();
