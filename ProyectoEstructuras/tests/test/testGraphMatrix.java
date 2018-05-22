@@ -45,7 +45,6 @@ private GraphMatrix<String, Integer> gm;
 	void testGetValue(){
 		setUpEscenario1();
 		
-		
 			assertTrue(gm.getValue(0)=="pepe");
 		
 		
@@ -57,13 +56,17 @@ private GraphMatrix<String, Integer> gm;
 		setUpEscenario1();
 		ArrayList[][] correcto=new ArrayList[1][1];
 		
-		correcto[1][1]=new ArrayList<Integer>();
-		correcto[1][1].add(1);
+		correcto[0][0]=new ArrayList<Integer>();
+		correcto[0][0].add(1);
 		
-		System.out.println(gm.getEdgesArray()[1][1].get(0).toString());
+		try {
+			System.out.println(gm.getEdgesArray()[gm.getInteger("pepe")][gm.getInteger("juan")].get(0).toString());
 		
-		assertTrue(gm.getEdgesArray()[1][1].get(0).equals(correcto[1][1].get(0)));
+		assertTrue(gm.getEdgesArray()[gm.getInteger("pepe")][gm.getInteger("juan")].get(0).equals(correcto[0][0].get(0)));
 		
+		} catch (Exception e) {
+			fail("something is wrong with the matrix");
+		}
 		
 	}
 	
@@ -73,6 +76,7 @@ private GraphMatrix<String, Integer> gm;
 		
 		try {
 			assertTrue(gm.getInteger("pepe")==0);
+			assertTrue(gm.getInteger("juan")==1);
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -110,7 +114,7 @@ private GraphMatrix<String, Integer> gm;
 	@Test
     void testGetLabel(){
 		setUpEscenario1();
-		assertTrue(gm.getLabel("juan","pepe")==1);
+		assertTrue(gm.getLabel("pepe","juan")==1);
 	}
 	//TODO
 	//help ONLY WORKS ON PEPE IF TRIED ON JUAN WILL FAIL

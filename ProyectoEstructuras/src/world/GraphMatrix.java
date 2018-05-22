@@ -126,7 +126,7 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 	public E getLabel(V v1, V v2) {
 		
 		// TODO Auto-generated method stub
-		if(!valueToint.containsKey(v1)||!valueToint.containsKey(v2)) {
+		if(valueToint.containsKey(v1) && valueToint.containsKey(v2)) {
 			return (E) edges[valueToint.get(v1)][valueToint.get(v2)].get(0);
 		}else
 			return null;
