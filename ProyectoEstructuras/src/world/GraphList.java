@@ -105,6 +105,9 @@ public class GraphList<V, E extends Comparable<E>> implements IGraph<V,E> {
 
 	@Override
 	public E getLabel(V v1, V v2) {
+		if(getVertex(v1)==null || getVertex(v2)==null) {
+			return null;
+		}
 		ArrayList<Edge<V,E>>edges=getVertex(v1).getEdges(getVertex(v2));
 		if(edges==null) {
 			return null;
@@ -115,41 +118,24 @@ public class GraphList<V, E extends Comparable<E>> implements IGraph<V,E> {
 
 	@Override
 	public ArrayList<V> getNeighbors(V v) {
-		// TODO Auto-generated method stub
-		ArrayList<V> aux=new ArrayList<V>();
-		if(edges.contains(v)) {
-			ArrayList<Object[]> theEdges=this.getEdges();
-			for (int i = 0; i < theEdges.size(); i++) {
-				Object end=theEdges.get(i)[2];
-				Object start=theEdges.get(i)[1];
-				if(end==v) {
-					aux.add((V) start);
-				}else if(start==v) {
-					aux.add((V) end);
-				}
-			}	
+		Vertex<V,E>ver=graph.get(v);
+		ArrayList<V>neighs=new ArrayList<V>();
+		Iterator<Vertex<V,E>>it=ver.neighborIterator();
+		while(it.hasNext()) {
+			neighs.add(it.next().getValue());
 		}
-		return aux;
-		
+		return neighs;
 	}
 
 	@Override
 	public boolean isThereEdge(V v1, V v2) {
-		// TODO Auto-generated method stub
-		boolean retorno=false;
-		if(edges.contains(v1)&&edges.contains(v2)) {
-			ArrayList<Object[]> theEdges=this.getEdges();
-			for (int i = 0; i < theEdges.size(); i++) {
-				Object end=theEdges.get(i)[2];
-				Object start=theEdges.get(i)[1];
-				if((end==v2&&start==v1)||(end==v1&&start==v2)) {
-					retorno=true;
-					break;
-				}
-			}
-			
+		Vertex<V,E> vertex1=getVertex(v1);
+		Vertex<V,E> vertex2=getVertex(v2);
+		ArrayList<Edge<V,E>>edges=vertex1.getEdges(vertex2);
+		if(edges!=null) {
+			return true;
 		}
-		return retorno;
+		return false;
 	}
 
 	@Override

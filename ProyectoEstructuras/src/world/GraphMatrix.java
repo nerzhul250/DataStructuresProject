@@ -17,8 +17,7 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 		intToValue=new HashMap<Integer, V>();
 		valueToint=new HashMap<V, Integer> ();
 		undirected=un;
-		edges=new ArrayList[0][0];
-		
+		edges=new ArrayList[0][0];	
 	}
 	@Override
 	public boolean addEdge(E e, V v1, V v2) {
@@ -61,12 +60,8 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 	 * @param v
 	 */
 	public V getValue(int v) {
-		
-		
-			return intToValue.get(v);
-		
-			
-}
+		return intToValue.get(v);
+	}
 		
 	
 

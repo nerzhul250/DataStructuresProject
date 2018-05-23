@@ -15,85 +15,57 @@ class TestGraphList {
 	
 	private GraphList<String, Integer> gm;
 	
-	private void setUpEscenario1() {
-		//value strimg
-		//edge integer
+	private void setUpScenario1() {
 		gm=new GraphList<String, Integer>(true);
 		gm.addEdge(1, "pepe", "juan");
-		
 	}
-
-	//done
 	@Test
 	void testAddEdge() {
-		setUpEscenario1();
-		
+		setUpScenario1();	
 		gm.addEdge(2, "santi", "jose");
-		 
 		assertTrue(gm.getNumberOfVertices()==4);
 	}
 	@Test
     void testGetVertex(){
-		setUpEscenario1();
+		setUpScenario1();
 		Vertex<String, Integer> alpah=new Vertex<String, Integer>("pepe");
 		assertTrue(gm.getVertex("pepe").getValue().equals(alpah.getValue()));
 	}
-
-	//done
 	@Test
 	void testGetValues(){
-		setUpEscenario1();
+		setUpScenario1();
 		ArrayList<String> correcto=new ArrayList<String> ();
-		correcto.add("pepe");
 		correcto.add("juan");
-	//	System.out.println(correcto.toString()+"\n");
-		
-		
-		assertTrue(correcto.toString().equals(gm.getValues().toString()));
-		
+		correcto.add("pepe");
+		assertTrue(correcto.equals(gm.getValues()));
 	}
 	@Test
     void testGetEdges(){
-		setUpEscenario1();
-		
-		
+		setUpScenario1();
 	}
 	@Test
     void testAddVertex(){
-		setUpEscenario1();
-		gm.addVertex("jajajaj");
-		assertTrue(gm.getNumberOfVertices()==3);
-		
-		
+		setUpScenario1();
+		gm.addVertex("ja");
+		assertTrue(gm.getVertex("ja")!=null);
 	}
-	//TODO
-	//help NOT WORKING
 	@Test
     void testGetLabel(){
-		setUpEscenario1();
+		setUpScenario1();
 		assertTrue(gm.getLabel("juan","pepe")==1);
 	}
 	//TODO
 	//help ONLY WORKS ON PEPE IF TRIED ON JUAN WILL FAIL
 	@Test
     void testGetNeighbours(){
-		setUpEscenario1();
-		
-		assertTrue(gm.getNeighbors("pepe").toString().equals("[juan]"));
+		setUpScenario1();
+		assertTrue(gm.getNeighbors("pepe").get(0).equals("juan"));
 	}
 	//TODO
 		//help ONLY WORKS ON PEPE IF TRIED ON JUAN WILL FAIL
 	@Test
     void testIsThereEdge(){
-		setUpEscenario1();
-		assertTrue(gm.isThereEdge( "pepe","juan"));
+		setUpScenario1();
+		assertTrue(gm.isThereEdge("pepe","juan"));
 	}
-	
-	
-	
-	
-	
-	
-	
-
 }

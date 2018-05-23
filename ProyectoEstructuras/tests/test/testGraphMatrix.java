@@ -15,19 +15,16 @@ class testGraphMatrix {
 	
 private GraphMatrix<String, Integer> gm;
 	
-	private void setUpEscenario1() {
+	private void setUpScenario1() {
 		//value strimg
 		//edge integer
 		gm=new GraphMatrix<String, Integer>(true);
 		gm.addEdge(1, "pepe", "juan");
-		
-		
-		
 	}
 	
 	@Test
 	void testAddEdge() {
-		setUpEscenario1();
+		setUpScenario1();
 		
 		gm.addEdge(2, "santi", "jose");
 		 
@@ -35,25 +32,20 @@ private GraphMatrix<String, Integer> gm;
 	}
 	@Test
 	void testExpand() {
-		setUpEscenario1();
+		setUpScenario1();
 		gm.expandMatrix("elemento");
-		
 		assertTrue(gm.getNumberOfVertices()==3);
 	}
 	
 	@Test
 	void testGetValue(){
-		setUpEscenario1();
-		
-			assertTrue(gm.getValue(0)=="pepe");
-		
-		
+		setUpScenario1();
+		assertTrue(gm.getValue(0)=="pepe");	
 	}
-	//TODO
-	//help:NOT WORKING
+	
 	@Test
 	void testGetEdgesArray(){
-		setUpEscenario1();
+		setUpScenario1();
 		ArrayList[][] correcto=new ArrayList[1][1];
 		
 		correcto[0][0]=new ArrayList<Integer>();
@@ -72,7 +64,7 @@ private GraphMatrix<String, Integer> gm;
 	
 	@Test
 	void testGetInteger(){
-		setUpEscenario1();
+		setUpScenario1();
 		
 		try {
 			assertTrue(gm.getInteger("pepe")==0);
@@ -85,7 +77,7 @@ private GraphMatrix<String, Integer> gm;
 	
 	@Test
 	void testGetValues(){
-		setUpEscenario1();
+		setUpScenario1();
 		ArrayList<String> correcto=new ArrayList<String> ();
 		correcto.add("pepe");
 		correcto.add("juan");
@@ -97,30 +89,28 @@ private GraphMatrix<String, Integer> gm;
 	}
 	@Test
     void testGetEdges(){
-		setUpEscenario1();
+		setUpScenario1();
 		
 		
 	}
 	@Test
     void testAddVertex(){
-		setUpEscenario1();
-		gm.expandMatrix("jajjajaja");
+		setUpScenario1();
+		gm.expandMatrix("j");
 		assertTrue(gm.getNumberOfVertices()==3);
 		
 		
 	}
-	//TODO
-	//help NOT WORKING
 	@Test
     void testGetLabel(){
-		setUpEscenario1();
+		setUpScenario1();
 		assertTrue(gm.getLabel("pepe","juan")==1);
 	}
 	//TODO
 	//help ONLY WORKS ON PEPE IF TRIED ON JUAN WILL FAIL
 	@Test
     void testGetNeighbours(){
-		setUpEscenario1();
+		setUpScenario1();
 		
 		assertTrue(gm.getNeighbors("pepe").toString().equals("[juan]"));
 	}
@@ -128,7 +118,7 @@ private GraphMatrix<String, Integer> gm;
 		//help ONLY WORKS ON PEPE IF TRIED ON JUAN WILL FAIL
 	@Test
     void testIsThereEdge(){
-		setUpEscenario1();
+		setUpScenario1();
 		assertTrue(gm.isThereEdge( "pepe","juan"));
 	}
 	
