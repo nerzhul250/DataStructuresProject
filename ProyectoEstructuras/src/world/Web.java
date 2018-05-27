@@ -117,11 +117,11 @@ public class Web {
 		
 	}
 	public String organizador(String a) {
-		a=a.substring(1, a.length());
+		a=a.substring(1, a.length()-1);
 		String[] joda=a.split(", ");
 		String retorno="";
 		for (int i = 0; i < joda.length; i++) {
-			retorno=retorno+"\n"+i+")"+joda[i];
+			retorno=retorno+"\n"+i+1+")"+joda[i];
 		}
 		return retorno;
 	}
@@ -134,6 +134,7 @@ public class Web {
 		IGraph<Domain,String>aux=ga.bfs(a, act);
 		
 		if(act.equals(obj)){
+			ex.add(obj);
 			return ex;
 		}else{
 				Domain next=	aux.getNeighbors(act).iterator().next();
