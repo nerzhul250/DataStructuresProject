@@ -3,12 +3,15 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+
+import org.jsoup.HttpStatusException;
 
 import world.Domain;
 import world.Web;
@@ -41,6 +44,7 @@ public class WebGUI extends JFrame {
 	}
 
 	public void refreshCompleteGraph() {
+		
 		ArrayList<String> doms=new ArrayList<String>();
 		ArrayList<String[]> links= new ArrayList<String[]>();
 		ArrayList<Object[]> objs=world.getLinks();
@@ -66,18 +70,24 @@ public class WebGUI extends JFrame {
 	}
 
 	public void findCycles(Domain start) {
-		// TODO Auto-generated method stub
-		
+		ArrayList<Domain> cycleDomains = world.cyclesOf(start);
+		op.refreshDomainList(world.getDomains());
+		refreshCompleteGraph();
+		JOptionPane.showMessageDialog(this, "Los Dominios con los que " + start.getName() + " forman ciclos, son: " + cycleDomains.toString());
 	}
 
 	public void expandGraph(Domain start, int depth) {
 		try {
 			HashSet<String> hs=new HashSet<String>(); 
-			int a=world.expandGraph(start,start.getURL(), depth,hs);
+			int a=world.expandGraph(start,start.getURL(), depth,hs, true);
 			JOptionPane.showMessageDialog(this,"Se han agregado "+a+" Nuevas conexiones");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}  catch (MalformedURLException e) {
+		JOptionPane.showMessageDialog(this, "No se pudo agregar algun(os) de los URL porque no tienen el protocolo http o https", "Se encontraron URL mal formados", JOptionPane.ERROR_MESSAGE);
+		} catch (HttpStatusException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
+			catch (IOException e1) {
+			e1.printStackTrace();
 		}
 		op.refreshDomainList(world.getDomains());
 		refreshCompleteGraph();
