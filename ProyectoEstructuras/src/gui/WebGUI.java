@@ -65,13 +65,14 @@ public class WebGUI extends JFrame {
 		gvp.remakeGraph(doms,links);
 	}
 
+	
 	public void findShortestPath(Domain or, Domain des ) {
 		
 		ArrayList<Domain> route =  world.findShortestPath(or, des);
 		
 		op.refreshDomainList(world.getDomains());
 		refreshCompleteGraph();
-		JOptionPane.showMessageDialog(this, "el camino de "+or.getName()+" hasta "+des.getName()+" es "+"\n"+route.toString());
+		JOptionPane.showMessageDialog(this, "el camino de "+or.getName()+" hasta "+des.getName()+" es "+"\n"+world.organizador(route.toString()));
 		
 	}
 

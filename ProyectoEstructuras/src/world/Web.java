@@ -116,6 +116,14 @@ public class Web {
 		
 		
 	}
+	public String organizador(String a) {
+		String[] joda=a.split(", ");
+		String retorno="";
+		for (int i = 0; i < joda.length; i++) {
+			retorno=retorno+"\n"+i+")"+joda[i];
+		}
+		return retorno;
+	}
 	
 	
 	
