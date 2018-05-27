@@ -49,7 +49,8 @@ public class Web {
 			} catch (MalformedURLException e) {
 				throw new MalformedURLException();
 			} catch (HttpStatusException e) {
-				throw new HttpStatusException("Ha ocurrido un error de tipo: " + e.getStatusCode() + " al intentar cargar la página " + e.getUrl() + " del grafo", e.getStatusCode(), e.getUrl());
+				throw new HttpStatusException("Ha ocurrido un error de tipo: " + e.getStatusCode()
+						+ " al intentar cargar la página " + e.getUrl() + " del grafo", e.getStatusCode(), e.getUrl());
 			} catch (IOException e) {
 				e.printStackTrace();
 				return 0;
@@ -104,17 +105,26 @@ public class Web {
 	 * 
 	 * @param d
 	 */
-	public ArrayList<Domain> cyclesOf(Domain d) {
+	public IGraph cyclesOf(Domain d) {
 		GraphAlgorithm<Domain, String> algo = new GraphAlgorithm<>();
-		net = (GraphList<Domain, String>) algo.dfs(net);
+		net = algo.dfs(net);
 		Vertex<Domain, String> vertexDomain = ((GraphList<Domain, String>) net).getVertex(d);
-		ArrayList<Domain> cycles = new ArrayList<>();
-		ArrayList<Vertex<Domain, String>> cAux = vertexDomain.getCycleAncestors();
-		for (int i = 0; i < cAux.size(); i++) {
-			cycles.add(cAux.get(i).getValue());
+		GraphList<Domain, String> niu = new GraphList<>(true);
+		for (int i = 0; i < vertexDomain.getCycleAncestors().size(); i++) {
+			Vertex<Domain, String> vAux = vertexDomain.getCycleAncestors().get(i);
+			String original = net.getLabel(d, vAux.getValue());
+			niu.addEdge(original, d, vAux.getValue());
+			while (vertexDomain != vAux) {
+				Vertex<Domain, String> v2Aux = vAux.getAncestor();
+				original = net.getLabel(vAux.getValue(), v2Aux.getValue());
+				niu.addEdge(original, vAux.getValue(), v2Aux.getValue());
+				vAux = v2Aux;
+			}
 		}
-		return cycles;
-
+		if(vertexDomain.getCycleAncestors().size()>0)
+		return net = niu;
+//		System.out.println("igual a 0");
+		return net;
 	}
 
 	public boolean changeGraphImplementation() {

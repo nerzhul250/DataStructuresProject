@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import org.jsoup.HttpStatusException;
 
 import world.Domain;
+import world.GraphList;
 import world.Web;
 
 public class WebGUI extends JFrame {
@@ -70,10 +71,10 @@ public class WebGUI extends JFrame {
 	}
 
 	public void findCycles(Domain start) {
-		ArrayList<Domain> cycleDomains = world.cyclesOf(start);
+		GraphList<Domain, String> cycleDomains = (GraphList<Domain, String>) world.cyclesOf(start);
 		op.refreshDomainList(world.getDomains());
 		refreshCompleteGraph();
-		JOptionPane.showMessageDialog(this, "Los Dominios con los que " + start.getName() + " forman ciclos, son: " + cycleDomains.toString());
+		JOptionPane.showMessageDialog(this, "Los Dominios con los que " + start.getName() + " forma ciclos, son: " + cycleDomains.getNumberOfVertices());
 	}
 
 	public void expandGraph(Domain start, int depth) {

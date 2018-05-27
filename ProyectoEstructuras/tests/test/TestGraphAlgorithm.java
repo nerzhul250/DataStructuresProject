@@ -66,12 +66,13 @@ class TestGraphAlgorithm {
 		grafo.addEdge(1,1,8);
 		grafo=(GraphList<Integer, Integer>) ga.dfs(grafo);
 		Vertex<Integer,Integer>v=grafo.getVertex(1);
-		int[] ans= {1,8,7,6,4,3,2};
+		int[] ans= {1,2,3,4,6,8};
 		int i=0;
-		Vertex<Integer,Integer> init=v.getCycleAncestors().get(1);
+		Vertex<Integer,Integer> init=v.getCycleAncestors().get(0);
 		assert(v.getValue()==ans[i]);
 		i++;
 		while(init!=v) {
+//			System.out.println(init.getValue());
 			assert(init.getValue()==ans[i]);
 			i++;
 			init=init.getAncestor();

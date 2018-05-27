@@ -52,11 +52,17 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 		GraphList<V,E> dfsTree=new GraphList<V,E>(g.isUndirected());
 		ArrayList<Object[]> edges=g.getEdges();
 		for (int i = 0; i < edges.size(); i++) {
+//			V d1 = (V) edges.get(i)[1];
+//			V d = (V) edges.get(i)[2];
+//			((GraphList<V, E>) g).getVertex(d1).setColor(0);
+//			((GraphList<V, E>) g).getVertex(d).setColor(0);
 			dfsTree.addEdge((E)edges.get(i)[0],(V)edges.get(i)[1],(V)edges.get(i)[2]);	
 		}
 		Iterator<V>it=dfsTree.valuesIterator();
 		while(it.hasNext()) {
-			Vertex<V,E> init=dfsTree.getVertex(it.next());
+			V v = it.next();
+//			System.out.println(v);
+			Vertex<V,E> init=dfsTree.getVertex(v);
 			if(init.getColor()==0) {
 				auxDFS(init);
 			}
@@ -68,14 +74,17 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 		u.setColor(1);
 		Iterator<Vertex<V,E>>it=u.neighborIterator();
 		while(it.hasNext()) {
-			Vertex<V,E> w=it.next();
+			Vertex v = it.next();
+			Vertex<V,E> w=v;
 			if(w.getColor()==0) {
+//				System.out.println(v.getValue() + "vecino");
 				w.setAncestor(u);
 				auxDFS(w);
-			}else {
+			}else if(w.getColor() == 1 && u.getAncestor() != w){
 				w.addCycleAncestor(u);
 			}
 		}
+		u.setColor(2);
 	}
 	/**
 	 * 
