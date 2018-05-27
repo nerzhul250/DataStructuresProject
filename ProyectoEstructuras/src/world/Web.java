@@ -50,7 +50,7 @@ public class Web {
 				throw new MalformedURLException();
 			} catch (HttpStatusException e) {
 				throw new HttpStatusException("Ha ocurrido un error de tipo: " + e.getStatusCode()
-						+ " al intentar cargar la página " + e.getUrl() + " del grafo", e.getStatusCode(), e.getUrl());
+						+ " al intentar cargar la pï¿½gina " + e.getUrl() + " del grafo", e.getStatusCode(), e.getUrl());
 			} catch (IOException e) {
 				e.printStackTrace();
 				return 0;
@@ -98,8 +98,43 @@ public class Web {
 	 */
 	public ArrayList<Domain> findShortestPath(Domain d1, Domain d2) {
 		// TODO - implement Web.findShortestPath
-		throw new UnsupportedOperationException();
+	//	throw new UnsupportedOperationException();
+		
+		GraphAlgorithm<Domain,String> ga=new GraphAlgorithm<Domain,String>();
+		ArrayList<Domain> solution=new ArrayList<Domain> ();
+		
+		if(net.getValues().contains(d1)&&net.getValues().contains(d2)){
+			
+			IGraph<Domain,String> shortPaths=ga.bfs(net,d1);
+			net=shortPaths;
+			buscador(shortPaths,d1,d2,solution);
+			
+		}
+		
+				
+		return solution;
+		
+		
 	}
+	
+	
+	
+	public ArrayList<Domain> buscador(IGraph<Domain,String> a,Domain act,Domain obj, ArrayList<Domain> ex) {
+		
+		GraphAlgorithm<Domain,String> ga=new GraphAlgorithm<Domain,String>();
+		IGraph<Domain,String>aux=ga.bfs(a, act);
+		
+		if(act.equals(obj)){
+			return ex;
+		}else if(aux.getValues().contains(obj)) {
+				Domain next=	aux.getNeighbors(act).iterator().next();
+				ex.add(act);
+				
+				return buscador(ga.bfs(a, next), next, obj, ex);
+			}else {
+				return null;
+			}	
+		}
 
 	/**
 	 * 

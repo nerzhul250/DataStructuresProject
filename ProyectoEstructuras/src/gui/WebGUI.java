@@ -66,7 +66,12 @@ public class WebGUI extends JFrame {
 	}
 
 	public void findShortestPath(Domain or, Domain des ) {
-		// TODO Auto-generated method stub
+		
+		ArrayList<Domain> route =  world.findShortestPath(or, des);
+		
+		op.refreshDomainList(world.getDomains());
+		refreshCompleteGraph();
+		JOptionPane.showMessageDialog(this, "el camino de "+or.getName()+" hasta "+des.getName()+" es "+"\n"+route.toString());
 		
 	}
 
