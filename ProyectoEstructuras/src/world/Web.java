@@ -107,7 +107,7 @@ public class Web {
 			
 			IGraph<Domain,String> shortPaths=ga.bfs(net,d1);
 			net=shortPaths;
-			buscador(shortPaths,d1,d2,solution);
+			finder(shortPaths,d1,d2,solution);
 			
 		}
 		
@@ -117,6 +117,7 @@ public class Web {
 		
 	}
 	public String organizador(String a) {
+		a=a.substring(1, a.length());
 		String[] joda=a.split(", ");
 		String retorno="";
 		for (int i = 0; i < joda.length; i++) {
@@ -127,21 +128,19 @@ public class Web {
 	
 	
 	
-	public ArrayList<Domain> buscador(IGraph<Domain,String> a,Domain act,Domain obj, ArrayList<Domain> ex) {
+	public ArrayList<Domain> finder(IGraph<Domain,String> a,Domain act,Domain obj, ArrayList<Domain> ex) {
 		
 		GraphAlgorithm<Domain,String> ga=new GraphAlgorithm<Domain,String>();
 		IGraph<Domain,String>aux=ga.bfs(a, act);
 		
 		if(act.equals(obj)){
 			return ex;
-		}else if(aux.getValues().contains(obj)) {
+		}else{
 				Domain next=	aux.getNeighbors(act).iterator().next();
 				ex.add(act);
 				
-				return buscador(ga.bfs(a, next), next, obj, ex);
-			}else {
-				return null;
-			}	
+				return finder(ga.bfs(a, next), next, obj, ex);
+			}
 		}
 
 	/**
