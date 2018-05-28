@@ -1,6 +1,6 @@
 package world;
 
-public class Domain {
+public class Domain implements Comparable<Domain>{
 
 	private String URL;
 	private String description;
@@ -38,5 +38,9 @@ public class Domain {
 	@Override
 	public String toString() {
 		return name;
+	}
+	@Override
+	public int compareTo(Domain o) {
+		return name.compareTo(o.getName());
 	}
 }

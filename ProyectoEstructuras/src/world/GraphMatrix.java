@@ -3,7 +3,7 @@ package world;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GraphMatrix<V, E> implements IGraph<V,E> {
+public class GraphMatrix<V, E extends Comparable<E>> implements IGraph<V,E> {
 	
 	boolean undirected;
 	/**
@@ -101,7 +101,9 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 		ArrayList<Object[]> aux=new ArrayList<Object[]>();
 		for (int i = 0; i < edges.length; i++) {
 			 for (int j = 0; j < edges.length; j++) {
-				 aux.add(new Object[]{edges[i][j].get(0),intToValue.get(i),intToValue.get(j)});
+				 if(!edges[i][j].isEmpty()) {
+					 aux.add(new Object[]{edges[i][j].get(0),intToValue.get(i),intToValue.get(j)});					 
+				 }
 			}
 			
 		}
@@ -153,6 +155,15 @@ public class GraphMatrix<V, E> implements IGraph<V,E> {
 	@Override
 	public int getNumberOfVertices() {
 		return edges.length;
+	}
+	@Override
+	public IGraph<V, E> transformToMyOpposite() {
+		GraphList<V,E> gl=new GraphList<>(undirected);
+		ArrayList<Object[]> edges=this.getEdges();
+		for (int i = 0; i < edges.size(); i++) {
+			gl.addEdge((E)edges.get(i)[0],(V)edges.get(i)[1],(V)edges.get(i)[2]);	
+		}
+		return gl;
 	}
 	
 

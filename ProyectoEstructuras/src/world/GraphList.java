@@ -147,5 +147,14 @@ public class GraphList<V, E extends Comparable<E>> implements IGraph<V,E> {
 	public int getNumberOfVertices() {
 		return graph.size();
 	}
+	@Override
+	public IGraph<V,E> transformToMyOpposite() {
+		GraphMatrix<V,E> gm=new GraphMatrix<>(undirected);
+		ArrayList<Object[]> edges=this.getEdges();
+		for (int i = 0; i < edges.size(); i++) {
+			gm.addEdge((E)edges.get(i)[0],(V)edges.get(i)[1],(V)edges.get(i)[2]);	
+		}
+		return gm;
+	}
 
 }

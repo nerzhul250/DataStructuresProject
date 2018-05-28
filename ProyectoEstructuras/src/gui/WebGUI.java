@@ -15,6 +15,7 @@ import org.jsoup.HttpStatusException;
 
 import world.Domain;
 import world.GraphList;
+import world.IGraph;
 import world.Web;
 
 public class WebGUI extends JFrame {
@@ -35,7 +36,7 @@ public class WebGUI extends JFrame {
 		add(new JScrollPane(gvp),BorderLayout.CENTER);
 		add(op,BorderLayout.EAST);
 		pack();
-		refreshCompleteGraph();
+		drawGraph(world.getGraph());
 	}
 	    
 	public static void main(String[] args) {
@@ -44,12 +45,12 @@ public class WebGUI extends JFrame {
 		wg.setVisible(true);
 	}
 
-	public void refreshCompleteGraph() {
+	public void drawGraph(IGraph<Domain,String> g) {
 		
 		ArrayList<String> doms=new ArrayList<String>();
 		ArrayList<String[]> links= new ArrayList<String[]>();
-		ArrayList<Object[]> objs=world.getLinks();
-		ArrayList<Domain> domains=world.getDomains();
+		ArrayList<Object[]> objs=g.getEdges();
+		ArrayList<Domain> domains=g.getValues();
 		for (int i = 0; i < domains.size(); i++) {
 			doms.add(domains.get(i).toString());
 		}
@@ -67,26 +68,24 @@ public class WebGUI extends JFrame {
 
 	
 	public void findShortestPath(Domain or, Domain des ) {
-		
-		ArrayList<Domain> route =  world.findShortestPath(or, des);
-		
-		op.refreshDomainList(world.getDomains());
-		refreshCompleteGraph();
+		IGraph<Domain, String> shortest=world.findShortestPath(or, des);
+		ArrayList<Domain> route =  shortest.getValues();
+		op.refreshDomainList(shortest.getValues());
+		drawGraph(shortest);
 		JOptionPane.showMessageDialog(this, "el camino de "+or.getName()+" hasta "+des.getName()+" es "+"\n"+world.organizador(route.toString()));
-		
 	}
 
 	public void findCycles(Domain start) {
 		GraphList<Domain, String> cycleDomains = (GraphList<Domain, String>) world.cyclesOf(start);
-		op.refreshDomainList(world.getDomains());
-		refreshCompleteGraph();
+		op.refreshDomainList(cycleDomains.getValues());
+		drawGraph(cycleDomains);
 		JOptionPane.showMessageDialog(this, "Los Dominios con los que " + start.getName() + " forma ciclos, son: " + cycleDomains.getNumberOfVertices());
 	}
 
 	public void expandGraph(Domain start, int depth) {
 		try {
 			HashSet<String> hs=new HashSet<String>(); 
-			int a=world.expandGraph(start,start.getURL(), depth,hs, true);
+			int a=world.expandGraph(start,start.getURL(), depth,hs);
 			JOptionPane.showMessageDialog(this,"Se han agregado "+a+" Nuevas conexiones");
 		}  catch (MalformedURLException e) {
 		JOptionPane.showMessageDialog(this, "No se pudo agregar algun(os) de los URL porque no tienen el protocolo http o https", "Se encontraron URL mal formados", JOptionPane.ERROR_MESSAGE);
@@ -97,16 +96,18 @@ public class WebGUI extends JFrame {
 			e1.printStackTrace();
 		}
 		op.refreshDomainList(world.getDomains());
-		refreshCompleteGraph();
+		drawGraph(world.getGraph());
 	}
 
 	public void changeGraphImplementation() {
-		world.changeGraphImplementation();
+		String message=world.changeGraphImplementation();
+		JOptionPane.showMessageDialog(this, message);
 	}
 
-	public void refreshGraphOf(Domain selectedValue) {
-		// TODO Auto-generated method stub
-		
+	public void updateList() {
+		ArrayList<Domain>dom=world.getDomains();
+		System.out.println(dom.size());
+		op.refreshDomainList(dom);
 	}
 
 }

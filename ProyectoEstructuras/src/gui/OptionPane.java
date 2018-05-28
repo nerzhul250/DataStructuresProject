@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -23,12 +24,13 @@ import javax.swing.border.TitledBorder;
 
 import world.Domain;
 
-public class OptionPane extends JPanel implements MouseListener, ActionListener{
+public class OptionPane extends JPanel implements ActionListener{
 	
 	public final static String GOTODOMAIN="GOTODOMAIN";
 	public final static String FINDREDUNDANCIES="REDUNDANCIES";
 	public final static String EXPANDGRAPH="EXPANDGRAPH";
 	public final static String CHANGEIMPLEMENTATION="CHANGEIMPLEMENTATION";
+	public final static String UPDATE="UPDATE";
 	
 	private JList<Domain> domainList;
 	private DefaultListModel<Domain> modelDomain;
@@ -38,21 +40,27 @@ public class OptionPane extends JPanel implements MouseListener, ActionListener{
 	
 	private JComboBox<Integer> comboDepth;
 	
+	private JButton butUpdateDomainList;
 	private WebGUI gui;
 	public OptionPane(WebGUI wb) {
 		gui=wb;
 		
-		setLayout(new GridLayout(5,1));
+		setLayout(new GridLayout(6,1));
 		
 		modelDomain = new DefaultListModel<Domain>();
 		domainList = new JList<Domain>(modelDomain);
-		domainList.addMouseListener(this);
-
+		
 		JScrollPane scroll = new JScrollPane(domainList);
 		scroll.setBackground(Color.WHITE);
 		scroll.setPreferredSize(new Dimension(200,0));
 		
 		add(scroll);
+		
+		butUpdateDomainList=new JButton("Update Domain List");
+		butUpdateDomainList.addActionListener(this);
+		butUpdateDomainList.setActionCommand(UPDATE);
+		
+		add(butUpdateDomainList);
 		
 		JPanel auxPane=new JPanel();
 		auxPane.setBorder(new TitledBorder("Find shortest path to domain"));
@@ -101,35 +109,8 @@ public class OptionPane extends JPanel implements MouseListener, ActionListener{
 		add(auxPane);
 		
 	}
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		if(e.getButton()==MouseEvent.BUTTON1){
-			if(!domainList.isSelectionEmpty()){
-				gui.refreshGraphOf(domainList.getSelectedValue());
-			}
-		}
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 	public void refreshDomainList(ArrayList<Domain>domains) {
+		Collections.sort(domains);
 		modelDomain.removeAllElements();
 		comboModel=new DefaultComboBoxModel<Domain>();
 		for (int i = 0; i <domains.size(); i++) {
@@ -141,7 +122,11 @@ public class OptionPane extends JPanel implements MouseListener, ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command=e.getActionCommand();
-		if(!domainList.isSelectionEmpty()) {
+		if(command.equals(CHANGEIMPLEMENTATION)) {
+			gui.changeGraphImplementation();
+		}else if(command.equals(UPDATE)) {
+			gui.updateList();
+		} else if(!domainList.isSelectionEmpty()) {
 			if(command.equals(GOTODOMAIN)) {
 				Domain d1=domainList.getSelectedValue();
 				Domain d2=(Domain)comboDomain.getSelectedItem();
@@ -154,8 +139,6 @@ public class OptionPane extends JPanel implements MouseListener, ActionListener{
 				gui.findCycles(domainList.getSelectedValue());
 			}else if(command.equals(EXPANDGRAPH)) {
 				gui.expandGraph(domainList.getSelectedValue(),(int)comboDepth.getSelectedItem());
-			}else if(command.equals(CHANGEIMPLEMENTATION)) {
-				gui.changeGraphImplementation();
 			}
 		}else {
 			JOptionPane.showMessageDialog(gui,"Select a starting domain");			

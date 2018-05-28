@@ -55,4 +55,5 @@ public interface IGraph<V, E> {
 	 */
 	public boolean isUndirected();
 	public int getNumberOfVertices();
+	public IGraph<V,E> transformToMyOpposite();
 }
