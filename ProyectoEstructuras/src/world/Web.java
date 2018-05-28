@@ -136,7 +136,7 @@ public class Web {
 		a=a.substring(1, a.length()-1);
 		String[] joda=a.split(", ");
 		String retorno="";
-		for (int i = joda.length-1; i >0; i--) {
+		for (int i = joda.length-1; i >=0; i--) {
 			int act=joda.length-i;
 			retorno=retorno+"\n"+act+")"+joda[i];
 		}
