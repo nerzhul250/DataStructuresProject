@@ -107,7 +107,7 @@ public class Web {
 		
 		
 		if(net.getValues().contains(d1)&&net.getValues().contains(d2)){
-			solution.add(d2);
+			//solution.add(d2);
 			
 			net=ga.bfs(net, d1);
 			
@@ -182,5 +182,14 @@ public class Web {
 	public ArrayList<Object[]> getLinks() {
 		return net.getEdges();
 	}
+
+	public IGraph<Domain, String> getNet() {
+		return net;
+	}
+
+	public void setNet(IGraph<Domain, String> net) {
+		this.net = net;
+	}
+	
 
 }
