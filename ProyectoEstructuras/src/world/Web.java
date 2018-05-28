@@ -99,38 +99,50 @@ public class Web {
 	 */
 	public ArrayList<Domain> findShortestPath(Domain d1, Domain d2) {
 		// TODO - implement Web.findShortestPath
-		// throw new UnsupportedOperationException();
-
-		GraphAlgorithm<Domain, String> ga = new GraphAlgorithm<Domain, String>();
-		ArrayList<Domain> solution = new ArrayList<Domain>();
-		GraphList<Domain, String> newGraph = new GraphList<>(true);
-
-		net = ga.bfs(net, d1);
+	//	throw new UnsupportedOperationException();
 		
-		Vertex<Domain, String> ant = ((GraphList<Domain, String>) net).getVertex(d2);
-		String e = net.getLabel(d2, ant.getValue());
-		newGraph.addEdge(e, d2, ant.getValue());
-		while (ant.getAncestor() != null) {
-			Vertex<Domain, String> aux = ant.getAncestor();
-			e = net.getLabel(ant.getValue(), aux.getValue());
-			newGraph.addEdge(e, ant.getValue(), aux.getValue());
-			solution.add(ant.getValue());
-			ant = ant.getAncestor();
+		GraphAlgorithm<Domain,String> ga=new GraphAlgorithm<Domain,String>();
+		ArrayList<Domain> solution=new ArrayList<Domain> ();
+		IGraph<Domain,String> lol=new GraphList<Domain,String>(true);
+		
+		
+		if(net.getValues().contains(d1)&&net.getValues().contains(d2)){
+			solution.add(d2);
+			
+			net=ga.bfs(net, d1);
+			
+			Vertex<Domain, String> vertexDomain1 = ((GraphList<Domain, String>) net).getVertex(d2);
+			Vertex<Domain, String> objective = ((GraphList<Domain, String>) net).getVertex(d1);
+			
+			while(!vertexDomain1.equals(objective)){
+			
+				solution.add(vertexDomain1.getValue());
+				
+			lol.addEdge(net.getLabel(vertexDomain1.getValue(), vertexDomain1.getAncestor().getValue()), vertexDomain1.getAncestor().getValue(), vertexDomain1.getValue());
+				vertexDomain1=vertexDomain1.getAncestor();
+				
+			}
+			solution.add(d1);
 		}
-		net = newGraph;
+		if(lol.getNumberOfVertices()>0)
+			net=lol;
+		
+		
 		return solution;
+		
+		
 	}
-
 	public String organizador(String a) {
-		a = a.substring(1, a.length() - 1);
-		String[] joda = a.split(", ");
-		String retorno = "";
-		for (int i = 0; i < joda.length; i++) {
-			int act = i + 1;
-			retorno = retorno + "\n" + act + ")" + joda[i];
+		a=a.substring(1, a.length()-1);
+		String[] joda=a.split(", ");
+		String retorno="";
+		for (int i = joda.length-1; i >0; i--) {
+			int act=joda.length-i;
+			retorno=retorno+"\n"+act+")"+joda[i];
 		}
 		return retorno;
 	}
+	
 
 	/**
 	 * 
