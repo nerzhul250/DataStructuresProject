@@ -81,6 +81,7 @@ public class GraphAlgorithm<V,E extends Comparable<E>> {
 				w.setAncestor(u);
 				auxDFS(w);
 			}else if(w.getColor() == 1 && u.getAncestor() != w){
+				System.out.println(u.getValue() + " cicloancestro de " + w.getValue());
 				w.addCycleAncestor(u);
 			}
 		}

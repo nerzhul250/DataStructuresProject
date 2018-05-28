@@ -67,5 +67,6 @@ class TestGraphList {
     void testIsThereEdge(){
 		setUpScenario1();
 		assertTrue(gm.isThereEdge("pepe","juan"));
+		assertFalse(gm.isThereEdge("pepe", "Carlos"));
 	}
 }
