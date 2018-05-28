@@ -50,7 +50,8 @@ public class Web {
 				throw new MalformedURLException();
 			} catch (HttpStatusException e) {
 				throw new HttpStatusException("Ha ocurrido un error de tipo: " + e.getStatusCode()
-						+ " al intentar cargar la p�gina " + e.getUrl() + " del grafo", e.getStatusCode(), e.getUrl());
+						+ " al intentar cargar la p�gina " + e.getUrl() + " del grafo", e.getStatusCode(),
+						e.getUrl());
 			} catch (IOException e) {
 				e.printStackTrace();
 				return 0;
@@ -98,57 +99,38 @@ public class Web {
 	 */
 	public ArrayList<Domain> findShortestPath(Domain d1, Domain d2) {
 		// TODO - implement Web.findShortestPath
-	//	throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+
+		GraphAlgorithm<Domain, String> ga = new GraphAlgorithm<Domain, String>();
+		ArrayList<Domain> solution = new ArrayList<Domain>();
+		GraphList<Domain, String> newGraph = new GraphList<>(true);
+
+		net = ga.bfs(net, d1);
 		
-		GraphAlgorithm<Domain,String> ga=new GraphAlgorithm<Domain,String>();
-		ArrayList<Domain> solution=new ArrayList<Domain> ();
-		
-		if(net.getValues().contains(d1)&&net.getValues().contains(d2)){
-			
-			IGraph<Domain,String> shortPaths=ga.bfs(net,d1);
-			net=shortPaths;
-			finder(shortPaths,d1,d2,solution);
-			
+		Vertex<Domain, String> ant = ((GraphList<Domain, String>) net).getVertex(d2);
+		String e = net.getLabel(d2, ant.getValue());
+		newGraph.addEdge(e, d2, ant.getValue());
+		while (ant.getAncestor() != null) {
+			Vertex<Domain, String> aux = ant.getAncestor();
+			e = net.getLabel(ant.getValue(), aux.getValue());
+			newGraph.addEdge(e, ant.getValue(), aux.getValue());
+			solution.add(ant.getValue());
+			ant = ant.getAncestor();
 		}
-		
-				
+		net = newGraph;
 		return solution;
-		
-		
 	}
+
 	public String organizador(String a) {
-		a=a.substring(1, a.length()-1);
-		String[] joda=a.split(", ");
-		String retorno="";
+		a = a.substring(1, a.length() - 1);
+		String[] joda = a.split(", ");
+		String retorno = "";
 		for (int i = 0; i < joda.length; i++) {
-			int act=i+1;
-			retorno=retorno+"\n"+act+")"+joda[i];
+			int act = i + 1;
+			retorno = retorno + "\n" + act + ")" + joda[i];
 		}
 		return retorno;
 	}
-	
-	
-	
-	public ArrayList<Domain> finder(IGraph<Domain,String> a,Domain act,Domain obj, ArrayList<Domain> ex) {
-		
-		GraphAlgorithm<Domain,String> ga=new GraphAlgorithm<Domain,String>();
-		
-
-			for (int i = 0; i < a.getNeighbors(act).size(); i++) {
-				a=ga.bfs(a, a.getNeighbors(act).get(i));
-				if(a.getNeighbors(a.getNeighbors(act).get(i)).contains(obj)) {
-					ex.add(act);
-					ex.add(a.getNeighbors(act).get(i));
-					return finder(a,a.getNeighbors(act).get(i),obj,ex);
-				}	
-			}
-			if(!ex.contains(act))
-				ex.add(act);
-		ex.add(obj);
-		return ex;
-		
-		
-		}
 
 	/**
 	 * 
@@ -170,9 +152,9 @@ public class Web {
 				vAux = v2Aux;
 			}
 		}
-		if(vertexDomain.getCycleAncestors().size()>0)
-		return net = niu;
-//		System.out.println("igual a 0");
+		if (vertexDomain.getCycleAncestors().size() > 0)
+			return net = niu;
+		// System.out.println("igual a 0");
 		return net;
 	}
 
