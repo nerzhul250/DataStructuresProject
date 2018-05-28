@@ -121,7 +121,8 @@ public class Web {
 		String[] joda=a.split(", ");
 		String retorno="";
 		for (int i = 0; i < joda.length; i++) {
-			retorno=retorno+"\n"+i+1+")"+joda[i];
+			int act=i+1;
+			retorno=retorno+"\n"+act+")"+joda[i];
 		}
 		return retorno;
 	}
@@ -131,17 +132,22 @@ public class Web {
 	public ArrayList<Domain> finder(IGraph<Domain,String> a,Domain act,Domain obj, ArrayList<Domain> ex) {
 		
 		GraphAlgorithm<Domain,String> ga=new GraphAlgorithm<Domain,String>();
-		IGraph<Domain,String>aux=ga.bfs(a, act);
 		
-		if(act.equals(obj)){
-			ex.add(obj);
-			return ex;
-		}else{
-				Domain next=	aux.getNeighbors(act).iterator().next();
-				ex.add(act);
-				
-				return finder(ga.bfs(a, next), next, obj, ex);
+
+			for (int i = 0; i < a.getNeighbors(act).size(); i++) {
+				a=ga.bfs(a, a.getNeighbors(act).get(i));
+				if(a.getNeighbors(a.getNeighbors(act).get(i)).contains(obj)) {
+					ex.add(act);
+					ex.add(a.getNeighbors(act).get(i));
+					return finder(a,a.getNeighbors(act).get(i),obj,ex);
+				}	
 			}
+			if(!ex.contains(act))
+				ex.add(act);
+		ex.add(obj);
+		return ex;
+		
+		
 		}
 
 	/**
