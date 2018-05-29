@@ -17,8 +17,8 @@ class TestWeb {
 
 	private void setUpEscenario1() {
 		w = new Web();
-		Domain d1 = new Domain("https://www.google.com.co", "google.com.co");
-		Domain d2 = new Domain("https://adwords.google.com", "adwords.google.com");
+		Domain d1 = new Domain("https://www.docs.google.com.co", "docs.google.com.co");
+		Domain d2 = new Domain("https://alv.google.com", "alv.google.com");
 		Domain d3 = new Domain("https://www.facenook.com", "facebook.com");
 		Domain d4 = new Domain("https://www.apple.com", "apple.com");
 		Domain d5 = new Domain("https://www.amazon.com", "amazon.com");
@@ -37,7 +37,7 @@ class TestWeb {
 	@Test
 	void testFindShortestPath() {
 		setUpEscenario1();
-		Domain d1 = new Domain("https://www.google.com.co", "google.com.co");
+		Domain d1 = new Domain("https://www.docs.google.com.co", "docs.google.com.co");
 		Domain d7 = new Domain("https://www.20minmail", "20minmail.com");
 		Domain d5 = new Domain("https://www.amazon.com", "amazon.com");
 		Domain d4 = new Domain("https://www.apple.com", "apple.com");
@@ -47,30 +47,35 @@ class TestWeb {
 		test.add(d5);
 		test.add(d4);
 		test.add(d1);
-
-		assertTrue(test.equals(w.findShortestPath(d1, d7)));
+		System.out.println(test.toString());
+		System.out.println(w.findShortestPath(d1, d7).getValues());
+		
+		GraphList<Domain, String> newGraph = (GraphList<Domain, String>) w.findShortestPath(d1, d7);			
+		for (int i = 0; i < newGraph.getNumberOfVertices(); i++) {
+			assertTrue(test.contains(newGraph.getValues().get(i)));
+		}
 
 	}
 	@Test
 	void testFindCycles() {
 		setUpEscenario1();
-		Domain d1 = new Domain("https://www.google.com.co", "google.com.co");
-		Domain d2 = new Domain("https://adwords.google.com", "adwords.google.com");
+		Domain d1 = new Domain("https://www.docs.google.com.co", "docs.google.com.co");
+		Domain d2 = new Domain("https://alv.google.com", "alv.google.com");
 		Domain d3 = new Domain("https://www.facenook.com", "facebook.com");
 		Domain d4 = new Domain("https://www.apple.com", "apple.com");
 		Domain d5 = new Domain("https://www.amazon.com", "amazon.com");
 		Domain d6 = new Domain("https://www.icesi.edu.co", "icesi.edu.co");
 		Domain d7 = new Domain("https://www.20minmail", "20minmail.com");
-		System.out.println(w.getDomains());
-		w.cyclesOf(d6);
-		System.out.println(w.getDomains());
-		assertTrue(w.getNet().isThereEdge(d2, d3));
-		assertTrue(w.getNet().isThereEdge(d6, d3));
-		assertTrue(w.getNet().isThereEdge(d1, d4));
-		assertTrue(w.getNet().isThereEdge(d5, d4));
-		assertTrue(w.getNet().isThereEdge(d5, d6));
-		assertFalse(w.getNet().isThereEdge(d5, d7));
-		assertFalse(w.getNet().isThereEdge(d3, d2));
+//		System.out.println(w.getDomains());
+		GraphList<Domain, String> newGraph = (GraphList<Domain, String>) w.cyclesOf(d5);
+//		System.out.println(newGraph.getValues());
+		assertTrue(newGraph.isThereEdge(d1, d4));
+		assertTrue(newGraph.isThereEdge(d1, d3));
+		assertTrue(newGraph.isThereEdge(d6, d3));
+		assertTrue(newGraph.isThereEdge(d5, d4));
+		assertTrue(newGraph.isThereEdge(d5, d6));
+		assertFalse(newGraph.isThereEdge(d5, d7));
+		assertFalse(newGraph.isThereEdge(d3, d2));
 	}
 	
 	void testExpand() {

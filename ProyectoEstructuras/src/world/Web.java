@@ -28,9 +28,6 @@ public class Web {
 		Domain d2 = new Domain("https://adwords.google.com", "adwords.google.com");
 		net.addEdge("https://www.google.com.co/intl/en_co/ads", d1, d2);
 	}
-	public IGraph<Domain,String> getGraph(){
-		return net;
-	}
 	/**
 	 * @param startingPoint
 	 * @param depth

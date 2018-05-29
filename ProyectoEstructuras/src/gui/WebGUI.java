@@ -36,7 +36,7 @@ public class WebGUI extends JFrame {
 		add(new JScrollPane(gvp),BorderLayout.CENTER);
 		add(op,BorderLayout.EAST);
 		pack();
-		drawGraph(world.getGraph());
+		drawGraph(world.getNet());
 	}
 	    
 	public static void main(String[] args) {
@@ -96,7 +96,7 @@ public class WebGUI extends JFrame {
 			e1.printStackTrace();
 		}
 		op.refreshDomainList(world.getDomains());
-		drawGraph(world.getGraph());
+		drawGraph(world.getNet());
 	}
 
 	public void changeGraphImplementation() {
