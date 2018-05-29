@@ -72,23 +72,23 @@ public class WebGUI extends JFrame {
 		ArrayList<Domain> route =  shortest.getValues();
 		op.refreshDomainList(shortest.getValues());
 		drawGraph(shortest);
-		JOptionPane.showMessageDialog(this, "el camino de "+or.getName()+" hasta "+des.getName()+" es "+"\n"+world.organizador(route.toString()));
+		JOptionPane.showMessageDialog(this, "The path from "+or.getName()+" to "+des.getName()+" is "+"\n"+world.organizador(route.toString()));
 	}
 
 	public void findCycles(Domain start) {
 		GraphList<Domain, String> cycleDomains = (GraphList<Domain, String>) world.cyclesOf(start);
 		op.refreshDomainList(cycleDomains.getValues());
 		drawGraph(cycleDomains);
-		JOptionPane.showMessageDialog(this, "Los Dominios con los que " + start.getName() + " forma ciclos, son: " + cycleDomains.getNumberOfVertices());
+		JOptionPane.showMessageDialog(this, start.getName() + " forms cycles with: " + cycleDomains.getNumberOfVertices());
 	}
 
 	public void expandGraph(Domain start, int depth) {
 		try {
 			HashSet<String> hs=new HashSet<String>(); 
 			int a=world.expandGraph(start,start.getURL(), depth,hs);
-			JOptionPane.showMessageDialog(this,"Se han agregado "+a+" Nuevas conexiones");
+			JOptionPane.showMessageDialog(this,a+" added connections");
 		}  catch (MalformedURLException e) {
-		JOptionPane.showMessageDialog(this, "No se pudo agregar algun(os) de los URL porque no tienen el protocolo http o https", "Se encontraron URL mal formados", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(this, "Some websites were unable to be added", "bad formed urls found", JOptionPane.ERROR_MESSAGE);
 		} catch (HttpStatusException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}

@@ -24,9 +24,9 @@ public class Web {
 
 	public Web() {
 		net = new GraphList<Domain, String>(true);
-//		Domain d1 = new Domain("https://www.google.com.co", "google.com.co");
-//		Domain d2 = new Domain("https://adwords.google.com", "adwords.google.com");
-//		net.addEdge("https://www.google.com.co/intl/en_co/ads", d1, d2);
+		Domain d1 = new Domain("https://www.google.com.co", "google.com.co");
+		Domain d2 = new Domain("https://adwords.google.com", "adwords.google.com");
+		net.addEdge("https://www.google.com.co/intl/en_co/ads", d1, d2);
 	}
 	/**
 	 * @param startingPoint
