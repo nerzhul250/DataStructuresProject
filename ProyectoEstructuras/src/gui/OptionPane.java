@@ -52,7 +52,6 @@ public class OptionPane extends JPanel implements ActionListener{
 		
 		JScrollPane scroll = new JScrollPane(domainList);
 		scroll.setBackground(Color.WHITE);
-		scroll.setPreferredSize(new Dimension(200,0));
 		
 		add(scroll);
 		
@@ -108,6 +107,10 @@ public class OptionPane extends JPanel implements ActionListener{
 		
 		add(auxPane);
 		
+	}
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(200,0);
 	}
 	public void refreshDomainList(ArrayList<Domain>domains) {
 		Collections.sort(domains);

@@ -31,7 +31,6 @@ class TestWeb {
 		w.getNet().addEdge("5", d3, d6);
 		w.getNet().addEdge("6", d6, d5);
 		w.getNet().addEdge("7", d5, d7);
-
 	}
 
 	@Test
@@ -71,10 +70,5 @@ class TestWeb {
 		assertTrue(w.getNet().isThereEdge(d5, d6));
 		assertFalse(w.getNet().isThereEdge(d5, d7));
 		assertFalse(w.getNet().isThereEdge(d3, d2));
-	}
-	
-	void testExpand() {
-		// TODO Auto-generated method stub
-
 	}
 }

@@ -36,58 +36,49 @@ public class Web {
 	 * @param depth
 	 * @throws IOException
 	 */
-	public int expandGraph(Domain domain, String link, int depth, HashSet<String> hs)
-			throws IOException {
+	public int expandGraph(Domain domain, String link, int depth, HashSet<String> hs) throws IOException {
 		int b = 0;
-		if (depth > 0 && !hs.contains(link)) {
-			hs.add(link);
-			// System.out.println(link);
-			depth--;
-			Document doc = null;
-			try {
-				doc = Jsoup.connect(link).get();
-			} catch (MalformedURLException e) {
-				throw new MalformedURLException();
-			} catch (HttpStatusException e) {
-				throw new HttpStatusException("Ha ocurrido un error de tipo: " + e.getStatusCode()
-						+ " al intentar cargar la pagina " + e.getUrl() + " del grafo", e.getStatusCode(),
-						e.getUrl());
-			} catch (IOException e) {
-				e.printStackTrace();
-				return 0;
-			}
-			Elements elements = doc.select("a");
-			// System.out.println(elements.size());
-			Iterator<Element> itLinks = elements.iterator();
-			while (itLinks.hasNext()) {
-				Element l = itLinks.next();
-				// System.out.println(l);
-				String absHref = l.attr("abs:href");
-				// System.out.println(absHref);
-				if (!absHref.isEmpty() && absHref != null) {
-					// System.out.println(absHref);
-					String[] URL = absHref.split("//");
-					String[] part = null;
-					try {
-						part = URL[1].split("/");
-					} catch (Exception e) {
-						continue;
-					}
-					String name = part[0];
-					if (name.substring(0, 4).equals("www.")) {
-						name = name.substring(4);
-					}
-					if (!domain.getName().equals(name)) {
-						Domain newdomain = new Domain(URL[0] + "//" + part[0], name);
-						boolean a = net.addEdge(link, domain, newdomain);
-						if (a) {
-							b += 1 + expandGraph(newdomain, newdomain.getURL(), depth, hs);
+		try {
+			if (depth > 0 && !hs.contains(link)) {
+				hs.add(link);
+				depth--;
+				Document doc = null;
+				try {
+					doc = Jsoup.connect(link).get();					
+				}catch(Exception e) {
+					throw new Exception(link);
+				}
+				Elements elements = doc.select("a");
+				Iterator<Element> itLinks = elements.iterator();
+				while (itLinks.hasNext()) {
+					Element l = itLinks.next();
+					String absHref = l.attr("abs:href");
+					if (!absHref.isEmpty() && absHref != null) {
+						String[] URL = absHref.split("//");
+						String[] part = null;
+						try {
+							part = URL[1].split("/");
+						} catch (Exception e) {
+							continue;
 						}
-					} else {
-						b += expandGraph(domain, absHref, depth, hs);
+						String name = part[0];
+						if (name.substring(0, 4).equals("www.")) {
+							name = name.substring(4);
+						}
+						if (!domain.getName().equals(name)) {
+							Domain newdomain = new Domain(URL[0] + "//" + part[0], name);
+							boolean a = net.addEdge(link, domain, newdomain);
+							if (a) {
+								b += 1 + expandGraph(newdomain, newdomain.getURL(), depth, hs);
+							}
+						} else {
+							b += expandGraph(domain, absHref, depth, hs);
+						}
 					}
 				}
 			}
+		}catch(Exception e) {
+			System.out.println("Could not connect to: "+e);
 		}
 		return b;
 	}
