@@ -22,9 +22,11 @@ import tablasHash.TablaHashEncadenada;
 public class PanelBahia extends JPanel implements ActionListener{
 
 	private static final String VER_SIMULACION = "Ver Simulación";
+	private static final String VER_VEHICULOS = "Ver Vehículos por Bahía";
 	
 	private JButton butVerSimulacion;
 	private JLabel[][] labBahias;
+	private JButton butVerVehiculos;
 	private InterfazParqueadero ppal;
 	private int[] cantidadesBahia;
 	private Bahia[] bahiasMoves;
@@ -35,16 +37,20 @@ public class PanelBahia extends JPanel implements ActionListener{
 		butVerSimulacion = new JButton(VER_SIMULACION);
 		butVerSimulacion.addActionListener(this);
 		butVerSimulacion.setActionCommand(VER_SIMULACION);
+		butVerVehiculos = new JButton(VER_VEHICULOS);
+		butVerVehiculos.addActionListener(this);
+		butVerVehiculos.setActionCommand(VER_VEHICULOS);
 		cantidadesBahia = new int[2];
 		add(butVerSimulacion, BorderLayout.NORTH);
+		add(butVerVehiculos, BorderLayout.WEST);
 		parqueaderoActual = 0;
 	}
 	public void mostrarDatosBahia() {
 		removeAll();
 		setLayout(new GridLayout(cantidadesBahia.length/2 + 2, 4));
 		add(butVerSimulacion, BorderLayout.NORTH);
-		add(new JLabel(" "));
-		add(new JLabel("Parqueadero #:"));
+		add(butVerVehiculos, BorderLayout.WEST);
+		add(new JLabel("En Observación:"));
 		add(new JLabel(""+parqueaderoActual));
 		labBahias = new JLabel[cantidadesBahia.length/2][4];
 		add(new JLabel("Bahía #"));
